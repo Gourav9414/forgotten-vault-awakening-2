@@ -1,925 +1,1562 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>THE FORGOTTEN VAULT: AWAKENING · v104 Prototype</title>
-<style>
-:root{--bg:#090612;--panel:#17132a;--gold:#f2ca78;--purple:#9a6bff;--muted:#aaa1c3;--line:#51416e}*{box-sizing:border-box}body{margin:0;background:linear-gradient(180deg,rgba(5,4,18,.34),rgba(5,4,18,.76) 48%,rgba(5,4,18,.92)),url('https://raw.githubusercontent.com/Gourav9414/forgotten-vault-awakening-2/main/assets/cosmic-vault-cinematic.svg') center top/cover fixed,radial-gradient(ellipse at top,#302052,#090612 65%);color:#f8f2ff;font:14px system-ui,Segoe UI,sans-serif;min-height:100vh;overflow-x:hidden}body:before{content:'';position:fixed;inset:-15%;pointer-events:none;z-index:-1;background:radial-gradient(circle at 18% 22%,#b05cff22 0 2px,transparent 4px),radial-gradient(circle at 74% 35%,#73dffff0 0 1px,transparent 3px),radial-gradient(circle at 55% 75%,#ffe4a044 0 2px,transparent 4px);background-size:230px 210px,310px 270px,390px 330px;animation:cosmicDrift 28s linear infinite}@keyframes cosmicDrift{from{transform:translate3d(0,0,0)}to{transform:translate3d(-45px,30px,0)}}.app{max-width:1440px;margin:auto;padding:18px;position:relative;z-index:1}.top,.brand,.actions,.row,.stats{display:flex;align-items:center;justify-content:space-between;gap:12px}.brand{justify-content:flex-start}.logo{font-size:27px;color:var(--gold);border:1px solid #9974cf;border-radius:12px;padding:8px 13px;background:#211638}.brand h1{font-size:clamp(15px,2vw,23px);letter-spacing:.1em;margin:0}.brand small{color:var(--muted);letter-spacing:.2em}.tag{border:1px solid #7c5ca8;border-radius:99px;padding:7px 10px;color:#decaff;background:#211634;font-size:11px}.hero{text-align:center;margin:24px 0 18px}.hero small{color:var(--gold);letter-spacing:.3em}.hero h2{font-size:clamp(25px,4vw,38px);margin:7px 0}.hero p{color:var(--muted);margin:0}.layout{display:grid;grid-template-columns:minmax(0,1fr) 245px;gap:14px}.machine,.card{background:linear-gradient(145deg,rgba(29,19,52,.94),rgba(7,7,22,.94));backdrop-filter:blur(9px);border:1px solid #9b77d7;border-radius:17px;padding:13px;box-shadow:0 18px 45px #0009,0 0 22px #7650ff22,inset 0 1px #fff2}.machine-head,.foot{display:flex;justify-content:space-between;gap:8px;color:var(--muted);font-size:11px;margin-bottom:10px}.machine-head b{color:var(--gold);letter-spacing:.12em}.bonus-spins-hud{display:none;align-items:center;gap:8px;margin:0 0 10px;padding:9px 12px;border:1px solid #e8c879;border-radius:10px;background:linear-gradient(100deg,#3b2456,#171025);box-shadow:0 0 18px #f2ca7830}.bonus-spins-hud.show{display:flex}.bonus-spins-hud span{font-size:10px;letter-spacing:.14em;color:#d7c5f2;font-weight:900}.bonus-spins-hud strong{margin-left:auto;color:#ffe29a;font-size:22px;line-height:1;text-shadow:0 0 12px #f2ca7866}.bonus-spins-hud em{font-style:normal;font-size:10px;color:#cbb9e6}.bonus-win-hud{display:none;align-items:center;justify-content:space-between;gap:10px;margin:0 0 10px;padding:11px 13px;border:1px solid #7cf4ff;border-radius:11px;background:linear-gradient(100deg,#102b42,#211532 70%);box-shadow:0 0 20px #29b9e533}.bonus-win-hud.show{display:flex}.bonus-win-label{font-size:10px;font-weight:900;letter-spacing:.13em;color:#b9fbff}.bonus-win-note{font-size:10px;color:#cbb9e6;margin-top:3px}.bonus-win-value{font-size:24px;font-weight:950;color:#ffe29a;text-shadow:0 0 14px #f2ca7866;white-space:nowrap}.frame{padding:6px;border:1px solid #d4adff;border-radius:12px;background:linear-gradient(145deg,#24153e,#070611);box-shadow:0 0 22px #8c56ff33,inset 0 0 20px #c18aff12}.board-area{display:grid;grid-template-columns:minmax(0,1fr) 112px;gap:9px;align-items:stretch}.board{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:4px;aspect-ratio:8/6}.mult-ladder{border:1px solid #604b80;border-radius:9px;background:linear-gradient(180deg,#1b1230,#0d0917);padding:7px;display:flex;flex-direction:column;gap:5px;min-width:0}.ladder-title{font-size:9px;letter-spacing:.12em;color:#c9b4ed;text-align:center;font-weight:900;margin-bottom:2px}.ladder-current{font-size:20px;color:#ffe29a;font-weight:950;text-align:center;text-shadow:0 0 12px #f2ca7855}.ladder-progress{font-size:9px;line-height:1.4;color:#aaa1c3;text-align:center;margin-bottom:3px}.ladder-step{font-size:11px;font-weight:850;text-align:center;padding:5px 2px;border:1px solid #403153;border-radius:6px;color:#8f83a8;background:#171022}.ladder-step.done{color:#b9f0d0;border-color:#3d8063;background:#14251e}.ladder-step.active{color:#ffe29a;border-color:#c99a48;background:#3a2917;box-shadow:0 0 9px #f2ca7833}.ladder-step.capped{color:#e7d5ff;border-color:#8964b6;background:#2a1b3e}.tile{display:grid;place-items:center;min-width:0;background:linear-gradient(145deg,#302347,#151126);border:1px solid #6c538a;border-radius:7px;box-shadow:inset 0 1px #fff1;transition:.2s}.tile svg{width:84%;height:84%;filter:drop-shadow(0 2px 4px #0009)}.reels-running .tile{overflow:hidden;will-change:transform,filter}.reels-running .tile.reel-spin{animation:reelBlur .11s linear infinite;filter:blur(1.5px) brightness(1.18)}.reels-running .tile.reel-stop{animation:reelLand .22s cubic-bezier(.2,.85,.25,1.2) both;filter:brightness(1.35)}@keyframes reelBlur{0%{transform:translateY(-12px);filter:blur(2px) brightness(1.25)}50%{transform:translateY(10px);filter:blur(3px) brightness(1.4)}100%{transform:translateY(-12px);filter:blur(2px) brightness(1.25)}}@keyframes reelLand{0%{transform:translateY(-18px) scaleY(1.08);opacity:.55}70%{transform:translateY(3px) scaleY(.97);opacity:1}100%{transform:translateY(0) scaleY(1)}}.autoplay-row{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;margin-top:9px;padding:9px;border:1px solid #51416e;border-radius:10px;background:#100c1c}.autoplay-row label{font-size:11px;color:#d9c9f2;display:flex;align-items:center;gap:7px}.autoplay-row select{background:#211832;color:#f8f2ff;border:1px solid #5e477d;border-radius:7px;padding:6px;font-size:11px}.autoplay-toggle{width:100%;margin-top:7px;padding:10px;border-radius:9px;border:1px solid #8e6ac2;background:#25183a;color:#e8d7ff;font-weight:850}.autoplay-toggle.active{border-color:#f2ca78;background:#3b2918;color:#ffe6a0}.tile.win{border-color:#ffe19a;box-shadow:0 0 13px #f2ca7899;transform:scale(.95);filter:brightness(1.4)}.foot{margin:10px 2px 0 2px}.sidebar{display:flex;flex-direction:column;gap:11px}.card h3{font-size:10px;color:var(--muted);letter-spacing:.18em;text-transform:uppercase;margin:0 0 12px}.muted{color:var(--muted);font-size:11px}.balance{font-size:30px;font-weight:850;color:#fff2d0;margin:4px 0}.balance span{font-size:12px;color:var(--gold)}.stats{font-size:11px;color:var(--muted);margin-top:6px}.stats b{color:#fff}.betrow{display:flex;align-items:center;justify-content:space-between}.step{width:36px;height:36px;border:1px solid var(--line);border-radius:9px;background:#29203c;color:var(--gold);font-size:20px}.spin{width:100%;margin-top:12px;padding:13px 8px;border:1px solid #ffdfa0;border-radius:11px;background:linear-gradient(110deg,#ffe7a5,#dca84d);color:#23152d;font-weight:900;letter-spacing:.08em}.spin:disabled{opacity:.5}.buttons{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:8px}.buttons button,.sound{padding:9px;border:1px solid var(--line);border-radius:9px;background:#211a32;color:#eee5ff}.winbox{text-align:center;background:#f2ca780c;border:1px solid #f2ca7833;border-radius:10px;padding:10px;margin-top:10px}.winbox small{display:block;color:var(--muted);letter-spacing:.14em;text-transform:uppercase}.winbox strong{display:block;color:var(--gold);font-size:23px;margin-top:4px}.feature{display:flex;align-items:center;gap:10px}.guardian{font-size:24px;background:#352047;border:1px solid #9264c4;border-radius:10px;padding:8px}.feature b{font-size:12px}.feature p{color:var(--muted);font-size:10px;line-height:1.5;margin:4px 0 0}.rules{color:var(--muted);font-size:11px;line-height:1.7}.rules summary{color:var(--gold);cursor:pointer;font-weight:700}.footer{text-align:center;color:#817795;font-size:10px;line-height:1.6;margin:15px 0}.toast{position:fixed;top:15px;left:50%;transform:translate(-50%,-150%);background:#211735;border:1px solid #a27be0;border-radius:12px;padding:12px 18px;z-index:9;transition:.25s;box-shadow:0 10px 30px #0009}.toast.show{transform:translate(-50%,0)}.modal{display:none;position:fixed;inset:0;background:#000b;place-items:center;padding:18px;z-index:10}.modal.show{display:grid}.dialog{max-width:440px;background:#17122a;border:1px solid #8865b6;border-radius:15px;padding:20px}.dialog h2{color:var(--gold)}.dialog p,.dialog li{color:var(--muted);font-size:12px;line-height:1.7}.close{float:right;background:#251c36;border:1px solid var(--line);color:white;padding:7px;border-radius:8px}
-.cinematic{position:fixed;inset:0;z-index:20;display:none;place-items:center;padding:18px;background:radial-gradient(ellipse at center,#3c1c65eF,#05030cf5 72%);backdrop-filter:blur(7px)}.cinematic.show{display:grid;animation:fadeIn .35s ease-out}.cinema-card{width:min(540px,100%);text-align:center;padding:26px 20px;border:1px solid #e8c879;border-radius:20px;background:linear-gradient(150deg,#24143c,#080611);box-shadow:0 0 60px #9b63ff55,inset 0 0 30px #f2ca7810}.cinema-kicker{color:#f2ca78;font-size:11px;letter-spacing:.28em}.cinema-title{font-size:clamp(28px,6vw,48px);line-height:1.05;margin:12px 0;color:#fff0c8;text-shadow:0 0 24px #bd7cff}.cinema-mult{font-size:clamp(42px,10vw,76px);font-weight:950;color:#f2ca78;text-shadow:0 0 24px #ffb84d;animation:pulse .85s infinite alternate}.cinema-copy{color:#cbb9e6;line-height:1.6}.cinema-btn{margin-top:14px;padding:12px 24px;border-radius:10px;border:1px solid #ffe5a0;background:linear-gradient(110deg,#ffe7a5,#dca84d);color:#24152f;font-weight:900}.bonus-pill{display:inline-block;border:1px solid #e8c879;background:#3b2456;color:#ffe4a0;border-radius:99px;padding:5px 10px;font-size:11px;letter-spacing:.12em}.tile.special{box-shadow:inset 0 0 12px #bd7cff44}.tile.wild-tile{border:2px solid #7cf4ff;background:radial-gradient(circle,#176078,#10152c);box-shadow:0 0 16px #7cf4ff99,inset 0 0 18px #7cf4ff55;animation:wildPulse .7s ease-in-out infinite alternate}.tile.zap-arrival{animation:zapArrival .55s ease-out both!important;z-index:5}@keyframes wildPulse{from{filter:brightness(1);box-shadow:0 0 8px #7cf4ff77}to{filter:brightness(1.7);box-shadow:0 0 22px #7cf4ffdd}}@keyframes zapArrival{0%{transform:scale(.2) rotate(-30deg);filter:brightness(4);opacity:0}55%{transform:scale(1.25) rotate(8deg);filter:brightness(2.5);opacity:1}100%{transform:scale(1);filter:brightness(1.4);opacity:1}}.tile.guardian-tile{position:relative;border:2px solid #ffe29a;background:radial-gradient(circle,#62408a,#211331);box-shadow:0 0 12px #b783ff88,inset 0 0 12px #ffe29a44}.tile.guardian-tile:after{content:"GUARDIAN";position:absolute;bottom:1px;left:1px;right:1px;text-align:center;font-size:clamp(5px,.65vw,8px);font-weight:950;color:#fff0bb;text-shadow:0 1px 3px #000;background:#26153de8;border-radius:2px}.tile.guardian-burst{animation:guardianBurst .48s ease-in forwards!important;z-index:2}.tile.guardian-burst:after{opacity:0}.tile.cascade-burst{animation:cascadeBurst .48s ease-in forwards!important;z-index:3}.tile.cascade-burst:after{opacity:0}@keyframes cascadeBurst{0%{transform:scale(1);opacity:1;filter:brightness(1)}30%{transform:scale(1.18);opacity:1;filter:brightness(2.6) drop-shadow(0 0 10px #ffe29a)}65%{transform:scale(.72);opacity:.8;filter:brightness(2.2)}100%{transform:scale(.05) rotate(18deg);opacity:0;filter:brightness(3)}}@keyframes guardianBurst{0%{transform:scale(1);opacity:1;filter:brightness(1)}35%{transform:scale(1.28);opacity:1;filter:brightness(2.5) drop-shadow(0 0 12px #ffe29a)}100%{transform:scale(.08) rotate(28deg);opacity:0;filter:brightness(3)}}.guardian-key{display:flex;align-items:center;gap:10px;margin-top:10px;padding:10px;border:1px solid #8060a8;border-radius:10px;background:#261738}.guardian-mini{width:48px;height:48px;flex:0 0 48px;border:2px solid #ffe29a;border-radius:9px;background:radial-gradient(circle,#62408a,#211331);display:grid;place-items:center;box-shadow:0 0 13px #b783ff66}.guardian-mini svg{width:90%;height:90%}.guardian-key b{color:#ffe5a1;font-size:12px}.guardian-key p{margin:3px 0 0;color:var(--muted);font-size:10px;line-height:1.5}.trigger-count{display:inline-block;margin:8px 0 0;padding:6px 10px;border-radius:8px;border:1px solid #8060a8;background:#211634;color:#e8d8ff;font-size:11px}.trigger-count.active{border-color:#ffe29a;color:#ffe8a8;box-shadow:0 0 14px #f2ca7855}.mode-active{border-color:#ffe29a!important;color:#ffe6a0!important;box-shadow:0 0 12px #f2ca7844}.buttons #buyBtn{border-color:#a17be0;color:#e5d3ff}.buttons #anteBtn{border-color:#d9b35e;color:#ffe5a0}.forge-btn{width:100%;margin-top:9px;padding:12px;border:1px solid #b18aff;border-radius:11px;background:linear-gradient(110deg,#39235b,#211634);color:#f0e3ff;font-weight:900;letter-spacing:.06em}.feature-dialog{width:min(520px,100%);max-height:90vh;overflow:auto}.feature-options{display:grid;grid-template-columns:1fr;gap:9px;margin-top:14px}.feature-option{display:flex;justify-content:space-between;align-items:center;gap:12px;text-align:left;padding:13px;border:1px solid #5e477d;border-radius:11px;background:#211832;color:#f8f2ff}.feature-option strong{display:block;color:#ffe2a0;font-size:13px}.feature-option small{display:block;color:#bdb0d6;margin-top:4px;font-size:11px;line-height:1.4}.feature-option em{font-style:normal;white-space:nowrap;color:#e5d3ff;font-weight:850}.feature-option:disabled{opacity:.4}.feature-option.ante-option strong{color:#9ee9ff}.feature-note{color:#a99abd;font-size:11px;line-height:1.5;margin-top:12px}.feature-section{margin:16px 0 5px;color:#f2ca78;font-size:10px;letter-spacing:.16em;font-weight:900;text-transform:uppercase}.feature-option.extreme-option{border-color:#c17bff;background:linear-gradient(110deg,#30174a,#211832)}.feature-option.multi-option strong{color:#bdeaff}.tile.bonus-win{animation:bonusFlash .45s ease-in-out infinite alternate;border-color:#ffe59c}.machine.bonus-mode{border-color:#f2ca78;box-shadow:0 0 32px #a66dff66,0 0 70px #f2ca781a}.machine.bonus-mode .machine-head b{color:#ffe6a0}@keyframes fadeIn{from{opacity:0;transform:scale(1.02)}to{opacity:1;transform:scale(1)}}@keyframes pulse{from{transform:scale(1);filter:brightness(1)}to{transform:scale(1.06);filter:brightness(1.35)}}@keyframes bonusFlash{from{box-shadow:0 0 8px #f2ca7855}to{box-shadow:0 0 22px #f2ca78dd;filter:brightness(1.5)}}
-@media(max-width:760px){.board-area{grid-template-columns:minmax(0,1fr) 86px}.layout{grid-template-columns:1fr}.sidebar{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.balance-card{grid-column:1/-1}}@media(max-width:420px){.app{padding:9px}.board-area{grid-template-columns:minmax(0,1fr) 72px;gap:4px}.mult-ladder{padding:4px}.ladder-step{font-size:9px}.board{gap:2px}.tile{border-radius:4px}.frame{padding:3px}.tag{font-size:9px;padding:6px}.brand small{font-size:8px}}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Forgotten Vault: Awakening</title>
+    <style>
+      :root {
+        --bg-deep: #080b14;
+        --bg-mid: #171124;
+        --bg-glow: #2c173e;
+        --gold-1: #f7e9b1;
+        --gold-2: #d8a94e;
+        --gold-3: #9c6429;
+        --purple-1: #8c5eff;
+        --purple-2: #4a2a7a;
+        --blue-1: #43d7ff;
+        --blue-2: #1a7df5;
+        --pink-1: #ff5fe8;
+        --pink-2: #b854ff;
+        --green-1: #7af5d0;
+        --green-2: #2fbd8f;
+        --red-1: #ff5d5d;
+        --red-2: #d62d5a;
+        --panel: rgba(17, 12, 24, 0.94);
+        --panel-alt: rgba(20, 15, 29, 0.96);
+        --stroke: rgba(241, 194, 97, 0.9);
+        --muted: #cab8f7;
+      }
 
-/* v47: Wild groups can connect multiple symbol types in one cascade. */
-/* Reel-style spin animation */
-#board{perspective:900px;overflow:hidden}
-.tile{position:relative;will-change:transform,filter;backface-visibility:hidden}
-.tile.reel-spin{animation:reelDrop .12s linear infinite;filter:blur(1.8px) brightness(1.25);z-index:2}
-.tile.reel-stop{animation:reelLand .28s cubic-bezier(.18,.8,.25,1.25) both;z-index:3}
-@keyframes reelDrop{0%{transform:translateY(-28%) rotateX(18deg);opacity:.78}100%{transform:translateY(28%) rotateX(-18deg);opacity:1}}
-@keyframes reelLand{0%{transform:translateY(-65%) scale(.94);filter:blur(3px);opacity:.4}65%{transform:translateY(7%) scale(1.035);filter:blur(0);opacity:1}100%{transform:translateY(0) scale(1);filter:none;opacity:1}}
-#board.reels-running{box-shadow:0 0 0 1px #d8b46c,0 0 32px #8e55ff66,inset 0 0 28px #a36bff22}
+      * { box-sizing: border-box; }
 
+      html, body {
+        margin: 0;
+        min-height: 100%;
+        font-family: Segoe UI, Tahoma, Geneva, Verdana, sans-serif;
+        color: var(--gold-1);
+        background:
+          radial-gradient(circle at 18% 12%, rgba(140, 94, 255, 0.45), transparent 22%),
+          radial-gradient(circle at 80% 24%, rgba(67, 215, 255, 0.35), transparent 18%),
+          radial-gradient(circle at 50% 72%, rgba(255, 95, 232, 0.12), transparent 26%),
+          linear-gradient(180deg, #130d1f 0%, #090c16 46%, #070a12 100%);
+      }
 
-/* Max-win milestone spectacle */
-body.maxwin-shake{animation:maxWinShake .16s linear 8} @keyframes maxWinShake{0%,100%{transform:translate(0,0)}20%{transform:translate(-5px,3px)}40%{transform:translate(5px,-3px)}60%{transform:translate(-3px,-2px)}80%{transform:translate(4px,2px)}}
-.maxwin-banner{position:fixed;inset:0;z-index:40;display:none;place-items:center;padding:18px;background:radial-gradient(ellipse at center,#512d83dd,#05030cf2 72%);backdrop-filter:blur(5px)}.maxwin-banner.show{display:grid;animation:fadeIn .25s ease-out}.maxwin-card{width:min(680px,100%);text-align:center;padding:30px 18px;border:2px solid #ffe29a;border-radius:22px;background:linear-gradient(145deg,#3a2059,#090612);box-shadow:0 0 45px #b77bff88,inset 0 0 28px #f2ca7822;animation:maxWinPulse .65s ease-in-out infinite alternate}.maxwin-kicker{color:#e8d3ff;letter-spacing:.32em;font-weight:900;font-size:11px}.maxwin-title{font-size:clamp(27px,6vw,58px);font-weight:1000;line-height:1.05;margin:14px 0;color:#fff0bc;text-shadow:0 0 15px #ffcf6c,0 0 32px #b56bff}.maxwin-value{font-size:clamp(38px,9vw,82px);font-weight:1000;color:#ffe29a;text-shadow:0 0 18px #ffb84d;animation:pulse .35s infinite alternate}.maxwin-copy{color:#e1d4f4;line-height:1.6}.maxwin-btn{padding:12px 24px;border-radius:10px;border:1px solid #ffe5a0;background:linear-gradient(110deg,#ffe7a5,#dca84d);color:#24152f;font-weight:950;cursor:pointer}.maxwin-final{position:fixed;inset:0;z-index:45;display:none;place-items:center;padding:18px;background:radial-gradient(ellipse at center,#6b174fef,#030208fa 72%);backdrop-filter:blur(9px)}.maxwin-final.show{display:grid;animation:fadeIn .5s ease-out}.maxwin-final .maxwin-card{border-color:#ff7be8;background:linear-gradient(145deg,#3b1245,#100713);box-shadow:0 0 70px #ff4fce88,0 0 120px #a86bff55;animation:maxWinPulse .45s ease-in-out infinite alternate}.maxwin-final .maxwin-title{color:#fff0ff;text-shadow:0 0 18px #ff45d0,0 0 36px #b56bff}.maxwin-particle{position:fixed;z-index:41;top:-15px;width:8px;height:13px;pointer-events:none;animation:particleFall var(--dur,2.5s) linear forwards;left:var(--x);background:var(--c);border-radius:2px;box-shadow:0 0 8px var(--c)}@keyframes particleFall{to{transform:translate3d(var(--drift),110vh,0) rotate(900deg);opacity:.1}}@keyframes maxWinPulse{from{transform:scale(1);filter:brightness(1)}to{transform:scale(1.025);filter:brightness(1.28)}}
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background:
+          radial-gradient(2px 2px at 8% 14%, rgba(255,255,255,0.8), transparent 38%),
+          radial-gradient(2px 2px at 22% 28%, rgba(167, 122, 255, 0.87), transparent 40%),
+          radial-gradient(2px 2px at 72% 16%, rgba(255, 255, 255, 0.8), transparent 38%),
+          radial-gradient(2px 2px at 62% 80%, rgba(116, 216, 255, 0.8), transparent 38%),
+          radial-gradient(2px 2px at 80% 64%, rgba(255, 180, 246, 0.7), transparent 42%);
+        pointer-events: none;
+        opacity: 0.9;
+      }
 
-/* Cinematic cosmic-fantasy art direction — visual-only; game logic and math untouched */
-:root{--bg:#05030e;--panel:#100d20;--gold:#ffd889;--purple:#a66bff;--line:#7251a0}
-html{background:#05030e}
-body{background:
-radial-gradient(ellipse at 50% 2%,rgba(120,52,190,.42),transparent 34%),
-radial-gradient(ellipse at 8% 28%,rgba(30,116,206,.24),transparent 30%),
-radial-gradient(ellipse at 94% 32%,rgba(220,76,157,.22),transparent 32%),
-radial-gradient(ellipse at 50% 100%,rgba(123,56,204,.24),transparent 44%),
-linear-gradient(180deg,#090515 0%,#100921 45%,#05030c 100%);background-attachment:fixed}
-body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;opacity:.55;background-image:radial-gradient(2px 2px at 12% 18%,#fff9,transparent 70%),radial-gradient(1px 1px at 72% 26%,#d6b8ff,transparent 70%),radial-gradient(2px 2px at 84% 70%,#ffd58c,transparent 70%),radial-gradient(1px 1px at 36% 83%,#fff,transparent 70%),radial-gradient(1px 1px at 54% 46%,#a5caff,transparent 70%);background-size:260px 220px;animation:starDrift 36s linear infinite}
-@keyframes starDrift{to{background-position:260px 220px}}
-.app{max-width:1500px;padding:clamp(10px,2vw,28px)}
-.top{padding:12px 16px;border:1px solid #c59aff55;border-radius:16px;background:linear-gradient(110deg,#120c26eF,#080613eF);box-shadow:0 12px 45px #0009,0 0 30px #8c4fff18,inset 0 1px #fff2;backdrop-filter:blur(16px)}
-.logo{border-radius:12px;background:linear-gradient(145deg,#51317e,#171126);box-shadow:0 0 22px #a66bff55,inset 0 0 12px #ffe3a522}
-.brand h1{color:#fff2d6;text-shadow:0 0 18px #f3c87955;letter-spacing:.13em}
-.brand small{color:#c7a8ff}
-.tag,.sound{border-color:#b98bff66!important;background:linear-gradient(145deg,#29183f,#100c1f)!important;box-shadow:inset 0 1px #fff2,0 5px 18px #0006}
-.hero{margin:clamp(22px,4vw,48px) 0 26px;position:relative}
-.hero:before{content:"✧  ·  ☾  ·  ✦";display:block;color:#e9bd75;letter-spacing:1.4em;font-size:12px;margin-bottom:15px;text-shadow:0 0 15px #f3c879}
-.hero small{color:#f4d18a;text-shadow:0 0 14px #f3c87966}
-.hero h2{font-size:clamp(30px,5vw,56px);letter-spacing:.055em;color:#fff5df;text-shadow:0 3px 0 #56366d,0 0 24px #ad74ff88,0 0 55px #7a45bd55}
-.hero p{color:#c9bce2;line-height:1.7}
-.layout{gap:18px}
-.machine,.card{border:1px solid #bd94ff55!important;border-radius:16px!important;background:linear-gradient(145deg,rgba(35,22,58,.94),rgba(8,7,20,.96) 60%,rgba(25,14,43,.94))!important;box-shadow:0 20px 65px #0009,0 0 35px #8548d51b,inset 0 1px #fff2!important;backdrop-filter:blur(12px)}
-.machine{padding:clamp(10px,1.5vw,20px)!important}
-.machine-head{color:#ffe1a0!important;letter-spacing:.12em}
-.frame{border:2px solid #d6b66d!important;border-radius:13px!important;padding:8px!important;background:linear-gradient(135deg,#4b326c,#100b20 28%,#0b0817 72%,#57376d)!important;box-shadow:0 0 0 1px #a86dff66,0 0 30px #8e55ff3d,0 0 70px #000b,inset 0 0 30px #000c!important}
-.board{gap:5px!important;padding:5px!important;background:radial-gradient(ellipse,#24143b,#080611 72%)!important}
-.cell,.tile,.symbol{box-shadow:inset 0 1px #fff2, inset 0 -9px 18px #0006,0 3px 6px #0008}
-.card{padding:17px!important}
-.card h3{color:#ffe0a0!important;letter-spacing:.08em;text-shadow:0 0 12px #f3c87933}
-.spin{background:radial-gradient(circle at 35% 25%,#8e52df,#39166b 58%,#170a2e)!important;border:2px solid #ffe0a0!important;color:#fff2ce!important;box-shadow:0 0 0 4px #d9a95a22,0 0 28px #a04cff77,inset 0 2px #fff6!important;text-shadow:0 0 12px #fff6;transition:transform .18s,filter .18s,box-shadow .18s}
-.spin:hover{transform:translateY(-2px) scale(1.015);filter:brightness(1.18);box-shadow:0 0 0 5px #d9a95a33,0 0 42px #a04cffaa,inset 0 2px #fff8!important}
-button{transition:filter .18s,transform .18s,box-shadow .18s}
-button:hover{filter:brightness(1.12)}
-.step{border-color:#d5b06b!important;background:linear-gradient(145deg,#39234e,#130d22)!important;color:#ffe1a0!important;box-shadow:inset 0 1px #fff2,0 4px 12px #0007}
-.betrow,.winbox,.balance-card{border-color:#b68aff44!important}
-.bonus-spins-hud,.bonus-win-hud{box-shadow:0 0 25px #a04cff33,inset 0 0 22px #a04cff12!important}
-#status{color:#cdb5ff}
-#ladderCurrent{color:#ffe4a3;text-shadow:0 0 20px #ffb84899}
-@media(min-width:1000px){.layout{grid-template-columns:minmax(0,1.75fr) minmax(300px,.8fr)!important}.hero{margin-bottom:32px}}
-@media(max-width:700px){.app{padding:9px}.top{align-items:flex-start;flex-wrap:wrap}.top .actions{flex-wrap:wrap;justify-content:flex-end}.hero:before{letter-spacing:.6em}.machine{padding:8px!important}.board{gap:3px!important}.card{padding:12px!important}}
-@media(prefers-reduced-motion:reduce){body:before{animation:none}*,*:before,*:after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+      .app {
+        position: relative;
+        z-index: 1;
+        max-width: 1500px;
+        margin: 0 auto;
+        padding: 18px 12px 22px;
+      }
 
+      .topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px;
+        padding: 8px 12px 16px;
+      }
 
-/* Phase 2: richer symbol rendering and readable cinematic tile states; visual-only */
-.tile{position:relative;isolation:isolate;overflow:hidden;border:1px solid #8060ad;background:radial-gradient(ellipse at 50% 24%,#5c397b 0%,#241637 48%,#0b0817 100%);box-shadow:inset 0 1px #fff3,inset 0 -12px 18px #03020a99,0 3px 7px #0009;transition:border-color .22s,box-shadow .22s,transform .22s,filter .22s}
-.tile:before{content:"";position:absolute;inset:1px;border-radius:6px;pointer-events:none;background:linear-gradient(135deg,#fff2,transparent 28%,transparent 70%,#d5a5ff0c);z-index:1}
-.tile:after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.55;background:radial-gradient(ellipse at 50% 50%,transparent 35%,#03020b66 100%);z-index:1}
-.tile svg{position:relative;z-index:2;width:88%;height:88%;filter:drop-shadow(0 0 4px #cda0ff55) drop-shadow(0 4px 5px #000c);transition:transform .25s,filter .25s}
-.tile:hover svg{transform:translateY(-2px) scale(1.06);filter:drop-shadow(0 0 9px #f5d28b99) drop-shadow(0 4px 5px #000c)}
-.tile.guardian-tile{border-color:#e6b86e;background:radial-gradient(ellipse at 50% 35%,#9d4f58 0%,#422044 48%,#130b20 100%);box-shadow:inset 0 0 15px #ffbf6840,0 0 9px #e9a25d22}
-.tile.guardian-tile svg{filter:drop-shadow(0 0 7px #ffb66a99) drop-shadow(0 3px 4px #000)}
-.tile.wild-tile{border-color:#8deeff;background:radial-gradient(ellipse at 50% 35%,#167aa3 0%,#152b51 52%,#080a19 100%);box-shadow:inset 0 0 18px #5be8ff33,0 0 10px #37c8ff22}
-.tile.wild-tile svg{filter:drop-shadow(0 0 8px #66eaffaa)}
-.tile.special:not(.guardian-tile):not(.wild-tile){border-color:#d58fff;background:radial-gradient(ellipse at 50% 35%,#713d9a 0%,#28183f 55%,#0d091b 100%);box-shadow:inset 0 0 14px #cf82ff26}
-.tile.win{z-index:4;border-color:#fff0b4;background:radial-gradient(ellipse,#fff0b4 0%,#c28bff 20%,#42265e 68%,#130b22 100%);box-shadow:0 0 0 1px #fff2b877,0 0 14px #ffe6a5,0 0 32px #b96cff88,inset 0 0 20px #fff5;animation:cinematicWinPulse .38s ease-in-out infinite alternate}
-.tile.win svg{filter:drop-shadow(0 0 10px #fff4b8) brightness(1.3);transform:scale(1.08)}
-@keyframes cinematicWinPulse{from{transform:scale(.94);filter:brightness(1)}to{transform:scale(1.025);filter:brightness(1.35)}}
-.reels-running .tile.reel-spin svg{filter:blur(2px) brightness(1.6) drop-shadow(0 0 8px #a86bff);transform:scale(.92)}
-.reels-running .tile.reel-stop{border-color:#ffe4a3;box-shadow:0 0 12px #e6b86e77,inset 0 1px #fff5}
-#board{perspective:900px;transform-style:preserve-3d}
-@media(max-width:520px){.tile{border-radius:4px}.tile svg{width:94%;height:94%}}
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
 
+      .brand-mark {
+        width: 72px;
+        height: 72px;
+        border-radius: 18px;
+        border: 2px solid rgba(248, 204, 108, 0.9);
+        background: linear-gradient(180deg, rgba(36, 24, 48, 0.95), rgba(14, 10, 22, 0.9));
+        box-shadow: 0 0 0 2px rgba(255, 206, 118, 0.15), 0 0 26px rgba(170, 112, 255, 0.38);
+        display: grid;
+        place-items: center;
+        font-size: 34px;
+        text-shadow: 0 0 18px rgba(255, 210, 96, 0.7);
+      }
 
-/* Phase 3: cinematic motion polish; does not alter game math or outcomes */
-.tile.guardian-tile:not(.win){animation:guardianAura 2.8s ease-in-out infinite}
-@keyframes guardianAura{0%,100%{box-shadow:inset 0 0 12px #ffbf6828,0 0 5px #e9a25d18}50%{box-shadow:inset 0 0 22px #ffbf6866,0 0 15px #ffb66a55}}
-.tile.zap-arrival{animation:zapArrival .48s cubic-bezier(.15,.85,.2,1.25) both!important;z-index:5}
-@keyframes zapArrival{0%{transform:scale(.3) rotate(-16deg);opacity:0;filter:brightness(3)}55%{transform:scale(1.16) rotate(5deg);opacity:1;filter:brightness(2)}100%{transform:scale(1) rotate(0);opacity:1;filter:brightness(1.25)}}
-.tile.win{animation:cinematicWinPulse .38s ease-in-out infinite alternate,winShimmer 1.1s linear infinite}
-@keyframes winShimmer{0%{background-position:0 0;filter:brightness(1)}50%{filter:brightness(1.35)}100%{background-position:100% 100%;filter:brightness(1.05)}}
-#status{transition:color .25s,text-shadow .25s}
-#status:not(:empty){text-shadow:0 0 14px #b98bff55}
-.toast{backdrop-filter:blur(12px);box-shadow:0 10px 32px #0009,0 0 18px #a66bff2a}
-@media(prefers-reduced-motion:reduce){.tile.guardian-tile:not(.win),.tile.zap-arrival,.tile.win{animation:none!important}}
+      .brand-copy {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+      }
 
+      .brand-copy h1 {
+        margin: 0;
+        font-size: clamp(32px, 2.6vw, 52px);
+        line-height: 0.85;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        font-weight: 900;
+        color: var(--gold-1);
+        text-shadow: 0 0 18px rgba(255, 168, 75, 0.7), 0 0 32px rgba(152, 108, 255, 0.7);
+      }
 
-/* Turbo mode control and accelerated motion */
-#turbo{border-color:#d7a7ff66!important;color:#e7d4ff!important}
-#turbo.active{border-color:#ffe08a!important;color:#fff0b8!important;background:linear-gradient(145deg,#54371b,#24162e)!important;box-shadow:0 0 18px #ffc85755,inset 0 1px #fff5!important}
-body.turbo-mode .tile{transition-duration:.08s!important}
-body.turbo-mode .tile.guardian-tile:not(.win){animation-duration:.8s!important}
-body.turbo-mode .tile.win{animation-duration:.18s,.45s!important}
-body.turbo-mode .toast{transition-duration:.1s!important}
+      .brand-copy small {
+        color: #d6c7ff;
+        letter-spacing: 0.25em;
+        text-transform: uppercase;
+        font-size: 11px;
+      }
 
+      .header-actions {
+        margin-left: auto;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
 
-/* LIVE CINEMATIC ENVIRONMENT ARTWORK */
-body{background-image:linear-gradient(180deg,rgba(4,2,16,.08),rgba(5,3,17,.22) 35%,rgba(5,3,17,.72) 100%),url('https://raw.githubusercontent.com/Gourav9414/forgotten-vault-awakening-2/main/assets/cosmic-vault-cinematic.svg'),radial-gradient(ellipse at 50% 0%,#4c267b 0%,#15102c 43%,#05040c 100%)!important;background-position:center top!important;background-size:cover!important;background-attachment:fixed!important}
-.hero{background:linear-gradient(90deg,#10071fdd,#10071f99 50%,#10071fdd),url('https://raw.githubusercontent.com/Gourav9414/forgotten-vault-awakening-2/main/assets/cosmic-vault-cinematic.svg') center 24%/cover;border-color:#d6b16d88}
-.machine,.card{background:linear-gradient(145deg,rgba(29,15,49,.88),rgba(5,5,17,.9));backdrop-filter:blur(7px)}
-.frame{background:linear-gradient(145deg,#6b4b85,#21132f 40%,#070611);box-shadow:0 0 0 2px #3b2457,0 0 32px #bd83ff55,0 0 60px #e9bd6330,inset 0 0 28px #d7a9ff1b}
+      .pill {
+        min-width: 116px;
+        height: 46px;
+        border-radius: 14px;
+        border: 2px solid rgba(229, 196, 105, 0.9);
+        background: linear-gradient(180deg, rgba(33, 17, 41, 0.9), rgba(12, 10, 18, 0.94));
+        box-shadow: inset 0 0 14px rgba(147, 92, 255, 0.18), 0 0 18px rgba(150, 98, 255, 0.28);
+        color: var(--gold-1);
+        font-weight: 800;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+      }
 
-/* GEM ART PASS — dimensional SVG sigils and cinematic board depth */
-.board{position:relative;isolation:isolate;padding:2px;border-radius:9px;background:radial-gradient(ellipse at 50% 0%,#6e4b9c22,transparent 55%),linear-gradient(145deg,#080610,#17102a 48%,#05040b);box-shadow:inset 0 0 22px #000b,0 0 18px #9a63e52b}
-.tile{position:relative;isolation:isolate;overflow:hidden;border:1px solid #8e72ad;background:linear-gradient(145deg,#594076 0%,#29203f 20%,#151124 56%,#080710 100%);box-shadow:inset 0 1px 0 #fff7,inset 1px 0 0 #fff2,inset 0 -8px 12px #0009,0 2px 4px #000a;transition:transform .18s ease,filter .18s ease,border-color .18s ease}
-.tile:before{content:"";position:absolute;inset:1px;z-index:2;pointer-events:none;border-radius:5px;background:linear-gradient(135deg,#fff3 0%,#fff0 24%,#fff0 68%,#a86eff12 100%);box-shadow:inset 0 0 0 1px #ffffff08}
-.tile:after{content:"";position:absolute;left:10%;right:10%;top:3%;height:22%;z-index:2;pointer-events:none;border-radius:50%;background:linear-gradient(180deg,#fff2,transparent);filter:blur(4px)}
-.tile svg{position:relative;z-index:1;width:88%;height:88%;filter:drop-shadow(0 0 5px #d5aaff77) drop-shadow(0 3px 3px #000e)}
-.tile.special svg{filter:drop-shadow(0 0 8px #8eeaffaa) drop-shadow(0 3px 4px #000e)}
-.tile.guardian-tile{background:radial-gradient(circle at 50% 35%,#7051a8,#211432 55%,#090711);border-color:#f3d18a;box-shadow:inset 0 1px #fff9,0 0 12px #b777ff77,inset 0 0 16px #f3d18a22}
-.tile.wild-tile{background:radial-gradient(circle at 50% 40%,#5a3c8b,#19102a 62%,#07050e);border-color:#8aeaff;box-shadow:inset 0 1px #fff9,0 0 13px #54d9ff88}
-.tile.win{transform:scale(.94);border-color:#fff0a6;box-shadow:0 0 10px #ffdf77,0 0 26px #ffbf4ccc,inset 0 0 16px #fff2a955;filter:brightness(1.25)}
-.frame{padding:8px;border:2px solid #f0d28c;background:linear-gradient(145deg,#715094,#2a1a43 25%,#080611 70%,#4d326a);box-shadow:0 0 0 2px #38254f,0 0 26px #c28aff40,0 0 48px #e4b65a18,inset 0 0 25px #c18aff22}
-@media(prefers-reduced-motion:reduce){.tile{transition:none}}
+      .pill .icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background: rgba(255, 202, 88, 0.14);
+        border: 1px solid rgba(255, 204, 101, 0.7);
+      }
 
-/* CINEMATIC VISUAL PASS — live playable UI */
-body{background-color:#070511;background-image:linear-gradient(180deg,rgba(4,2,16,.08),rgba(5,3,17,.22) 35%,rgba(5,3,17,.72) 100%),url('https://raw.githubusercontent.com/Gourav9414/forgotten-vault-awakening-2/main/assets/cosmic-vault-cinematic.svg'),radial-gradient(ellipse at 50% 0%,#4c267b 0%,#15102c 43%,#05040c 100%);background-position:center top;background-size:cover;background-attachment:fixed}
-body:after{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.24;background:linear-gradient(115deg,transparent 0%,#a56dff10 28%,transparent 46%,#56dffff0 49%,transparent 51%),radial-gradient(ellipse at 50% 0%,transparent 20%,#05030a66 100%);mix-blend-mode:screen;animation:vaultAura 12s ease-in-out infinite alternate}
-@keyframes vaultAura{from{opacity:.12;filter:hue-rotate(0deg)}to{opacity:.3;filter:hue-rotate(18deg)}}
-.app{max-width:1520px;padding:clamp(10px,1.5vw,22px)}
-.brand .logo{background:linear-gradient(145deg,#54378a,#171026 58%,#3a245b);border:1px solid #f3d18a;box-shadow:0 0 22px #a96cff55,inset 0 0 16px #ffe6a022;text-shadow:0 0 15px #f7d78c}
-.brand h1,.hero h2{background:linear-gradient(180deg,#fff6d7 5%,#f5cf79 48%,#b9752c 90%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 3px 10px #7b35d777)}
-.hero{position:relative;padding:15px 12px 18px;margin:12px 0 15px;border:1px solid #d4ae6a66;border-radius:18px;background:linear-gradient(90deg,transparent,#130b25b8 22%,#130b25d9 50%,#130b25b8 78%,transparent);box-shadow:0 0 38px #813bff22}
-.hero:before{content:"✦  ✧  ✦";display:block;color:#f5d88f;letter-spacing:1.1em;font-size:12px;text-shadow:0 0 15px #bb7aff}
-.machine,.card{border-color:#c79a58;background:linear-gradient(145deg,rgba(38,22,60,.94),rgba(7,6,20,.94) 72%);box-shadow:0 18px 50px #000b,0 0 26px #8d4dff25,inset 0 1px #fff3,inset 0 0 0 2px #d8ac5c12}
-.machine{position:relative;overflow:hidden}
-.machine:before{content:"";position:absolute;inset:0;pointer-events:none;border-radius:inherit;background:linear-gradient(115deg,#fff0 0%,#e7c46b0a 32%,#c28aff10 50%,#fff0 68%);background-size:220% 100%;animation:frameSheen 9s linear infinite}
-@keyframes frameSheen{from{background-position:200% 0}to{background-position:-20% 0}}
-.frame{border:2px solid #d7b76d;background:linear-gradient(145deg,#50336c,#171027 45%,#070611);box-shadow:0 0 0 2px #56357c,0 0 30px #a85cff42,0 0 55px #e4b65a17,inset 0 0 24px #c78bff17}
-.tile{border:1px solid #8b6a9e;background:linear-gradient(145deg,#3b2855 0%,#171126 55%,#090712 100%);box-shadow:inset 0 1px #fff3,inset 0 -8px 18px #0008,0 2px 4px #0009}
-.tile svg{filter:drop-shadow(0 0 4px #b88bff55) drop-shadow(0 2px 3px #000d)}
-.tile.win{border-color:#fff0a6;box-shadow:0 0 8px #ffdf77,0 0 23px #ffbf4caa,inset 0 0 14px #fff2a955}
-.spin{position:relative;overflow:hidden;background:linear-gradient(115deg,#fff0b5,#e3ad48 35%,#fff0a8 50%,#b87828 72%,#ffe8a2);background-size:220% 100%;box-shadow:0 0 18px #e9b95355,inset 0 1px #fff9;color:#24122f;animation:spinButtonGleam 5s linear infinite}
-@keyframes spinButtonGleam{from{background-position:200% 0}to{background-position:-20% 0}}
-.buttons button,.sound,.step,.autoplay-toggle{border-color:#8d6baf;background:linear-gradient(145deg,#302043,#141020);box-shadow:inset 0 1px #fff2,0 3px 10px #0005}
-.card h3{color:#f0d18a;text-shadow:0 0 10px #e2ae4d33}
-.cinematic{background:radial-gradient(ellipse at 50% 38%,#6635aacc 0%,#140b2aee 46%,#030209f7 100%);backdrop-filter:blur(10px)}
-.cinema-card{position:relative;overflow:hidden;border:1px solid #f1d28a;background:linear-gradient(150deg,#35204f,#100a20 60%,#080610);box-shadow:0 0 0 2px #6b438b,0 0 70px #a86aff88,inset 0 0 35px #f2ca7818}
-.cinema-card:before{content:"✧";position:absolute;top:-38px;left:calc(50% - 48px);font-size:96px;color:#f5d47e;text-shadow:0 0 28px #9f5cff;opacity:.5}
-@media(max-width:850px){.app{padding:8px}.hero{margin:8px 0 10px}.layout{grid-template-columns:minmax(0,1fr)}.sidebar{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.board-area{grid-template-columns:minmax(0,1fr) 88px}.machine,.card{padding:9px}}
-@media(prefers-reduced-motion:reduce){body:after,.machine:before,.spin{animation:none!important;transition:none!important}}
+      .settings {
+        width: 46px;
+        min-width: 46px;
+        border-radius: 14px;
+      }
 
+      .layout {
+        display: grid;
+        grid-template-columns: 270px minmax(0, 1fr) 270px;
+        gap: 18px;
+        align-items: start;
+      }
 
-/* FINAL REFERENCE INTEGRATION — cosmic gold cabinet, guardian rail, centered 8×6 board */
-:root{--bg:#070611;--panel:#100b18;--gold:#ffd56f;--purple:#9b4dff;--muted:#e0d1f4;--line:#a56b26}
-body{background:linear-gradient(180deg,rgba(4,3,14,.12),rgba(4,3,14,.28) 50%,rgba(4,3,14,.55)),url('https://raw.githubusercontent.com/Gourav9414/forgotten-vault-awakening-2/main/assets/cosmic-vault-cinematic.svg') center center/cover fixed,#070611}
-body:after{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;background:radial-gradient(ellipse at center,transparent 35%,#02010866 100%);box-shadow:inset 0 0 100px #0008}
-.app{max-width:1800px;width:100%;padding:12px 16px 10px;z-index:1}
-.top{position:relative;justify-content:flex-end;min-height:46px;margin-bottom:2px}
-.brand{position:absolute;left:50%;top:0;transform:translateX(-50%);justify-content:center;min-width:0;z-index:3;text-align:center}
-.brand .logo{display:none}
-.brand h1{font-family:Georgia,'Times New Roman',serif;font-size:clamp(23px,3vw,46px);line-height:.95;letter-spacing:.04em;color:#ffdf83;text-shadow:0 3px 0 #5e2509,0 0 12px #ff9b24,0 0 28px #a34dff;border:0;padding:0;background:none}
-.brand small{display:block;color:#ffe2ff;font-weight:900;font-size:clamp(9px,1vw,15px);letter-spacing:.48em;text-shadow:0 0 10px #ad43ff}
-.actions{margin-left:auto;z-index:4;align-self:flex-start}
-.tag{display:none}
-.sound{border:1px solid #e4b64e!important;border-radius:13px!important;background:linear-gradient(145deg,#21131b,#07060b)!important;color:#fff0bf!important;box-shadow:0 0 12px #ffb52b33,inset 0 1px #fff3}
-.hero{margin:38px auto 10px;min-height:34px}
-.hero>small,.hero h2,.hero p{display:none}
-.layout{grid-template-columns:minmax(205px, .85fr) minmax(480px,2.45fr) minmax(220px,.9fr);gap:10px;align-items:stretch}
-.machine{grid-column:2;grid-row:1;min-width:0;padding:9px;border:2px solid #d99b35;border-radius:18px;background:linear-gradient(145deg,#140c20eF,#05040bed);box-shadow:0 0 0 2px #542b17,0 0 28px #ff9d2b44,inset 0 0 20px #ffcb5418;position:relative}
-.machine:before{content:"";position:absolute;inset:3px;border:1px solid #ffe2a05c;border-radius:12px;pointer-events:none}
-.machine-head{color:#ffdda0;margin:0 4px 7px;font-size:11px}
-.machine-head b{color:#ffe18a;text-shadow:0 0 10px #ff9d2b;letter-spacing:.15em}
-.frame{padding:6px;border:2px solid #eab447;border-radius:13px;background:linear-gradient(145deg,#6c3718,#160b18 25%,#06050b 80%,#a86421);box-shadow:0 0 0 2px #49210f,0 0 22px #ff9c2b44,inset 0 0 20px #ffc04a22}
-.board-area{display:block}
-.board{gap:4px;aspect-ratio:8/6;max-height:calc(100vh - 300px);min-height:390px;grid-template-columns:repeat(8,minmax(0,1fr));}
-.tile{border:1px solid #b57a2c;border-radius:6px;background:linear-gradient(145deg,#25212e,#09080f 75%);box-shadow:inset 0 1px #fff2,inset 0 -5px 10px #000a,0 2px 3px #000a;overflow:hidden}
-.tile svg{width:94%;height:94%;filter:drop-shadow(0 0 5px #000) drop-shadow(0 0 5px currentColor)}
-.mult-ladder{display:none}
-.trigger-count{margin:6px 4px 0;color:#ffda8c}
-.foot{margin:6px 4px 0;color:#f4d9a2}
-.sidebar{display:contents}
-.sidebar>.card{min-width:0;border:2px solid #b9802c;border-radius:14px;padding:11px;background:linear-gradient(145deg,#170d1cfa,#05040bf5);box-shadow:0 0 0 2px #49210f,0 0 18px #ffb02b2c,inset 0 0 15px #ffcc5310}
-.sidebar>.card h3{font-size:clamp(10px,.9vw,14px);text-align:center;color:#ffdc76;letter-spacing:.1em;text-shadow:0 0 9px #ff9b2b;margin-bottom:10px}
-.sidebar>.guardian-key,.sidebar>.card:has(.guardian-key){grid-column:1;grid-row:1;align-self:start}
-.sidebar>.balance-card{grid-column:1;grid-row:2;align-self:start}
-.sidebar>.card:has(.feature-options),.sidebar>.card:has(#featureForgeBtn){grid-column:3;grid-row:1;align-self:start}
-.sidebar>.card:has(.feature){grid-column:3;grid-row:2;align-self:start}
-.sidebar>.rules{grid-column:3;grid-row:3;align-self:start}
-.guardian-key{display:flex;flex-direction:column;gap:6px}
-.guardian-key>div{display:flex;align-items:center;gap:9px;padding:6px;border:1px solid #a87934;border-radius:9px;background:linear-gradient(100deg,#25172b,#0b0810)}
-.guardian-mini{width:48px;height:48px;flex:0 0 48px}
-.guardian-key p{font-size:10px;line-height:1.35}
-.guardian-key b{color:#ffe3a0}
-.balance{font-size:clamp(22px,2vw,32px);color:#fff0bd}
-.balance-card .stats{color:#d9c6ec}
-.betrow{justify-content:center;gap:13px}
-.step{border-color:#d9a443;background:linear-gradient(145deg,#28191b,#09070c);color:#ffe17a;box-shadow:0 0 8px #ffb02b22}
-.spin{width:min(100%,300px);display:block;margin:12px auto 8px;min-height:76px;border:3px solid #ffe19a;border-radius:50%;aspect-ratio:1/1;max-width:108px;padding:12px;background:radial-gradient(circle at 35% 25%,#ffec9c,#ff9b2d 35%,#c52bdf 60%,#3c105e 78%);color:#fff3ad;font-size:0;box-shadow:0 0 0 5px #6c3517,0 0 0 8px #e4ad40,0 0 28px #ff8d2d,inset 0 0 20px #fff8;position:relative}
-.spin:after{content:"⟳";font-size:60px;line-height:1;text-shadow:0 2px 0 #9b3113,0 0 15px #fff5}
-.buttons button,.autoplay-toggle,.forge-btn{border:1px solid #e0ac43!important;background:linear-gradient(145deg,#21151b,#09070b)!important;color:#ffe8a6!important;box-shadow:0 0 8px #ffb02b1c}
-.feature-option{border-color:#bc7e30!important;background:linear-gradient(100deg,#142b1c,#07100c 75%)!important}
-.feature-option:nth-of-type(2){background:linear-gradient(100deg,#102e50,#070d1a 75%)!important}
-.feature-option:nth-of-type(3){background:linear-gradient(100deg,#472b10,#100a08 75%)!important}
-.winbox{border-color:#9b6b2a;background:#110b14}
-.footer{color:#dfc69d;font-size:10px}
-.modal .dialog{border-color:#d8a644!important;box-shadow:0 0 35px #a84dff44}
-@media(max-width:1050px){.app{padding:8px}.layout{grid-template-columns:minmax(0,1fr) minmax(0,2fr)}.machine{grid-column:2;grid-row:1 / span 3}.sidebar>.guardian-key,.sidebar>.card:has(.guardian-key){grid-column:1;grid-row:1}.sidebar>.balance-card{grid-column:1;grid-row:2}.sidebar>.card:has(#featureForgeBtn){grid-column:1;grid-row:3}.sidebar>.card:has(.feature){grid-column:1;grid-row:4}.sidebar>.rules{grid-column:1;grid-row:5}.board{min-height:320px;max-height:none}.brand{position:static;transform:none}.top{justify-content:space-between}.actions{flex-wrap:wrap}}
-@media(max-width:650px){.top{align-items:flex-start;flex-direction:column}.brand{position:static;transform:none;text-align:left}.brand h1{font-size:24px}.actions{margin-left:0}.hero{margin:8px 0}.layout{display:flex;flex-direction:column}.machine{order:1}.sidebar{display:flex;flex-direction:column}.sidebar>.card{order:initial}.board{min-height:0;max-height:none}.sidebar>.guardian-key,.sidebar>.card:has(.guardian-key),.sidebar>.balance-card,.sidebar>.card:has(#featureForgeBtn),.sidebar>.card:has(.feature),.sidebar>.rules{grid-column:auto;grid-row:auto}.spin{min-height:72px;max-width:84px}.spin:after{font-size:48px}}
+      .panel {
+        background: linear-gradient(180deg, rgba(22, 14, 31, 0.96), rgba(11, 9, 18, 0.96));
+        border: 2px solid rgba(234, 194, 90, 0.8);
+        border-radius: 18px;
+        box-shadow: 0 0 20px rgba(128, 88, 255, 0.18), inset 0 0 18px rgba(125, 87, 255, 0.08);
+        overflow: hidden;
+      }
 
+      .panel-title {
+        margin: 0;
+        padding: 14px 12px 8px;
+        font-size: 15px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        font-weight: 900;
+        color: var(--gold-1);
+      }
 
-/* REFERENCE LAYOUT FIX v2 — real three-column cabinet and persistent controls */
-body{background:linear-gradient(180deg,#05030a20,#05030a66),url('https://raw.githubusercontent.com/Gourav9414/forgotten-vault-awakening-2/main/assets/cosmic-vault-cinematic.svg') center/cover fixed,#070611}
-.app{max-width:1900px;padding:8px 12px}
-.top{min-height:62px}.brand{left:50%;top:0}.brand h1{font-size:clamp(22px,3.4vw,48px)}
-.hero{margin:10px 0 6px}.layout{display:grid;grid-template-columns:minmax(190px,.82fr) minmax(420px,2.35fr) minmax(230px,.95fr);gap:10px;align-items:start}
-.machine{grid-column:2;grid-row:1;padding:8px}
-.sidebar{display:flex;flex-direction:column;gap:8px;min-width:0}
-.sidebar>.balance-card{order:2}
-.sidebar>.card:has(.guardian-key){order:1}
-.sidebar>.card:has(#featureForgeBtn){order:3}
-.sidebar>.card:has(.feature){order:4}
-.sidebar>.rules{order:5}
-.sidebar>.card{padding:9px}
-.sidebar>.card h3{font-size:12px}
-.board-area{display:block}.mult-ladder{display:none}
-.board{min-height:380px;max-height:calc(100vh - 270px);aspect-ratio:8/6;gap:4px}
-.machine-head{margin-bottom:7px}.frame{padding:5px}
-.guardian-key{display:grid;grid-template-columns:1fr;gap:5px}
-.guardian-key>div{padding:4px}
-.guardian-mini{width:40px;height:40px;flex-basis:40px}
-.guardian-key p{font-size:9px;line-height:1.3}
-#referenceGuardianRail{display:flex;flex-direction:column;gap:5px}
-.ref-guardian{display:grid;grid-template-columns:31px 42px minmax(0,1fr);align-items:center;gap:6px;padding:4px 6px;border:1px solid #a86c2d;border-radius:8px;background:linear-gradient(100deg,#291a2d,#08070c);min-height:55px;box-shadow:inset 0 1px #fff2}
-.ref-guardian .rank{display:grid;place-items:center;width:29px;height:29px;border:2px solid #eab44e;border-radius:50%;font-size:18px;font-weight:900;color:#fff0bf;background:#07060b}
-.ref-guardian .portrait{width:40px;height:44px;display:grid;place-items:center;border-radius:7px;font-size:27px;background:radial-gradient(circle,#6d43a8,#0a0712 75%);border:1px solid #dba43e;filter:drop-shadow(0 0 5px #9d59ff)}
-.ref-guardian b{font-size:11px;color:#ffe3a0;display:block}.ref-guardian small{font-size:8px;color:#eee0ff;display:block}
-#referenceBuyPanel{display:flex;flex-direction:column;gap:7px}
-#referenceBuyPanel .ref-buy{display:flex;align-items:center;gap:8px;text-align:left;width:100%;min-height:68px;padding:7px;border:1px solid #dca344;border-radius:9px;color:#fff2c6;background:linear-gradient(100deg,#123d27,#07100c);cursor:pointer}
-#referenceBuyPanel .ref-buy:nth-child(2){background:linear-gradient(100deg,#123b66,#080d1b)}
-#referenceBuyPanel .ref-buy:nth-child(3){background:linear-gradient(100deg,#59330d,#100907)}
-#referenceBuyPanel .ref-buy .portrait{font-size:27px;min-width:42px;text-align:center}
-#referenceBuyPanel .ref-buy b{display:block;font-size:12px}
-#referenceBuyPanel .ref-buy small{display:block;font-size:9px;color:#f6e7bd}
-#referenceBuyPanel .ref-buy strong{font-size:21px;color:#ffdf72;margin-left:auto;white-space:nowrap}
-#referenceBuyPanel .ref-note{text-align:center;font-size:10px;color:#f1d9ff;padding:5px}
-#referenceExtreme{display:flex;align-items:center;gap:10px;border:1px solid #b77d34;border-radius:10px;padding:10px;background:radial-gradient(circle at 25% 50%,#7120a5,#160b20 65%);color:#fff}
-#referenceExtreme b{font-size:13px}#referenceExtreme strong{font-size:25px;color:#ffbfff;margin-left:auto}
-#referenceBottomControls{grid-column:1/4;grid-row:2;display:grid;grid-template-columns:minmax(160px,1fr) minmax(180px,1.2fr) minmax(180px,1fr) minmax(150px,1fr);align-items:center;gap:12px;padding:10px 14px;border:2px solid #d99d3b;border-radius:15px;background:linear-gradient(100deg,#100b12,#08060b 45%,#1a0e1c);box-shadow:0 0 0 2px #4e2615,0 0 24px #ff9d2b35}
-#referenceBottomControls .balance-inline{color:#ffe5a2;font-size:12px;font-weight:800}
-#referenceBottomControls .balance-inline strong{font-size:20px;color:white;margin-left:8px}
-#referenceBottomControls .controls-bet{display:flex;align-items:center;justify-content:center;gap:12px;color:#ffdf82}
-#referenceBottomControls .controls-bet b{font-size:20px;color:white}
-#referenceBottomControls .controls-auto{display:flex;flex-direction:column;gap:5px}
-#referenceBottomControls #spin{margin:0;max-width:88px;min-height:76px;justify-self:center}
-#referenceBottomControls #featureForgeBtn{margin-top:4px}
-#referenceBottomControls .winbox{margin:0}
-@media(max-width:1000px){.layout{grid-template-columns:minmax(155px,.7fr) minmax(350px,2fr)}.machine{grid-column:2;grid-row:1 / span 2}#referenceBottomControls{grid-column:1/3;grid-template-columns:1fr 1fr}.sidebar{grid-column:1;grid-row:1}.sidebar>.rules{display:none}.board{min-height:300px;max-height:none}}
-@media(max-width:650px){.layout{display:flex;flex-direction:column}.machine{order:1;width:100%}.sidebar{order:2;width:100%}#referenceBottomControls{order:3;width:100%;grid-template-columns:1fr 1fr}.board{min-height:0;max-height:none}.brand{position:static;transform:none}.top{display:flex;flex-wrap:wrap}.hero{margin:6px 0}}
-</style><style>
-/* Consolidated v18 polish: subtle build marker and accessible focus states */
-:focus-visible{outline:2px solid #e8c66d;outline-offset:3px}
-button:disabled{cursor:not-allowed;filter:saturate(.55);opacity:.55}
-/* v34 cinematic atmosphere: layered nebula, jewel-like reels and active feature state */
-body{background:radial-gradient(ellipse at 18% 4%,#4b286d 0,transparent 36%),radial-gradient(ellipse at 85% 18%,#142d55 0,transparent 34%),radial-gradient(ellipse at 50% 95%,#2d1745 0,transparent 42%),#06040d;background-attachment:fixed}
-body:before{content:"";position:fixed;inset:-20%;pointer-events:none;z-index:0;opacity:.28;background-image:radial-gradient(2px 2px at 8% 18%,#fff 45%,transparent 60%),radial-gradient(1.5px 1.5px at 23% 73%,#e8c879 45%,transparent 60%),radial-gradient(2px 2px at 49% 32%,#d8c5ff 45%,transparent 60%),radial-gradient(1px 1px at 78% 14%,#fff 45%,transparent 60%),radial-gradient(1.5px 1.5px at 89% 62%,#b99aff 45%,transparent 60%),radial-gradient(1px 1px at 63% 85%,#fff 45%,transparent 60%);background-size:420px 360px;animation:starDrift 38s linear infinite}
-@keyframes starDrift{from{transform:translate3d(0,0,0)}to{transform:translate3d(-90px,55px,0)}}
-.app{position:relative;z-index:1}.hero h2{letter-spacing:.06em;text-shadow:0 0 18px #b77bff66,0 0 42px #8e45d044}.machine{border-color:#a184ca;background:linear-gradient(145deg,#251a3cdd,#0b0817f2);box-shadow:0 0 0 1px #e8c87916,0 20px 55px #0009,0 0 36px #9255d01f}.frame{border:1px solid #c6a4ed;background:linear-gradient(145deg,#100a1d,#030208);box-shadow:inset 0 0 22px #8d58d51f,0 0 20px #b77bff20}.tile{position:relative;overflow:hidden;background:radial-gradient(ellipse at 35% 22%,#554174,#21162f 58%,#100b1a);border-color:#8b70ac;box-shadow:inset 0 1px #fff2,inset 0 -8px 16px #0005,0 2px 4px #0008}.tile:before{content:"";position:absolute;inset:1px;border-radius:5px;pointer-events:none;background:linear-gradient(135deg,#fff1,transparent 42%,#d3a5ff0a 75%,#0003)}.tile svg{position:relative;z-index:1;width:88%;height:88%;filter:drop-shadow(0 0 5px #b78dff70) drop-shadow(0 3px 4px #000c)}.tile.special{border-color:#c99aff;box-shadow:inset 0 0 16px #bd7cff66,0 0 9px #bd7cff40}.tile.win{box-shadow:0 0 0 1px #fff4,0 0 20px #ffe29a, inset 0 0 18px #ffe29a77}.spin{box-shadow:0 0 20px #f2ca7820, inset 0 1px #fff8;transition:transform .15s,box-shadow .15s}.spin:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 0 28px #f2ca7860}.feature-option.mode-active{border-color:#ffe29a;background:linear-gradient(100deg,#49321c,#2b1b3c);box-shadow:0 0 18px #f2ca7840,inset 0 0 12px #f2ca7818}.cinema-card{position:relative;overflow:hidden;box-shadow:0 0 70px #9b63ff70,0 0 120px #f2ca7818,inset 0 0 34px #f2ca7818}.cinema-card:before{content:"";position:absolute;inset:-60%;pointer-events:none;background:conic-gradient(from 0deg,transparent,#b77bff18,transparent,#f2ca7815,transparent);animation:cosmicRotate 16s linear infinite}.cinema-card>*{position:relative;z-index:1}@keyframes cosmicRotate{to{transform:rotate(360deg)}}
-@media(prefers-reduced-motion:reduce){body:before,.cinema-card:before{animation:none}}
-</style>
-</head><body>
-<div style="margin:10px auto;padding:9px 12px;max-width:980px;border:1px solid #b18aff;border-radius:9px;background:#211634;color:#e8d8ff;font-size:12px;text-align:center">Math calibration candidate · provisional 98% RTP target · not verified or certified</div>
+      .guardian-list {
+        padding: 0 8px 12px;
+      }
 
-<div style="margin:10px auto;padding:10px 14px;max-width:980px;border:1px solid #e8c879;border-radius:10px;background:linear-gradient(90deg,#211634,#171025);color:#fce4a6;font-size:11px;text-align:center;box-shadow:0 0 15px rgba(232,200,121,0.2)">
-  <strong>✦ PROTOTYPE DISCLAIMER:</strong> Virtual credits only. This standalone HTML prototype is not connected to Stake Engine RGS; outcomes are generated locally. RTP target: 98.00%, not verified or certified.
-</div>
-<div class="app">
-<header class="top"><div class="brand"><div class="logo">✧</div><div><h1>THE FORGOTTEN VAULT</h1><small>AWAKENING · ROGUE VAULT STUDIOS</small></div></div><div class="actions"><span class="tag">VIRTUAL CREDITS</span><button class="sound" id="sound">♫ Sound Off</button><button class="sound" id="turbo" aria-pressed="false" title="Speed up spins and screen animations">⚡ Turbo Off</button><button class="sound" id="replayBtn" style="border-color:#b89bfb;color:#f2ca78;margin-left:4px">↺ Replay</button></div></header>
-<section class="hero"><small>BEYOND THE VEIL OF FORGOTTEN STARS</small><h2>THE VAULT IS WAITING</h2><p>Align the ancient sigils. Awaken what sleeps beneath the cosmos. <span style="color:#b8a6d8;font-size:10px;letter-spacing:.08em">MECHANICS AUDIT v104 · PROTOTYPE · NOT CERTIFIED</span></p></section>
-<main class="layout"><section class="machine" id="machine"><div class="machine-head"><b>✦ COSMIC CLUSTER · 8 × 6</b><span id="status" aria-live="polite">Vault dormant</span></div><div id="bonusSpinsHud" class="bonus-spins-hud" aria-live="polite"><span>BONUS SPINS LEFT</span><strong id="bonusSpinsLeft">—</strong><em id="bonusTierLabel">BONUS</em></div><div id="bonusWinHud" class="bonus-win-hud" aria-live="polite"><div><div class="bonus-win-label">BONUS WINNING · TOTAL SO FAR</div><div class="bonus-win-note" id="bonusWinNote">Accumulating all bonus rounds</div></div><strong class="bonus-win-value" id="bonusWinTotal">0.0 VC</strong></div><div class="frame"><div class="board-area"><div class="board" id="board" role="grid" aria-label="8 columns by 6 rows"></div><div class="mult-ladder" id="multLadder"><div class="ladder-title">HIT MULTIPLIER</div><div class="ladder-current" id="ladderCurrent">×2</div><div class="ladder-progress" id="ladderProgress">0 / 2 cascades<br>to ×4</div><div id="ladderSteps"></div></div></div></div><div id="triggerCount" class="trigger-count">Starting-board Guardians: — / 4 needed</div><div class="foot"><span>48 sigil chambers</span><span id="action">Awaiting your command</span></div></section>
-<aside class="sidebar"><section class="card balance-card"><h3>Vault reserves</h3><div class="muted">Virtual credits</div><div class="balance"><b id="balance">1,000</b> <span>VC</span></div><div class="stats"><span>Last win</span><b id="lastWin">0 VC</b></div></section>
-<section class="card"><h3>Guardian symbol guide</h3><div class="guardian-key"><div class="guardian-mini"><svg viewBox="0 0 72 72" aria-label="Guardian icon"><path d="M36 7 57 16 54 42 36 60 18 42 15 16Z" fill="#7e52ba" stroke="#f7d9ff" stroke-width="2.5"/><path d="M24 26l8 5-5 7M48 26l-8 5 5 7M29 46h14" fill="none" stroke="#f7d9ff" stroke-width="2.5"/><circle cx="29" cy="27" r="2.5" fill="#f7d9ff"/><circle cx="43" cy="27" r="2.5" fill="#f7d9ff"/></svg></div><div><b>THIS IS THE GUARDIAN</b><p>Violet stone mask with glowing eyes. Its board tile has a gold border and GUARDIAN label. Four Guardians unlock Normal, five Higher, six or seven Mythic, and eight or more Epic. One extra Guardian is added to every bonus-round board; natural Guardian chance is reduced to 0.5% per tile during bonus rounds; Guardian drops can award extra rounds or upgrade the feature.</p></div></div></section><section class="card"><h3>Offer to the vault</h3><div class="muted">Demo bet per spin</div><div class="betrow"><button class="step" id="down">−</button><b><span id="bet">10</span> VC</b><button class="step" id="up">+</button></div><button class="spin" id="spin">✦ Standard Spin · 1×</button>
-<div class="autoplay-row"><label><input id="autoEnabled" type="checkbox"> Auto Spin</label><select id="autoCount" aria-label="Number of automatic spins"><option value="10">10 spins</option><option value="25">25 spins</option><option value="50">50 spins</option><option value="100">100 spins</option></select></div>
-<button id="autoToggle" class="autoplay-toggle" type="button">▶ START AUTO SPIN</button>
-<div class="muted" id="autoInfo">Auto Spin is optional. Stop anytime; it stops if your balance is too low.</div><button class="forge-btn" id="featureForgeBtn">✧ FEATURE FORGE · BONUS & ANTE OPTIONS</button><p class="muted" id="modeInfo">Standard spin costs 1× your selected bet. Open Feature Forge for bonus purchases, persistent Ante, or to lock a ×10/×50/×200 feature for Auto Spin.</p><div class="winbox"><small>Latest discovery</small><strong id="win">—</strong></div></section>
-<section class="card"><h3>Guardian of the deep</h3><div class="feature"><div class="guardian">♜</div><div><b id="gTitle">Guardian sleeps</b><p id="gText">4 Guardians: Normal · 5: Hyper · 6–7: Mythic · 8+: Epic. One extra Guardian is added in every bonus round.</p></div></div></section>
-<section class="card rules"><details open><summary>How to play</summary><b>Clusters:</b> 5+ matching sigils connected up/down/left/right can win. Diagonals do not connect.<br><b>Base payout per 5-symbol cluster:</b> Lunar Pearl 0.21× bet; Astral Star 0.252×; Oracle Eye 0.315×; Void Crystal 0.42×; Eclipse Crown 0.525×; Vault Key 0.63×; Wild-only cluster 0.21×. Payout scales with cluster size; rune and feature multipliers apply separately.<br><b>Cascades:</b> winning tiles vanish; tiles fall and new sigils enter.<br><b>Wild sigil:</b> a lightning Wild can appear naturally (4% per tile) and substitutes for a regular symbol in a cluster. Connected groups of 5+ Wilds also win by themselves; Wilds are counted as part of the connected cluster, including patterns such as 3 Wilds + 2 matching symbols or 4 Wilds + 1 matching symbol, provided all cells connect orthogonally. Wild groups can participate in multiple different symbol clusters in the same cascade; identical clusters are deduplicated, and each candidate cluster pays once. <b>Zap Wild:</b> when a board has no connection, there is a 5% chance per eligible spin for a visible lightning Wild to appear and complete a 5+ connection. It can trigger at most once per spin. This rescue feature is disclosed and is part of the prototype math, which is not RTP-verified.<br><b>Shining multiplier runes:</b> each winning hit advances the multiplier by one level. A winning cluster gets multiplied once if at least one shining rune is directly adjacent to it; multiple adjacent runes never stack the multiplier.<br><b>Guardian bonus:</b> 4 Guardians trigger Normal at 4 (3 starting rounds), Higher at 5 (5 rounds), Mythic at 6–7 (6 rounds), and Epic at 8+ (8 rounds). In bonus rounds, 4 Guardians award +3 rounds, 5 award +5, 6–7 award +6, and 8+ award +8. Normal Bonus is capped at ×2; Hyper at ×5; Mythic at ×8. Epic uses its separate in-game ladder and cannot be purchased. A higher tier upgrades and restarts the feature while retaining prior winnings. Starting multipliers: Normal ×2, Higher ×4, Mythic ×8. Epic ladder: ×50 → ×100 → ×200 → ×300 → ×500 → ×750 → ×1,000. The ladder advances after 2 winning cascades, then requires 3, then 4, and so on; progress carries across retriggers and resets on tier upgrade. A winning cluster receives the active multiplier only when a shining rune is directly adjacent. Multiple adjacent runes never stack. Prototype only; RTP must be recalibrated and validated after these mechanic changes.<br><b>Feature payout calibration:</b> total awards are adjusted by mode-specific calibration factors while the displayed feature prices remain fixed. This prototype calibration is experimental, must be disclosed and validated before any real-money use, and is not a certified RTP guarantee.<br><b>Maximum win:</b> capped at 100,000× the base bet per paid action across the prototype; the cap is not a statement of expected return. <b>Controls guide:</b> use − / + to change the demo bet; Spin starts one paid virtual-credit action; Feature Forge lists bonus purchases and persistent multiplier modes with their prices; the Auto Spin checkbox plus Start button enables the selected number of automatic actions and Stop ends the sequence; Sound toggles audio; Space starts a spin when focus is not in an interactive control; Escape closes open dialogs and the Math Lab. <b>Release status:</b> this is a virtual-credit prototype. Per-mode RTP is not yet verified, and the file is not integrated with Stake Engine RGS, replay, or static outcome files; it must not be submitted or represented as real-money-ready.</details></section></aside></main>
-<footer class="footer">THE FORGOTTEN VAULT: AWAKENING · ROGUE VAULT STUDIOS · v104 PROTOTYPE · TARGET RTP 98.00% · NOT VERIFIED<br>Virtual-credit prototype · Natural Wild chance: 4% per tile; natural Guardian chance: 1% standard, 1.5% Ante, and 0.5% during bonus boards. These are development settings and are not RTP-verified. Zap Wild rescue chance: 5% after a no-connection result, at most once per spin. Virtual credits only; no deposits, withdrawals or real-money payouts. A 98% RTP is a future math target, not a verified current return.</footer></div>
-<div class="modal" id="featureModal" role="dialog" aria-modal="true" aria-labelledby="featureTitle"><div class="dialog feature-dialog"><button class="close" id="featureClose">Close ✕</button><h2 id="featureTitle">✧ Feature Forge</h2><p>Choose a bonus feature or configure a separate persistent single-spin multiplier mode. The ×10, ×50, and ×200 options apply only to qualifying wins on individual spins; they are not bonus-round multipliers. Select one to lock it for manual Spin and Auto Spin until you disable it. Guardian Boost can stay enabled at the same time. Epic Bonus cannot be purchased; it must be triggered in-game with 8+ Guardians.</p><div class="feature-options"><button class="feature-option" id="buyNormal"><span><strong>✦ Buy Normal Bonus</strong><small>Guaranteed Normal Bonus · 3 starting rounds · ×2 start</small></span><em id="normalPrice">2.25× bet</em></button><button class="feature-option" id="buyHigher"><span><strong>✧ Buy Hyper Bonus</strong><small>Guaranteed Hyper Bonus · 5 starting rounds · ×4 start</small></span><em id="higherPrice">4.5× bet</em></button><button class="feature-option" id="buyMythic"><span><strong>☄ Buy Mythic Bonus</strong><small>Guaranteed Mythic Bonus · 6 starting rounds · ×8 start</small></span><em id="mythicPrice">8× bet</em></button><button class="feature-option ante-option" id="anteOption"><span><strong>✧ Guardian Boost</strong><small>Persistent toggle: regular spins cost 1× bet and use 1.5% Guardian chance until disabled.</small></span><em id="antePrice">1× bet</em></button><div class="feature-section">Risk Vault · Random bonus chance</div><button class="feature-option extreme-option" id="extremeSpin"><span><strong>☄ Extreme Spin</strong><small>50% nothing · 30% Normal · 15% Mythic · 5% Epic. One paid attempt; no bonus purchase guarantees.</small></span><em id="extremePrice">10× bet</em></button><div class="feature-section">Single-spin multiplier features</div><button class="feature-option multi-option" id="multi10"><span><strong>✦ ×10 Multiplier Spin</strong><small>Select to lock ×10 for manual spins and Auto Spin until disabled. Every winning cluster pays at ×10.</small></span><em id="multi10Price">10× bet</em></button><button class="feature-option multi-option" id="multi50"><span><strong>✧ ×50 Multiplier Spin</strong><small>Select to lock ×50 for manual spins and Auto Spin until disabled. Every winning cluster pays at ×50.</small></span><em id="multi50Price">30× bet</em></button><button class="feature-option multi-option" id="multi200"><span><strong>☄ ×200 Multiplier Spin</strong><small>Select to lock ×200 for manual spins and Auto Spin until disabled. Every winning cluster pays at ×200.</small></span><em id="multi200Price">75× bet</em></button></div><p class="feature-note">Configured feature prices: Guardian Boost 1×; ×10 multiplier 10×; ×50 multiplier 30×; ×200 multiplier 75×; Normal/Higher/Mythic Bonus Buy 2.25×/4.5×/8×; Extreme Spin 10×. Extreme Spin odds: 50% no bonus, 30% Normal, 15% Mythic, 5% Epic. Configuration values are aligned to the requested specification. RTP is not verified; feature-mode math requires separate balancing and validation.</p></div></div><div class="maxwin-banner" id="maxWinBanner" aria-live="assertive"><div class="maxwin-card"><div class="maxwin-kicker" id="maxWinKicker">VAULT INSTABILITY</div><div class="maxwin-title" id="maxWinTitle">MILESTONE REACHED</div><div class="maxwin-value" id="maxWinValue">1,000×</div><p class="maxwin-copy" id="maxWinCopy">The vault is breaking apart.</p><button class="maxwin-btn" id="maxWinNext">CONTINUE THE ASCENSION</button></div></div><div class="maxwin-final" id="maxWinFinal" role="dialog" aria-modal="true" aria-labelledby="maxWinFinalTitle"><div class="maxwin-card"><div class="maxwin-kicker">ROGUE VAULT STUDIOS · MAX WIN</div><div class="maxwin-title" id="maxWinFinalTitle">GAME CRASHED!</div><div class="maxwin-value" id="maxWinFinalValue">100,000×</div><p class="maxwin-copy" id="maxWinFinalCopy">Woah, finally you made it to here! The vault has reached its maximum payout.</p><button class="maxwin-btn" id="maxWinCollect">COLLECT VIRTUAL PAYOUT</button></div></div><div class="toast" id="toast"></div>
-<div class="modal" id="replayModal" role="dialog" aria-modal="true" aria-labelledby="replayTitle">
-  <div class="dialog" style="max-width:520px;background:#17122a;border:2px solid #e8c879;border-radius:18px;padding:22px">
-    <button class="close" id="replayClose">Close ✕</button>
-    <h2 id="replayTitle" style="color:#f2ca78;margin:0 0 8px 0;font-size:18px">↺ Stake Bet Replay</h2>
-    <p style="color:#cbb9e6;font-size:12px;margin-bottom:14px">
-      Replay any completed spin by its Stake Engine Round / Event ID. All tile positions, clusters, cascades, and payouts will be deterministically animated.
-    </p>
-    <div style="display:flex;gap:8px;margin-bottom:14px">
-      <input id="replayInput" type="text" placeholder="Enter Round ID (e.g. RND-...)" style="flex:1;padding:10px;background:#0b0814;border:1px solid #8e6ac2;border-radius:8px;color:#fff;font-family:monospace;font-size:12px">
-      <button id="replaySubmitBtn" style="padding:10px 16px;background:linear-gradient(110deg,#ffe7a5,#dca84d);border:0;border-radius:8px;font-weight:900;color:#24152f;cursor:pointer">Replay</button>
+      .guardian-item {
+        display: grid;
+        grid-template-columns: 32px 1fr;
+        gap: 10px;
+        align-items: center;
+        min-height: 58px;
+        background: linear-gradient(180deg, rgba(23, 14, 32, 0.9), rgba(10, 9, 16, 0.9));
+        border: 1px solid rgba(229, 204, 113, 0.48);
+        border-radius: 12px;
+        padding: 8px 10px;
+        margin-bottom: 8px;
+      }
+
+      .guardian-item:last-child { margin-bottom: 0; }
+
+      .guardian-count {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        font-weight: 900;
+        color: #290d11;
+        background: radial-gradient(circle at 30% 30%, #f8f9c2, #dfb950 52%, #8d5d1e 100%);
+        box-shadow: inset 0 0 10px rgba(255,255,255,0.24), 0 0 12px rgba(255,183,75,0.3);
+      }
+
+      .guardian-meta {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+      }
+
+      .guardian-meta strong {
+        font-size: 11px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      .guardian-meta small {
+        color: var(--muted);
+        font-size: 8px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .machine-wrap {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .machine-header {
+        text-align: center;
+        padding: 8px 0 14px;
+      }
+
+      .hero-title {
+        margin: 0;
+        font-size: clamp(31px, 4vw, 79px);
+        line-height: 0.9;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        font-weight: 900;
+        background: linear-gradient(180deg, #fbe7a5 0%, #f4c95f 18%, #ff9b2b 32%, #ff4ad3 52%, #8a58ff 70%, #f9e8a7 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        text-shadow: 0 0 26px rgba(255, 145, 80, 0.3);
+      }
+
+      .hero-title .sub {
+        display: block;
+        font-size: 0.22em;
+        letter-spacing: 0.28em;
+        margin-top: 8px;
+      }
+
+      .machine {
+        position: relative;
+        padding: 16px;
+        border-radius: 24px;
+        border: 3px solid rgba(231, 190, 85, 0.95);
+        background: linear-gradient(180deg, rgba(25, 16, 36, 0.8), rgba(11, 11, 17, 0.96));
+        box-shadow: 0 0 0 2px rgba(255, 190, 83, 0.2), 0 0 26px rgba(133, 89, 255, 0.36), inset 0 0 25px rgba(113, 71, 196, 0.4);
+      }
+
+      .machine::before,
+      .machine::after {
+        content: "";
+        position: absolute;
+        inset: 14px;
+        border-radius: 18px;
+        border: 2px solid rgba(255, 213, 123, 0.12);
+        pointer-events: none;
+      }
+
+      #board {
+        position: relative;
+        display: grid;
+        grid-template-columns: repeat(8, minmax(0, 1fr));
+        gap: 8px;
+        min-height: 620px;
+        padding: 12px;
+        border-radius: 18px;
+        background: linear-gradient(180deg, rgba(23, 15, 35, 0.88), rgba(11, 9, 17, 0.96));
+        border: 2px solid rgba(255, 206, 109, 0.6);
+        box-shadow: inset 0 0 26px rgba(137, 101, 255, 0.15), inset 0 0 18px rgba(28, 72, 122, 0.4);
+      }
+
+      .tile {
+        position: relative;
+        min-height: 78px;
+        border-radius: 16px;
+        border: 2px solid rgba(238, 193, 95, 0.8);
+        background: linear-gradient(180deg, rgba(17, 11, 27, 0.96), rgba(27, 17, 39, 0.96));
+        box-shadow: inset 0 0 18px rgba(98, 77, 181, 0.5), 0 0 12px rgba(123, 81, 255, 0.2);
+        display: grid;
+        place-items: center;
+        overflow: hidden;
+      }
+
+      .tile::before {
+        content: "";
+        position: absolute;
+        inset: 5px;
+        border-radius: 12px;
+        border: 1px solid rgba(255, 201, 92, 0.14);
+      }
+
+      .tile .symbol {
+        position: relative;
+        width: 62%;
+        height: 62%;
+        display: grid;
+        place-items: center;
+        font-size: 30px;
+        font-weight: 900;
+        border-radius: 14px;
+      }
+
+      .tile.moon .symbol { color: #d0f8ff; text-shadow: 0 0 18px rgba(114, 215, 255, 0.8); }
+      .tile.star .symbol { color: #ffe9a4; text-shadow: 0 0 16px rgba(255, 185, 77, 0.9); }
+      .tile.eye .symbol { color: #d9baff; text-shadow: 0 0 18px rgba(167, 118, 255, 0.9); }
+      .tile.crystal .symbol { color: #8cf7de; text-shadow: 0 0 18px rgba(70, 236, 214, 0.9); }
+      .tile.crown .symbol { color: #f7d8a0; text-shadow: 0 0 18px rgba(255, 156, 74, 0.9); }
+      .tile.key .symbol { color: #f6d885; text-shadow: 0 0 18px rgba(255, 202, 89, 0.9); }
+      .tile.wild .symbol { color: #b5fff8; text-shadow: 0 0 22px rgba(77, 245, 255, 0.95); }
+      .tile.guardian .symbol { color: #d9efef; text-shadow: 0 0 18px rgba(126, 220, 255, 0.9); }
+
+      .tile.moon { background: linear-gradient(135deg, rgba(12, 22, 44, 0.98), rgba(18, 28, 49, 0.94)); }
+      .tile.star { background: linear-gradient(135deg, rgba(34, 20, 18, 0.96), rgba(56, 26, 16, 0.94)); }
+      .tile.eye { background: linear-gradient(135deg, rgba(36, 17, 52, 0.96), rgba(24, 16, 38, 0.96)); }
+      .tile.crystal { background: linear-gradient(135deg, rgba(13, 28, 34, 0.96), rgba(11, 22, 28, 0.94)); }
+      .tile.crown { background: linear-gradient(135deg, rgba(41, 20, 8, 0.96), rgba(28, 12, 10, 0.94)); }
+      .tile.key { background: linear-gradient(135deg, rgba(38, 16, 15, 0.96), rgba(28, 18, 19, 0.96)); }
+      .tile.wild { background: linear-gradient(135deg, rgba(15, 46, 56, 0.96), rgba(18, 22, 48, 0.96)); }
+      .tile.guardian { background: linear-gradient(135deg, rgba(18, 35, 48, 0.96), rgba(20, 16, 38, 0.96)); }
+
+      .feature-panel {
+        padding: 0 0 12px;
+      }
+
+      .feature-row {
+        display: grid;
+        grid-template-columns: 60px 1fr 58px;
+        align-items: center;
+        gap: 10px;
+        padding: 12px 12px 10px;
+        border-top: 1px solid rgba(233, 192, 95, 0.12);
+      }
+
+      .feature-row:first-child { border-top: 0; }
+
+      .feature-icon {
+        width: 54px;
+        height: 54px;
+        border-radius: 12px;
+        border: 2px solid rgba(241, 196, 96, 0.8);
+        background: linear-gradient(180deg, rgba(38, 22, 52, 0.9), rgba(18, 13, 29, 0.96));
+        box-shadow: inset 0 0 12px rgba(140, 95, 255, 0.28);
+      }
+
+      .feature-copy {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+      }
+
+      .feature-copy strong {
+        font-size: 11px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--gold-1);
+      }
+
+      .feature-copy small {
+        font-size: 8px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: rgba(203, 183, 247, 0.9);
+      }
+
+      .feature-mult {
+        font-size: 27px;
+        font-weight: 900;
+        color: #f3ce70;
+        text-shadow: 0 0 16px rgba(255, 188, 76, 0.7);
+      }
+
+      .feature-note {
+        color: rgba(231, 202, 255, 0.8);
+        font-size: 10px;
+        line-height: 1.5;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        padding: 14px 12px 2px;
+      }
+
+      .bottom-bar {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 16px;
+        margin-top: 18px;
+      }
+
+      .bet-box {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 12px;
+        border-radius: 16px;
+        border: 2px solid rgba(239, 196, 91, 0.9);
+        background: linear-gradient(180deg, rgba(23, 14, 35, 0.92), rgba(10, 9, 16, 0.94));
+        min-width: 280px;
+        box-shadow: inset 0 0 16px rgba(132, 95, 255, 0.14);
+      }
+
+      .bet-box .step {
+        width: 28px;
+        height: 28px;
+        border-radius: 10px;
+        border: 1px solid rgba(243, 196, 88, 0.85);
+        background: rgba(11, 9, 18, 0.7);
+        display: grid;
+        place-items: center;
+        font-weight: 900;
+        color: var(--gold-1);
+      }
+
+      .bet-box .amount {
+        flex: 1;
+        text-align: center;
+        font-size: 18px;
+        font-weight: 900;
+        color: var(--gold-1);
+        letter-spacing: 0.08em;
+      }
+
+      .spin-button {
+        width: 112px;
+        height: 112px;
+        border-radius: 50%;
+        border: 3px solid rgba(242, 195, 86, 0.96);
+        background: radial-gradient(circle at center, rgba(250, 214, 127, 0.2), rgba(30, 16, 40, 0.96) 56%, rgba(9, 8, 17, 0.98));
+        box-shadow: 0 0 0 4px rgba(255, 203, 96, 0.15), 0 0 28px rgba(151, 97, 255, 0.46);
+        display: grid;
+        place-items: center;
+        position: relative;
+      }
+
+      .spin-button::before {
+        content: "";
+        position: absolute;
+        inset: 12px;
+        border-radius: 50%;
+        border: 2px solid rgba(255, 204, 93, 0.24);
+      }
+
+      .spin-button span {
+        position: relative;
+        z-index: 1;
+        font-size: 28px;
+        color: #ffd770;
+        text-shadow: 0 0 18px rgba(255, 184, 68, 0.8);
+      }
+
+      .mini-btn {
+        width: 112px;
+        height: 52px;
+        border-radius: 14px;
+        border: 2px solid rgba(233, 194, 91, 0.8);
+        background: linear-gradient(180deg, rgba(26, 16, 36, 0.94), rgba(12, 9, 18, 0.95));
+        color: var(--gold-1);
+        font-weight: 900;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      .status-strip {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 16px 0;
+        font-size: 12px;
+        color: var(--gold-1);
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        font-weight: 800;
+      }
+
+      @media (max-width: 1100px) {
+        .layout {
+          grid-template-columns: 1fr;
+        }
+        .brand-copy h1 {
+          font-size: 30px;
+        }
+        .topbar {
+          flex-wrap: wrap;
+        }
+        .header-actions {
+          width: 100%;
+          justify-content: flex-end;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app">
+      <header class="topbar">
+        <div class="brand">
+          <div class="brand-mark">✧</div>
+          <div class="brand-copy">
+            <h1>The<br>Forgotten Vault</h1>
+            <small>Awakening</small>
+          </div>
+        </div>
+
+        <div class="header-actions">
+          <div class="pill"><span class="icon">◀</span> Turbo</div>
+          <div class="pill"><span class="icon">◍</span> Auto</div>
+          <div class="pill settings"><span class="icon">☰</span></div>
+        </div>
+      </header>
+
+      <main class="layout">
+        <aside class="panel left-panel">
+          <h3 class="panel-title">Guardians</h3>
+          <div class="guardian-list">
+            <div class="guardian-item"><div class="guardian-count">8</div><div class="guardian-meta"><strong>Aether</strong><small>The supreme one</small></div></div>
+            <div class="guardian-item"><div class="guardian-count">7</div><div class="guardian-meta"><strong>Oblivion</strong><small>The end bringer</small></div></div>
+            <div class="guardian-item"><div class="guardian-count">6</div><div class="guardian-meta"><strong>Solara</strong><small>Star empress</small></div></div>
+            <div class="guardian-item"><div class="guardian-count">5</div><div class="guardian-meta"><strong>Nexus</strong><small>Realm weaver</small></div></div>
+            <div class="guardian-item"><div class="guardian-count">4</div><div class="guardian-meta"><strong>Void</strong><small>Rift walker</small></div></div>
+            <div class="guardian-item"><div class="guardian-count">3</div><div class="guardian-meta"><strong>Tidal</strong><small>Abyss keeper</small></div></div>
+            <div class="guardian-item"><div class="guardian-count">2</div><div class="guardian-meta"><strong>Inferno</strong><small>Flame sovereign</small></div></div>
+            <div class="guardian-item"><div class="guardian-count">1</div><div class="guardian-meta"><strong>Terra</strong><small>Earthbound fury</small></div></div>
+          </div>
+        </aside>
+
+        <section class="machine-wrap">
+          <div class="machine-header">
+            <h2 class="hero-title">THE <span class="sub">FORGOTTEN VAULT</span> AWAKENING</h2>
+          </div>
+
+          <div class="machine">
+            <div id="board" aria-label="Game board"></div>
+          </div>
+
+          <div class="bottom-bar">
+            <div class="bet-box">
+              <div class="step">−</div>
+              <div class="amount">100.00</div>
+              <div class="step">+</div>
+            </div>
+
+            <button class="spin-button" type="button"><span>✦</span></button>
+
+            <button class="mini-btn" type="button">Auto</button>
+            <button class="mini-btn" type="button">Turbo</button>
+          </div>
+
+          <div class="status-strip">
+            <span>Balance 1,000.00</span>
+            <span>Win 0.00</span>
+          </div>
+        </section>
+
+        <aside class="panel right-panel">
+          <h3 class="panel-title">Buy Feature</h3>
+          <div class="feature-panel">
+            <div class="feature-row">
+              <div class="feature-icon"></div>
+              <div class="feature-copy"><strong>Normal Bonus</strong><small>Max multiplier</small></div>
+              <div class="feature-mult">2×</div>
+            </div>
+            <div class="feature-row">
+              <div class="feature-icon"></div>
+              <div class="feature-copy"><strong>Hyper Bonus</strong><small>Max multiplier</small></div>
+              <div class="feature-mult">5×</div>
+            </div>
+            <div class="feature-row">
+              <div class="feature-icon"></div>
+              <div class="feature-copy"><strong>Mythic Bonus</strong><small>Max multiplier</small></div>
+              <div class="feature-mult">8×</div>
+            </div>
+            <div class="feature-note">Epic bonus cannot be bought. It can only be triggered during normal play.</div>
+            <div class="feature-row" style="padding-top:18px;">
+              <div class="feature-icon"></div>
+              <div class="feature-copy"><strong>Extreme Spin</strong><small>Higher chance</small></div>
+              <div class="feature-mult">65×</div>
+            </div>
+          </div>
+        </aside>
+      </main>
     </div>
-    <div style="font-size:11px;color:#e8d8ff;font-weight:bold;margin-bottom:6px">RECENT SESSION ROUNDS:</div>
-    <div id="replayHistoryList" style="max-height:160px;overflow-y:auto;background:#0b0814;border:1px solid #403153;border-radius:8px;padding:8px">
-      <div style="color:#888;font-size:11px;padding:6px;text-align:center">No spins completed in this session yet.</div>
-    </div>
-  </div>
-</div>
-<div id="mathLab" style="display:none;position:fixed;inset:0;z-index:1000;background:#05030cf5;overflow:auto;padding:20px"><div style="max-width:900px;margin:20px auto;background:#17122a;border:1px solid #a184ca;border-radius:16px;padding:20px;color:#f8f2ff;font:14px system-ui"><div style="display:flex;justify-content:space-between;align-items:center;gap:12px"><h2 style="color:#f2ca78;margin:0">FULL-GAME MATH LAB · DIAGNOSTIC TESTING</h2><button id="mathClose" style="padding:8px 12px">Close ✕</button></div><p style="color:#cbb9e6;line-height:1.5">Hidden developer tool · virtual credits only. Runs seeded diagnostics using shared cluster detection, base-payout, final-payout, multiplier-step, feature-price, and Extreme Spin odds configuration. The simulator applies the same mode-level payout factors and maximum-win cap as the live game. Bonus sequencing and random streams remain separately implemented; this lab is not an exact replay of the live engine and cannot certify RTP.</p><div style="display:flex;gap:12px;flex-wrap:wrap;align-items:end;margin:14px 0"><label>Total paid actions <select id="mathSpins" style="display:block;padding:8px;margin-top:5px"><option>10000</option><option>25000</option><option>50000</option><option selected>100000</option></select></label><label>Seed <input id="mathSeed" value="20261024" type="number" style="display:block;padding:8px;margin-top:5px;width:150px"></label><label>Test plan <select id="mathMode" style="display:block;padding:8px;margin-top:5px"><option value="mixed">Mixed features (weighted)</option><option value="standard">Standard only</option><option value="ante">Ante only</option><option value="multi10">×10 multiplier only</option><option value="multi50">×50 multiplier only</option><option value="multi200">×200 multiplier only</option><option value="multi10-ante">×10 + Guardian Boost</option><option value="multi50-ante">×50 + Guardian Boost</option><option value="multi200-ante">×200 + Guardian Boost</option><option value="buy-normal">Normal Bonus Buy only</option><option value="buy-higher">Higher Bonus Buy only</option><option value="buy-mythic">Mythic Bonus Buy only</option><option value="extreme-spin">Extreme Spin only</option></select></label><button id="mathRun" style="padding:10px 15px;background:#ffe7a5;border:0;border-radius:8px;font-weight:800">RUN SIMULATION</button><button id="mathSelfTest" style="padding:10px 15px;background:#b9e8ff;border:0;border-radius:8px;font-weight:800">RUN ENGINE CHECKS</button></div><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px;margin:12px 0"><label style="font-size:12px">Standard %<input id="mix-standard" type="number" min="0" max="100" value="35" style="display:block;width:100%;padding:7px"></label><label style="font-size:12px">Ante %<input id="mix-ante" type="number" min="0" max="100" value="20" style="display:block;width:100%;padding:7px"></label><label style="font-size:12px">×10 %<input id="mix-multi10" type="number" min="0" max="100" value="10" style="display:block;width:100%;padding:7px"></label><label style="font-size:12px">×50 %<input id="mix-multi50" type="number" min="0" max="100" value="8" style="display:block;width:100%;padding:7px"></label><label style="font-size:12px">×200 %<input id="mix-multi200" type="number" min="0" max="100" value="5" style="display:block;width:100%;padding:7px"></label><label style="font-size:12px">Normal Buy %<input id="mix-buy-normal" type="number" min="0" max="100" value="8" style="display:block;width:100%;padding:7px"></label><label style="font-size:12px">Higher Buy %<input id="mix-buy-higher" type="number" min="0" max="100" value="5" style="display:block;width:100%;padding:7px"></label><label style="font-size:12px">Mythic Buy %<input id="mix-buy-mythic" type="number" min="0" max="100" value="4" style="display:block;width:100%;padding:7px"></label><label style="font-size:12px">Extreme %<input id="mix-extreme-spin" type="number" min="0" max="100" value="5" style="display:block;width:100%;padding:7px"></label></div><div id="mixTotal" style="font-weight:700;color:#ffe29a">Mix total: 100%</div><div id="mathSelfTestStatus" style="color:#b9e8ff;margin:10px 0">Deterministic checks not run yet.</div><div id="mathStatus" style="color:#ffe29a;margin:10px 0">Ready.</div><pre id="mathResults" style="white-space:pre-wrap;overflow-wrap:anywhere;background:#0b0814;border:1px solid #51416e;border-radius:10px;padding:14px;min-height:150px;color:#e8dfff">Choose a run size and click Run Simulation.</pre><p style="font-size:12px;color:#aaa1c3">Scope note: cluster detection and payout helpers are shared with the playable engine. Feature sequencing and random-number streams are still independently simulated. Run deterministic checks and multiple seeds; this output is not RTP certification.</p></div></div><div class="cinematic" id="cinematic"><div class="cinema-card"><div class="cinema-kicker" id="cinemaKicker">THE VAULT HAS CHOSEN</div><h2 class="cinema-title" id="cinemaTitle">GUARDIAN AWAKENED</h2><div class="cinema-mult" id="cinemaMult">×2</div><p class="cinema-copy" id="cinemaCopy">The bonus round begins.</p><button class="cinema-btn" id="cinemaBtn">ENTER THE BONUS</button></div></div><script>
-(()=>{try{
- const layout=document.querySelector('.layout'), machine=document.querySelector('#machine'), sidebar=document.querySelector('.sidebar');
- if(!layout||!machine||!sidebar||document.querySelector('#referenceGuardianRail'))return;
- const left=document.createElement('section');left.className='card';left.id='referenceGuardianRail';left.innerHTML='<h3>GUARDIANS</h3>'+[
- [8,'AETHER','THE SUPREME ONE','👑','#f4c76a'],[7,'OBLIVION','THE END BRINGER','🌑','#9b59ff'],[6,'SOLARA','STAR EMPRESS','🌟','#ffae42'],[5,'NEXUS','REALM WEAVER','🔷','#408bff'],[4,'VOID','RIFT WALKER','🌌','#9a63ff'],[3,'TIDAL','ABYSS KEEPER','🌊','#3cbfff'],[2,'INFERNO','FLAME SOVEREIGN','🔥','#ff563e'],[1,'TERRA','EARTHBOUND FURY','🌿','#58d78b']
- ].map(g=>'<div class="ref-guardian"><span class="rank">'+g[0]+'</span><span class="portrait" style="color:'+g[4]+'">'+g[3]+'</span><span><b>'+g[1]+'</b><small>'+g[2]+'</small></span></div>').join('');
- const right=document.createElement('aside');right.className='card';right.id='referenceBuyPanel';right.innerHTML='<h3>BUY FEATURE</h3><div class="ref-note">CHOOSE A BONUS ROUND</div>';
- const modal=document.querySelector('#featureModal');
- const defs=[['buyNormal','NORMAL BONUS','MAX MULTIPLIER','2×','🌿'],['buyHigher','HYPER BONUS','MAX MULTIPLIER','5×','🔷'],['buyMythic','MYTHIC BONUS','MAX MULTIPLIER','8×','🌟']];
- defs.forEach(d=>{const src=document.getElementById(d[0]);const b=document.createElement('button');b.type='button';b.className='ref-buy';b.innerHTML='<span class="portrait">'+d[4]+'</span><span><b>'+d[1]+'</b><small>'+d[2]+'</small></span><strong>'+d[3]+'</strong>';b.addEventListener('click',()=>src&&src.click());right.appendChild(b);});
- const note=document.createElement('div');note.className='ref-note';note.textContent='EPIC BONUS CANNOT BE BOUGHT. IT CAN ONLY BE TRIGGERED DURING NORMAL PLAY.';right.appendChild(note);
- const extreme=document.createElement('button');extreme.type='button';extreme.id='referenceExtreme';extreme.innerHTML='<span><b>EXTREME SPIN</b><br><small>Higher chance · bigger rewards</small></span><strong>65×</strong>';extreme.addEventListener('click',()=>document.getElementById('extremeSpin')?.click());right.appendChild(extreme);
- const oldCards=[...sidebar.querySelectorAll(':scope > .card')];const controls=oldCards.find(x=>x.querySelector('#featureForgeBtn'));const balance=oldCards.find(x=>x.querySelector('#balance'));
- const bottom=document.createElement('section');bottom.id='referenceBottomControls';bottom.className='card';
- if(balance){const bal=document.createElement('div');bal.className='balance-inline';bal.innerHTML='▣ BALANCE <strong id="referenceBalance">1,000.00</strong>';bottom.appendChild(bal);const sync=()=>{const x=document.getElementById('balance');const y=document.getElementById('referenceBalance');if(x&&y)y.textContent=x.textContent+'.00';};setInterval(sync,300);sync();}
- if(controls){const bet=controls.querySelector('.betrow');const spin=controls.querySelector('#spin');const auto=controls.querySelector('.autoplay-row');const toggle=controls.querySelector('#autoToggle');const forge=controls.querySelector('#featureForgeBtn');const win=controls.querySelector('.winbox');const betWrap=document.createElement('div');betWrap.className='controls-bet';betWrap.innerHTML='<span>BET</span>';if(bet)betWrap.appendChild(bet);bottom.appendChild(betWrap);if(spin)bottom.appendChild(spin);const autoWrap=document.createElement('div');autoWrap.className='controls-auto';if(auto)autoWrap.appendChild(auto);if(toggle)autoWrap.appendChild(toggle);bottom.appendChild(autoWrap);const misc=document.createElement('div');if(forge)misc.appendChild(forge);if(win)misc.appendChild(win);bottom.appendChild(misc);}
- layout.insertBefore(left,machine);layout.appendChild(right);layout.appendChild(bottom);
- // Hide redundant legacy sidebar while retaining its untouched mechanics/IDs in the document.
- sidebar.style.display='none';
- }catch(e){console.warn('Reference layout enhancement:',e);}})();
-</script>
-<script>
-(()=>{'use strict';
-const C=8,R=6,BETS=[5,10,20,50],START=1000;
-const S=[
-{id:'moon',name:'Lunar Pearl',v:0.21,a:'#a7f4ff',b:'#4a92c7',p:'<path d="M36 12a19 19 0 1 0 17 31A17 17 0 0 1 36 12Z" fill="COLOR_A" stroke="COLOR_B" stroke-width="2"/><circle cx="24" cy="24" r="2" fill="COLOR_B"/>'},
-{id:'star',name:'Astral Star',v:0.252,a:'#ffe9a6',b:'#c58c39',p:'<path d="M36 8l7 18 19 2-15 12 5 19-16-11-16 11 5-19L10 28l19-2Z" fill="COLOR_A" stroke="COLOR_B" stroke-width="2"/>'},
-{id:'eye',name:'Oracle Eye',v:0.315,a:'#d4a6ff',b:'#8052c5',p:'<path d="M7 36Q36 6 65 36Q36 66 7 36Z" fill="COLOR_B" stroke="COLOR_A" stroke-width="2"/><circle cx="36" cy="36" r="12" fill="COLOR_A"/><circle cx="36" cy="36" r="6" fill="COLOR_B"/>'},
-{id:'crystal',name:'Void Crystal',v:0.42,a:'#9af5e4',b:'#368e9d',p:'<path d="M36 6 57 23 51 52 36 64 21 52 15 23Z" fill="COLOR_B" stroke="COLOR_A" stroke-width="2"/><path d="M15 23h42L36 64ZM36 6v58" fill="none" stroke="COLOR_A" stroke-width="2"/>'},
-{id:'crown',name:'Eclipse Crown',v:0.525,a:'#ffe0b0',b:'#bd6c54',p:'<path d="M10 22l15 12 11-22 11 22 15-12-5 32H15Z" fill="COLOR_B" stroke="COLOR_A" stroke-width="2"/><path d="M17 47h38" fill="none" stroke="COLOR_A" stroke-width="2"/>'},
-{id:'key',name:'Vault Key',v:0.63,a:'#f8d578',b:'#9b7028',p:'<circle cx="25" cy="25" r="13" fill="COLOR_B" stroke="COLOR_A" stroke-width="3"/><circle cx="25" cy="25" r="5" fill="COLOR_A"/><path d="M35 34 56 55M48 47l6-6M53 52l6-6" fill="none" stroke="COLOR_A" stroke-width="3"/>'},
-{id:'rune',name:'Multiplier Rune',v:0,a:'#f2a6ff',b:'#8e45d0',special:1,p:'<path d="M36 5 61 19 61 47 36 62 11 47 11 19Z" fill="COLOR_B" stroke="COLOR_A" stroke-width="2"/><path d="M26 20h20L28 43h20M36 13v7M36 43v8" fill="none" stroke="COLOR_A" stroke-width="2"/>'},
-{id:'guardian',name:'Guardian',v:0,a:'#f7d9ff',b:'#7e52ba',special:1,p:'<path d="M36 7 57 16 54 42 36 60 18 42 15 16Z" fill="COLOR_B" stroke="COLOR_A" stroke-width="2.5"/><path d="M24 26l8 5-5 7M48 26l-8 5 5 7M29 46h14" fill="none" stroke="COLOR_A" stroke-width="2.5"/><circle cx="29" cy="27" r="2.5" fill="COLOR_A"/><circle cx="43" cy="27" r="2.5" fill="COLOR_A"/>'},
-{id:'wild',name:'ZAP WILD',v:0,a:'#b9fbff',b:'#29b9e5',special:0,p:'<path d="M41 5 18 38h15l-3 29 24-38H38Z" fill="COLOR_A" stroke="COLOR_B" stroke-width="3"/><path d="M41 5 18 38h15l-3 29 24-38H38Z" fill="none" stroke="#ffffff" stroke-width="1.5"/>'}
-];
-let balance=START,bet=10,spins=0,last=0,board=[],busy=false,soundOn=false,turboMode=false,ctx=null,activeMode='standard',guardianChance=.01,anteEnabled=false,activeSingleSpinMode=null,activeGuardianRank=0;
-let autoRunning=false,autoRemaining=0,autoLoopToken=0,lastFeatureOpener=null;
-let bonusSessionTotal=0,bonusSessionActive=false;
-function updateBonusWinHud(currentRound=0,tierName="BONUS"){const el=$("bonusWinHud");if(!el)return;const total=Math.max(0,bonusSessionTotal+currentRound);$("bonusWinTotal").textContent=total.toLocaleString("en-IN",{minimumFractionDigits:1,maximumFractionDigits:1})+" VC";$("bonusWinNote").textContent=tierName+" · includes previous bonus rounds and current round";el.classList.toggle("show",bonusSessionActive);}
-const FEATURE_COSTS={guardianBoost:1,multi10:10,multi50:30,multi200:75,buyNormal:2.25,buyHigher:4.5,buyMythic:8,extreme:10};
-// First-pass mode-level payout calibration. Prices remain fixed; calibration is applied to the total award for the paid action. These factors are empirical tuning inputs, not certified RTP values.
-const PAYOUT_FACTORS={"standard":1.006554,"guardianBoost":1.038053,"multi10":2.096171,"multi50":1.258899,"multi200":0.786870,"multi10-ante":2.369244,"multi50-ante":1.340733,"multi200-ante":0.822387,"buy-normal":0.552912,"buy-higher":0.410470,"buy-mythic":0.358189,"extreme-spin":0.410766};
-function payoutFactorForMode(mode,anteEnabled=false){if(mode==='ante')return PAYOUT_FACTORS.guardianBoost;const aliases={'multi-10':'multi10','multi-50':'multi50','multi-200':'multi200'};const key=aliases[mode]||mode;if(anteEnabled&&key==='standard')return PAYOUT_FACTORS.guardianBoost;if(anteEnabled&&['multi10','multi50','multi200'].includes(key))return PAYOUT_FACTORS[key+'-ante']??PAYOUT_FACTORS[key];return PAYOUT_FACTORS[key]??PAYOUT_FACTORS.standard;}
-const EXTREME_ODDS={nothing:0.50,normal:0.30,mythic:0.15,epic:0.05};
-const MAX_WIN_MULTIPLIER=100000;
-const SINGLE_SPINS={'multi-10':{mult:10,cost:FEATURE_COSTS.multi10,label:'×10'},'multi-50':{mult:50,cost:FEATURE_COSTS.multi50,label:'×50'},'multi-200':{mult:200,cost:FEATURE_COSTS.multi200,label:'×200'}};
-function selectedSpinCost(){const f=activeSingleSpinMode?SINGLE_SPINS[activeSingleSpinMode]:null;return bet*(f?(f.cost+(anteEnabled?FEATURE_COSTS.guardianBoost:0)):FEATURE_COSTS.guardianBoost);}
-const $=id=>document.getElementById(id),rand=n=>Math.floor(Math.random()*n);
-const GUARDIAN_VISUALS=[{name:'Terra · Earthbound Fury',a:'#a7f4a0',b:'#286b43',p:'<path d="M36 6 58 20 53 45 36 64 19 45 14 20Z" fill="COLOR_B" stroke="COLOR_A" stroke-width="3"/><path d="M20 29 30 34 26 43M52 29 42 34 46 43M27 51h18" fill="none" stroke="COLOR_A" stroke-width="3"/><path d="M14 20 36 30 58 20" fill="none" stroke="#d9ffc9" stroke-width="2"/>'},{name:'Inferno · Flame Sovereign',a:'#ffd18a',b:'#b52d28',p:'<path d="M36 5 53 23 49 45 36 63 23 45 19 23Z" fill="COLOR_B" stroke="COLOR_A" stroke-width="3"/><path d="M25 39 31 32 36 42 42 31 47 39M28 51 36 46 44 51" fill="none" stroke="COLOR_A" stroke-width="3"/>'},{name:'Tidal · Abyss Keeper',a:'#9cf7ff',b:'#176a9a',p:'<path d="M36 5 57 19 52 43 36 62 20 43 15 19Z" fill="COLOR_B" stroke="COLOR_A" stroke-width="3"/><path d="M21 31Q28 23 36 31T51 31M22 42Q29 34 36 42T50 42M29 51h14" fill="none" stroke="COLOR_A" stroke-width="2.5"/>'},{name:'Void · Rift Walker',a:'#e0a6ff',b:'#52277f',p:'<path d="M36 5 58 18 53 45 36 63 19 45 14 18Z" fill="COLOR_B" stroke="COLOR_A" stroke-width="3"/><path d="M25 27 32 33 27 40M47 27 40 33 45 40M28 50 36 44 44 50" fill="none" stroke="COLOR_A" stroke-width="3"/><circle cx="36" cy="35" r="4" fill="#fff"/>'},{name:'Nexus · Star Weaver',a:'#fff0a0',b:'#7850ba',p:'<path d="M36 5 58 20 52 45 36 62 20 45 14 20Z" fill="COLOR_B" stroke="COLOR_A" stroke-width="3"/><path d="M36 17 40 30 53 34 40 38 36 51 32 38 19 34 32 30Z" fill="COLOR_A"/><circle cx="36" cy="34" r="4" fill="#fff"/>'},{name:'Solara · Mythic Dawn',a:'#ffe7a3',b:'#a65a23',p:'<path d="M36 5 58 20 52 45 36 62 20 45 14 20Z" fill="COLOR_B" stroke="COLOR_A" stroke-width="3"/><circle cx="36" cy="34" r="11" fill="none" stroke="COLOR_A" stroke-width="3"/><path d="M36 14v8M36 46v8M16 34h8M48 34h8M22 20l6 6M44 42l6 6M50 20l-6 6M28 42l-6 6" stroke="COLOR_A" stroke-width="2.5"/>'},{name:'Oblivion · Mythic Eclipse',a:'#c8b6ff',b:'#242044',p:'<path d="M36 5 58 20 52 45 36 62 20 45 14 20Z" fill="COLOR_B" stroke="COLOR_A" stroke-width="3"/><circle cx="36" cy="34" r="13" fill="none" stroke="COLOR_A" stroke-width="3"/><path d="M36 19a15 15 0 0 1 0 30a10 10 0 0 0 0-30Z" fill="COLOR_A"/>'},{name:'Aether · The Supreme One',a:'#ffffff',b:'#6651d9',p:'<path d="M36 3 59 17 56 43 36 66 16 43 13 17Z" fill="COLOR_B" stroke="COLOR_A" stroke-width="3.5"/><path d="M36 12 42 28 58 34 42 40 36 57 30 40 14 34 30 28Z" fill="COLOR_A"/><circle cx="36" cy="34" r="5" fill="#fff"/><path d="M22 20 27 25M50 20 45 25M22 48 28 43M50 48 44 43" stroke="#fff" stroke-width="2.5"/>'}];
-function guardianSymbol(){const limit=activeGuardianRank===3?8:activeGuardianRank===2?7:activeGuardianRank===1?5:4;const g=GUARDIAN_VISUALS[rand(limit)];return {id:'guardian',name:g.name,v:0,a:g.a,b:g.b,special:1,p:g.p};}
-function pick(){let x=Math.random();if(x<.04)return S[8];if(x<.085)return S[6];if(x<.085+guardianChance)return guardianSymbol();return S[rand(6)];}
-// Used for purely visual Guardian placement/refills: prevent accidental extra Guardians outside the selected feature count.
-function pickNonGuardian(){for(let i=0;i<100;i++){const s=pick();if(s.id!=='guardian')return s;}return S[rand(6)];}
-function svg(s){const uid='g'+Math.random().toString(36).slice(2,9);return '<svg viewBox="0 0 72 72" aria-label="'+s.name+'"><defs><radialGradient id="'+uid+'glow"><stop stop-color="'+s.a+'" stop-opacity=".48"/><stop offset=".58" stop-color="'+s.b+'" stop-opacity=".16"/><stop offset="1" stop-color="'+s.b+'" stop-opacity="0"/></radialGradient><linearGradient id="'+uid+'gem" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset=".16" stop-color="'+s.a+'"/><stop offset=".48" stop-color="'+s.b+'"/><stop offset=".78" stop-color="'+s.b+'"/><stop offset="1" stop-color="'+s.a+'"/></linearGradient><linearGradient id="'+uid+'shine" x1="0" y1="0" x2="0.8" y2="1"><stop stop-color="#ffffff" stop-opacity=".72"/><stop offset=".35" stop-color="#ffffff" stop-opacity=".08"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/></linearGradient><filter id="'+uid+'shadow" x="-35%" y="-35%" width="170%" height="170%"><feGaussianBlur in="SourceAlpha" stdDeviation="2.4" result="blur"/><feOffset dy="2" result="offset"/><feComponentTransfer><feFuncA type="linear" slope=".72"/></feComponentTransfer><feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><circle cx="36" cy="36" r="34" fill="url(#'+uid+'glow)"/><g filter="url(#'+uid+'shadow)">'+s.p.replaceAll('COLOR_A',s.a).replaceAll('COLOR_B','url(#'+uid+'gem)').replaceAll('stroke-width="3"','stroke-width="3.5"')+'</g><path d="M22 16 Q36 8 49 19 L42 25 Q32 18 25 25Z" fill="url(#'+uid+'shine)" opacity=".7"/></svg>'}
-function newBoard(){return Array.from({length:R},()=>Array.from({length:C},pick))}
-let ladderState={current:2,base:2,progress:0,needed:2,max:10,active:false,values:null};
-function ladderValues(max,base=2,custom=null){if(custom&&custom.length)return [...new Set(custom.map(v=>Math.min(v,max)))];let vals=[Math.min(base,max)];while(vals[vals.length-1]<max&&vals.length<16)vals.push(Math.min(max,vals[vals.length-1]*2));return [...new Set(vals)];}
-function drawLadder(){const max=ladderState.max,vals=ladderValues(max,ladderState.base||2,ladderState.values),idx=vals.findIndex(v=>v>=ladderState.current),next=vals[Math.min(vals.length-1,idx+1)]??max;$('ladderCurrent').textContent='×'+ladderState.current;$('ladderProgress').innerHTML=(activeMode==='multi-10'||activeMode==='multi-50'||activeMode==='multi-200')?'PURCHASED SPIN MULTIPLIER<br>×'+ladderState.current+' GUARANTEED':ladderState.current>=max?'MAXIMUM REACHED<br>×'+max+' CAP':'CASCADE PROGRESS '+ladderState.progress+'/'+ladderState.needed+'<br>next level ×'+next;$('ladderSteps').innerHTML=vals.map(v=>'<div class="ladder-step '+(v===ladderState.current?'active':v<ladderState.current?'done':ladderState.current>=max&&v===max?'capped':'')+'">×'+v+(v===max?' MAX':'')+'</div>').join('');$('multLadder').style.opacity=ladderState.active?'1':'.58';}
-function startLadder(max,base=2,custom=null){const values=ladderValues(max,base,custom);ladderState={current:values[0],base:values[0],progress:0,needed:2,max,active:true,values:custom&&custom.length?values:null};drawLadder();}
-function stepLadderProgress(state){if(!state.active||state.current>=state.max)return false;state.progress++;if(state.progress<state.needed)return false;const vals=ladderValues(state.max,state.base,state.values),next=nextMultiplierValue(vals,state.current);state.progress=0;if(next>state.current){state.current=next;state.needed++;return true;}return false;}
-function advanceLadder(){const before=ladderState.current,advanced=stepLadderProgress(ladderState);if(advanced&&ladderState.current>before)toast('CASCADE LADDER ADVANCED · ×'+ladderState.current);drawLadder();}
-function render(wins=new Set()){$('board').innerHTML=board.flatMap((row,r)=>row.map((s,c)=>'<div role="gridcell" aria-label="'+s.name+'" class="tile'+(s.special?' special':'')+(s.id==='guardian'?' guardian-tile':'')+(s.id==='wild'?' wild-tile':'')+(wins.has(r*C+c)?' win':'')+'" title="'+s.name+'">'+svg(s)+'</div>')).join('')}
-async function animateSpin(duration=1150){
- const host=$('board');host.classList.add('reels-running');
- const tiles=[...host.querySelectorAll('.tile')];
- tiles.forEach((tile,i)=>{tile.classList.add('reel-spin');tile.style.animationDelay=((i%C)*-0.025)+'s'});
- sound(180);
- await wait(duration);
- // Stop like staggered reels, left to right, with a visible drop/settle.
- for(let col=0;col<C;col++){
-   const colTiles=[...host.querySelectorAll('.tile')].filter((_,i)=>i%C===col);
-   colTiles.forEach(t=>{t.classList.remove('reel-spin');t.classList.add('reel-stop')});
-   sound(260+col*35);
-   await wait(75);
- }
- await wait(260);
- host.classList.remove('reels-running');
- host.querySelectorAll('.tile').forEach(t=>{t.classList.remove('reel-spin','reel-stop');t.style.animationDelay=''});
-}
 
-function findClustersForBoard(grid,getId=(cell)=>cell.id,isSpecial=(cell)=>!!cell.special){
- const rows=grid.length,cols=grid[0]?.length||0,candidates=[];
- const dirs=[[-1,0],[1,0],[0,-1],[0,1]];
- const scan=(r,c,seedId,allowWild)=>{
-  const start=r*cols+c,stack=[[r,c]],seen=new Set([start]),cells=[];
-  while(stack.length){
-   const [y,x]=stack.pop(),idx=y*cols+x,cell=grid[y][x];cells.push(idx);
-   for(const [dy,dx] of dirs){
-    const ny=y+dy,nx=x+dx;if(ny<0||ny>=rows||nx<0||nx>=cols)continue;
-    const ni=ny*cols+nx,n=grid[ny][nx];if(seen.has(ni)||isSpecial(n))continue;
-    const id=getId(n);if(id===seedId||(allowWild&&id==='wild')){seen.add(ni);stack.push([ny,nx]);}
-   }
-  }
-  if(cells.length>=5)candidates.push({s:grid[r][c],cells,kind:seedId==='wild'?'wild':'symbol'});
- };
- for(let r=0;r<rows;r++)for(let c=0;c<cols;c++){
-  const cell=grid[r][c];if(isSpecial(cell))continue;const id=getId(cell);
-  if(id==='wild')scan(r,c,'wild',false);else scan(r,c,id,true);
- }
- const unique=new Map();
- for(const cl of candidates){const key=cl.kind+':'+[...cl.cells].sort((a,b)=>a-b).join(',');if(!unique.has(key))unique.set(key,cl);}
- const all=[...unique.values()];
- const symbols=all.filter(cl=>cl.kind==='symbol').sort((a,b)=>b.cells.length-a.cells.length);
- const wildOnly=all.filter(cl=>cl.kind==='wild');
- const symbolCells=new Set(symbols.flatMap(cl=>cl.cells));
- return [...symbols,...wildOnly.filter(cl=>!cl.cells.some(i=>symbolCells.has(i)))];
-}
-const WILD_PAYOUT_VALUE=0.21;
-function baseClusterPayout(bet,symbolValue,clusterSize){return bet*symbolValue*(clusterSize/5);}
-function finalClusterPayout(bet,symbolValue,clusterSize,multiplier=1,qualifies=false){const base=baseClusterPayout(bet,symbolValue,clusterSize);return qualifies?base*multiplier:base;}
-// Shared simulator scoring rule: bonus multipliers qualify only when a rune touches the cluster. Paid multiplier modes intentionally force qualification.
-function simulatorClusterPayout(bet,symbolValue,clusterSize,multiplier,bonus,forcedMultiplier,touchesRune){const qualifies=bonus?!!touchesRune:(!!forcedMultiplier||!!touchesRune);return finalClusterPayout(bet,symbolValue,clusterSize,multiplier,qualifies);}
-function nextMultiplierValue(values,current){const idx=values.findIndex(v=>v>=current);return values[Math.min(values.length-1,Math.max(0,idx+1))]??values[values.length-1]??current;}
-function clusters(){
- return findClustersForBoard(board,cell=>cell.id,cell=>!!cell.special);
-}
-function zapWildToCreateHit(){
- // The Zap Wild is an openly signposted rescue feature: only considered after a no-win board.
- // It creates a visible 4-symbol run plus a wild substitute, guaranteeing one 5+ cluster.
- const row=rand(R),start=rand(C-4),symbol=S[rand(6)];
- for(let c=start;c<start+4;c++)board[row][c]=symbol;
- board[row][start+4]=S[8];
- render();const tiles=[...$('board').querySelectorAll('.tile')];for(let c=start;c<start+5;c++)if(tiles[row*C+c])tiles[row*C+c].classList.add('zap-arrival');
- $('status').textContent='⚡ ZAP WILD ACTIVATED';$('action').textContent='Wild rescue · connection created';toast('⚡ ZAP WILD! A wild sigil appeared to complete a connection.');sound(980);
-}
+    <script>
+      const board = document.getElementById('board');
+      const symbols = [
+        { key: 'moon', icon: '☾' },
+        { key: 'star', icon: '✦' },
+        { key: 'eye', icon: '◉' },
+        { key: 'crystal', icon: '△' },
+        { key: 'crown', icon: '◈' },
+        { key: 'key', icon: '◌' },
+        { key: 'wild', icon: 'W' },
+        { key: 'guardian', icon: '◍' }
+      ];
+
+      for (let r = 0; r < 6; r++) {
+        for (let c = 0; c < 8; c++) {
+          const tile = document.createElement('div');
+          tile.className = 'tile ' + symbols[(r * 8 + c) % symbols.length].key;
+          const glyph = document.createElement('div');
+          glyph.className = 'symbol';
+          glyph.textContent = symbols[(r * 8 + c) % symbols.length].icon;
+          tile.appendChild(glyph);
+          board.appendChild(tile);
+        }
+      }
+    </script>
+  </body>
+</html>
 
 
 
 
-let ambientNodes=[],ambientGain=null;
-function ensureAudio(){ctx=ctx||new(window.AudioContext||window.webkitAudioContext)();if(ctx.state==='suspended')ctx.resume().catch(()=>{});return ctx}
-function tone(ac,frequency,when,duration,shape='sine',volume=.04,endFrequency=null){
- const o=ac.createOscillator(),g=ac.createGain(),f=ac.createBiquadFilter();
- o.type=shape;o.frequency.setValueAtTime(Math.max(25,frequency),when);
- if(endFrequency) o.frequency.exponentialRampToValueAtTime(Math.max(25,endFrequency),when+duration);
- f.type='lowpass';f.frequency.setValueAtTime(4200,when);o.connect(f);f.connect(g);g.connect(ac.destination);
- g.gain.setValueAtTime(.0001,when);g.gain.exponentialRampToValueAtTime(volume,when+.012);g.gain.exponentialRampToValueAtTime(.0001,when+duration);
- o.start(when);o.stop(when+duration+.025);
-}
-function impact(ac,when,volume=.075){
- const o=ac.createOscillator(),g=ac.createGain(),f=ac.createBiquadFilter();
- o.type='sine';o.frequency.setValueAtTime(105,when);o.frequency.exponentialRampToValueAtTime(38,when+.19);
- f.type='lowpass';f.frequency.value=260;o.connect(f);f.connect(g);g.connect(ac.destination);
- g.gain.setValueAtTime(.0001,when);g.gain.exponentialRampToValueAtTime(volume,when+.008);g.gain.exponentialRampToValueAtTime(.0001,when+.22);
- o.start(when);o.stop(when+.24);
-}
-function startAmbient(){if(!soundOn||ambientNodes.length)return;try{const ac=ensureAudio();ambientGain=ac.createGain();ambientGain.gain.value=.0001;ambientGain.connect(ac.destination);const o=ac.createOscillator(),g=ac.createGain();o.type='sine';o.frequency.value=55;g.gain.value=.12;o.connect(g);g.connect(ambientGain);o.start();ambientNodes=[o];ambientGain.gain.setTargetAtTime(.003,ac.currentTime,.8)}catch(e){ambientNodes=[]}}
-function stopAmbient(){if(!ctx||!ambientNodes.length)return;try{ambientGain.gain.setTargetAtTime(.0001,ctx.currentTime,.12);const nodes=[...ambientNodes],gain=ambientGain;setTimeout(()=>{nodes.forEach(n=>{try{n.stop();n.disconnect()}catch(e){}});try{gain.disconnect()}catch(e){}},650)}catch(e){}ambientNodes=[];ambientGain=null}
-function sound(freq){
- if(!soundOn)return;
- try{
-  const ac=ensureAudio(),t=ac.currentTime;
-  if(freq<230){tone(ac,Math.max(70,freq*.72),t,.17,'sawtooth',.018,Math.max(38,freq*.42));tone(ac,Math.max(110,freq*1.5),t,.09,'triangle',.012);return}
-  if(freq>=900){impact(ac,t,.07);tone(ac,Math.min(1500,freq),t,.32,'triangle',.055,freq*.62);tone(ac,Math.min(2200,freq*1.5),t+.018,.24,'sine',.028);tone(ac,Math.min(2600,freq*2),t+.045,.19,'sine',.018);return}
-  tone(ac,freq,t,.13,'triangle',.024,freq*1.08);
-  if(freq>=400)tone(ac,freq*1.5,t+.012,.22,'sine',.018,freq*1.25);
- }catch(e){}
-}
-function playWinSting(level=1){
- if(!soundOn)return;
- try{const ac=ensureAudio(),t=ac.currentTime;impact(ac,t,.055);
- const notes=level>=3?[392,523.25,659.25,783.99,1046.5]:level===2?[392,493.88,587.33,783.99]:[392,493.88,587.33];
- notes.forEach((n,i)=>{tone(ac,n,t+i*(level>=3?.075:.095),level>=3?.42:.29,'triangle',level>=3?.045:.032,n*1.015);tone(ac,n*2,t+i*(level>=3?.075:.095),.2,'sine',.012)});
- }catch(e){}
-}
-function playGuardianSting(){
- if(!soundOn)return;
- try{const ac=ensureAudio(),t=ac.currentTime;impact(ac,t,.11);tone(ac,73.42,t,.75,'sawtooth',.035,48);tone(ac,220,t+.05,.8,'triangle',.045,440);tone(ac,329.63,t+.12,.72,'sine',.04,659.25);tone(ac,493.88,t+.22,.9,'sine',.035,987.76);tone(ac,1318.5,t+.3,.55,'triangle',.025,1760)}catch(e){}
-}
-function ui(){$('autoToggle').textContent=autoRunning?'■ STOP AUTO SPIN':'▶ START AUTO SPIN';$('balance').textContent=Math.floor(balance).toLocaleString('en-IN');$('bet').textContent=bet;$('lastWin').textContent=last.toFixed(1)+' VC';$('spin').disabled=busy||autoRunning||balance<selectedSpinCost();const activeFeature=activeSingleSpinMode?SINGLE_SPINS[activeSingleSpinMode]:null;$('spin').textContent=activeFeature?'✦ '+activeFeature.label+' FEATURE ACTIVE'+(anteEnabled?' · ANTE':'')+' · '+String(activeFeature.cost)+'× BET':anteEnabled?'✧ Guardian Boost Active · 1×':'✦ Standard Spin · 1×';$('featureForgeBtn').disabled=busy||autoRunning;const costs={buyNormal:bet*FEATURE_COSTS.buyNormal,buyHigher:bet*FEATURE_COSTS.buyHigher,buyMythic:bet*FEATURE_COSTS.buyMythic,extremeSpin:bet*FEATURE_COSTS.extreme,multi10:bet*FEATURE_COSTS.multi10,multi50:bet*FEATURE_COSTS.multi50,multi200:bet*FEATURE_COSTS.multi200};for(const [id,cost] of Object.entries(costs))$(id).disabled=busy||autoRunning;$('anteOption').disabled=busy;$('anteOption').classList.toggle('mode-active',anteEnabled);$('anteOption').querySelector('strong').textContent=anteEnabled?'✧ Disable Guardian Boost':'✧ Enable Guardian Boost';$('anteOption').querySelector('small').textContent=anteEnabled?'Guardian Boost is ON: regular spins cost 1× bet and use 1.5% Guardian chance. Click to turn it off.':'Enable Guardian Boost: regular spins cost 1× bet and use 1.5% Guardian chance until disabled.';$('normalPrice').textContent=(bet*FEATURE_COSTS.buyNormal).toLocaleString('en-IN')+' VC · '+FEATURE_COSTS.buyNormal+'×';$('higherPrice').textContent=(bet*FEATURE_COSTS.buyHigher).toLocaleString('en-IN')+' VC · '+FEATURE_COSTS.buyHigher+'×';$('mythicPrice').textContent=(bet*FEATURE_COSTS.buyMythic).toLocaleString('en-IN')+' VC · '+FEATURE_COSTS.buyMythic+'×';$('antePrice').textContent=anteEnabled?'ON · CLICK TO DISABLE':(bet*FEATURE_COSTS.guardianBoost).toLocaleString('en-IN')+' VC · '+FEATURE_COSTS.guardianBoost+'×';$('extremePrice').textContent=(bet*FEATURE_COSTS.extreme).toLocaleString('en-IN')+' VC · '+FEATURE_COSTS.extreme+'×';$('multi10Price').textContent=(bet*FEATURE_COSTS.multi10).toLocaleString('en-IN')+' VC · '+FEATURE_COSTS.multi10+'×';$('multi50Price').textContent=(bet*FEATURE_COSTS.multi50).toLocaleString('en-IN')+' VC · '+FEATURE_COSTS.multi50+'×';$('multi200Price').textContent=(bet*FEATURE_COSTS.multi200).toLocaleString('en-IN')+' VC · '+FEATURE_COSTS.multi200+'×';for(const [id,mode] of [['multi10','multi-10'],['multi50','multi-50'],['multi200','multi-200']]){const active=activeSingleSpinMode===mode;const label=SINGLE_SPINS[mode].label;$(id).classList.toggle('mode-active',active);const strong=$(id).querySelector('strong');if(strong){strong.textContent=(active?'✓ ACTIVE · ':'')+label+' Multiplier Spin'+(active?' · CLICK TO DISABLE':'');}const small=$(id).querySelector('small');if(small){small.textContent=active?'Persistent mode ON: every manual or Auto Spin uses '+label+' until you disable it. '+(anteEnabled?'Ante is also ON.':''):'Select to lock '+label+' for every manual or Auto Spin until disabled.';}}$('down').disabled=busy||autoRunning||bet===BETS[0];$('up').disabled=busy||autoRunning||bet===BETS.at(-1);
-$('autoToggle').textContent=autoRunning?'■ STOP AUTO SPIN':'▶ START AUTO SPIN';
-$('autoToggle').classList.toggle('active',autoRunning);
-$('autoToggle').disabled=busy&&!autoRunning;
-$('autoEnabled').checked=autoRunning;
-$('autoCount').disabled=autoRunning;
-}
-function openFeatureModal(opener=$('featureForgeBtn')){if(busy)return;lastFeatureOpener=opener;$('featureModal').classList.add('show');ui();$('featureClose').focus()}
-function closeFeatureModal(){ $('featureModal').classList.remove('show'); if(lastFeatureOpener&&document.contains(lastFeatureOpener))lastFeatureOpener.focus(); }
-function toast(t){$('toast').textContent=t;$('toast').classList.add('show');clearTimeout(toast.t);toast.t=setTimeout(()=>$('toast').classList.remove('show'),2300)}
-const wait=ms=>new Promise(r=>setTimeout(r,Math.max(0,ms*(turboMode?0.35:1))));
-function drop(remove){let set=new Set(remove);for(let c=0;c<C;c++){let keep=[];for(let r=R-1;r>=0;r--)if(!set.has(r*C+c))keep.push(board[r][c]);while(keep.length<R)keep.push(pick());for(let r=R-1,i=0;r>=0;r--,i++)board[r][c]=keep[i]}}
-async function cinematic({kicker,title,mult,copy,button='CONTINUE',auto=false,autoDelay=950}){$('cinemaKicker').textContent=kicker;$('cinemaTitle').textContent=title;$('cinemaMult').textContent=mult;$('cinemaCopy').textContent=copy;$('cinemaBtn').textContent=button;$('cinematic').classList.add('show');await new Promise(resolve=>{let done=false,timer=null;const finish=()=>{if(done)return;done=true;if(timer)clearTimeout(timer);$('cinemaBtn').removeEventListener('click',finish);$('cinematic').classList.remove('show');resolve()};$('cinemaBtn').onclick=finish;if(auto){$('cinemaBtn').textContent='CONTINUING…';timer=setTimeout(finish,autoDelay)}})}
-function canonicalTierForGuardians(gs){
- if(gs>=8)return {rank:3,name:'EPIC BONUS',rounds:8,retriggerRounds:8,baseMult:50,maxMult:1000,ladder:[50,100,200,300,500,750,1000],theme:'THE ANCIENTS RISE',threshold:8};
- if(gs>=6)return {rank:2,name:'MYTHIC BONUS',rounds:6,retriggerRounds:6,baseMult:8,maxMult:8,theme:'THE COSMOS BOWS',threshold:6};
- if(gs>=5)return {rank:1,name:'HYPER BONUS',rounds:5,retriggerRounds:5,baseMult:4,maxMult:5,theme:'THE GUARDIAN ASCENDS',threshold:5};
- return {rank:0,name:'NORMAL BONUS',rounds:3,retriggerRounds:3,baseMult:2,maxMult:2,theme:'THE VAULT OPENS',threshold:4};
-}
-function tierForGuardians(gs){return canonicalTierForGuardians(gs);}
-const GUARDIAN_ROSTER=[{name:'TERRA',title:'Earthbound Fury'},{name:'INFERNO',title:'Flame Sovereign'},{name:'TIDAL',title:'Abyss Keeper'},{name:'VOID',title:'Rift Walker'},{name:'NEXUS',title:'Star Weaver'},{name:'SOLARA',title:'Mythic Dawn'},{name:'OBLIVION',title:'Mythic Eclipse'},{name:'AETHER',title:'The Supreme One'}];
-function guardianRosterForTier(rank){const limit=rank===3?8:rank===2?7:rank===1?5:4;return GUARDIAN_ROSTER.slice(0,limit).map((g,i)=>(i+1)+'. '+g.name).join(' · ');}
-function addBonusGuardian(){let flat=board.flat();let candidates=flat.map((sym,i)=>({sym,i})).filter(x=>x.sym.id!=='guardian');if(candidates.length){let chosen=candidates[rand(candidates.length)];board[Math.floor(chosen.i/C)][chosen.i%C]=guardianSymbol();}}
-function clusterTouchesRune(cluster,runeCells){
- const set=new Set(cluster.cells);
- for(const idx of runeCells){const r=Math.floor(idx/C),c=idx%C;
-  for(const [nr,nc] of [[r-1,c],[r+1,c],[r,c-1],[r,c+1]]){
-   if(nr<0||nr>=R||nc<0||nc>=C)continue;
-   if(set.has(nr*C+nc))return true;
-  }
- }
- return false;
-}
-async function runBoard(roundBet,startingMult,bonusMode=false,maxMult=10,reuseBoard=false,paidSpinMultiplier=false){
- let total=0,cascade=0,mult=Math.min(startingMult,maxMult),zapUsed=false;
- const priorGuardianChance=guardianChance; if(bonusMode)guardianChance=.005;
- if(!reuseBoard)board=newBoard();if(bonusMode)addBonusGuardian();
- const guardiansAtStart=board.flat().filter(s=>s.id==='guardian').length;render();
- if(bonusMode){await animateSpin(1100);await wait(1100)}else{await wait(180)}
- while(cascade<8){
-  let cs=clusters();if(!cs.length&&!zapUsed&&Math.random()<0.05){zapUsed=true;zapWildToCreateHit();await wait(650);cs=clusters()}if(!cs.length)break;
-  const runeCells=[];board.forEach((row,r)=>row.forEach((sym,c)=>{if(sym.id==='rune')runeCells.push(r*C+c)}));
-  // A hit is each distinct winning cluster. Each hit advances the multiplier once.
-  // A cluster gets multiplied once if one or more shining runes are orthogonally adjacent.
-  const scored=[];
-  for(const cl of cs){
-   if(paidSpinMultiplier){
-    // A purchased single-spin multiplier is a guaranteed feature value, not merely a cap.
-    // Every winning cluster on this paid spin receives the exact multiplier purchased.
-    mult=Math.min(startingMult,maxMult);
-    const symbolValue=cl.kind==='wild'?WILD_PAYOUT_VALUE:cl.s.v;
-    scored.push({cl,qualifies:true,mult,payout:finalClusterPayout(roundBet,symbolValue,cl.cells.length,mult,true)});
-    continue;
-   }
-   if(bonusMode){ladderState.current=Math.min(maxMult,ladderState.current);mult=ladderState.current;}
-   const qualifies=clusterTouchesRune(cl,runeCells);
-   if(bonusMode&&ladderState.active){mult=Math.min(maxMult,ladderState.current);}
-   else if(!bonusMode&&mult<maxMult){mult=Math.min(maxMult,mult*2);}
-   const symbolValue=cl.kind==='wild'?WILD_PAYOUT_VALUE:cl.s.v;
-   const payout=finalClusterPayout(roundBet,symbolValue,cl.cells.length,mult,qualifies);
-   scored.push({cl,qualifies,mult,payout});
-  }
-  const cells=new Set(cs.flatMap(x=>x.cells));render(cells);
-  const hitTotal=scored.reduce((sum,x)=>sum+x.payout,0);total+=hitTotal;
-  if(bonusMode)updateBonusWinHud(total,$('bonusTierLabel').textContent||'BONUS');
-  $('win').textContent='+'+total.toFixed(1)+' VC';
-  $('status').textContent=bonusMode?'BONUS ROUND · '+cs.length+' winning hit'+(cs.length===1?'':'s'):cs.length+' winning hit'+(cs.length===1?'':'s')+' found';
-  const boosted=scored.filter(x=>x.qualifies).length;
-  $('action').textContent=(bonusMode?'BONUS · ':'CASCADE ')+(cascade+1)+' · '+boosted+'/'+scored.length+' rune-boosted · ×'+mult;
-  // Keep the winning board visible, then burst EVERY winning symbol (not just Guardians),
-  // and only after the burst remove those cells and drop fresh symbols into the gaps.
-  sound(bonusMode?880:660);await wait(bonusMode?1050:900);
-  const tileNodes=[...$('board').querySelectorAll('.tile')];
-  for(const idx of cells){if(tileNodes[idx])tileNodes[idx].classList.add('cascade-burst');}
-  sound(520);await wait(500);
-  drop(cells);render();cascade++;
-  if(bonusMode&&ladderState.active)advanceLadder();
-  sound(420);await wait(bonusMode?700:550);
- }
- guardianChance=priorGuardianChance;
- return {total,cascade,mult,guardiansAtStart};
-}
-function updateBonusSpinsHud(remaining,tierName,active=true){const hud=$('bonusSpinsHud');if(!hud)return;hud.classList.toggle('show',active);$('bonusSpinsLeft').textContent=String(Math.max(0,remaining));$('bonusTierLabel').textContent=(tierName||'BONUS').replace(' BONUS','');}
-async function playMaxWinSequence(winAmount,baseBet){
- const ratio=winAmount/Math.max(1,baseBet),milestones=[1000,10000,50000,MAX_WIN_MULTIPLIER];
- const reached=milestones.filter(m=>ratio>=m);if(!reached.length)return;
- const banner=$('maxWinBanner');
- function burstParticles(count=90){for(let i=0;i<count;i++){const el=document.createElement('i');el.className='maxwin-particle';el.style.setProperty('--x',Math.random()*100+'vw');el.style.setProperty('--drift',(Math.random()*260-130)+'px');el.style.setProperty('--dur',(1.5+Math.random()*2.5)+'s');el.style.setProperty('--c',['#ffe29a','#b77bff','#ff72df','#ffffff','#7cf4ff'][Math.floor(Math.random()*5)]);document.body.appendChild(el);setTimeout(()=>el.remove(),4300)}}
- function showBanner(m){$('maxWinKicker').textContent=m===MAX_WIN_MULTIPLIER?'ABSOLUTE LIMIT · VAULT FAILURE':'MAX WIN MILESTONE';$('maxWinTitle').textContent=m===MAX_WIN_MULTIPLIER?'THE IMPOSSIBLE HAS HAPPENED':m===50000?'REALITY IS FRACTURING':m===10000?'THE VAULT IS UNRAVELING':'COSMIC BREAKTHROUGH';$('maxWinValue').textContent=m.toLocaleString('en-US')+'× BASE BET';$('maxWinCopy').textContent='You crossed '+m.toLocaleString('en-US')+'× your base bet. The cosmic vault can barely contain this win.';banner.classList.add('show');document.body.classList.add('maxwin-shake');burstParticles(m>=50000?150:70);sound(m>=50000?880:640);return new Promise(resolve=>{const finish=()=>{banner.classList.remove('show');document.body.classList.remove('maxwin-shake');$('maxWinNext').removeEventListener('click',finish);resolve()};$('maxWinNext').addEventListener('click',finish,{once:true});setTimeout(finish, m===MAX_WIN_MULTIPLIER?2200:1600)})}
- for(const m of reached){await showBanner(m)}
- if(ratio>=1000){
-  const capped=Math.min(winAmount,baseBet*MAX_WIN_MULTIPLIER);
-  let tierTitle='',kicker='',message='',collectLabel='CLAIM VIRTUAL PAYOUT',particles=110,tone=700;
-  if(ratio>=MAX_WIN_MULTIPLIER){tierTitle='THE IMPOSSIBLE HAS HAPPENED';kicker='ROGUE VAULT STUDIOS · MAX WIN';message='GAME CRASHED! Woah, finally you made it to here! You reached the absolute 100,000× base-bet cap.';collectLabel='COLLECT MAX VIRTUAL WIN';particles=220;tone=990;}
-  else if(ratio>=50000){tierTitle='REALITY IS FRACTURING';kicker='50,000× MILESTONE · REALITY FRACTURE';message='An extraordinary win! Your payout falls in the 50,000×–99,999× tier.';particles=175;tone=880;}
-  else if(ratio>=10000){tierTitle='THE VAULT IS UNRAVELING';kicker='10,000× MILESTONE · VAULT UNRAVELING';message='An incredible win! Your payout falls in the 10,000×–49,999× tier.';particles=140;tone=800;}
-  else {tierTitle='COSMIC BREAKTHROUGH';kicker='1,000× MILESTONE · COSMIC BREAKTHROUGH';message='A monumental win! Your payout falls in the 1,000×–9,999× tier.';}
-  $('maxWinFinal').querySelector('.maxwin-kicker').textContent=kicker;
-  $('maxWinFinalTitle').textContent=tierTitle;
-  $('maxWinFinalValue').textContent=Math.floor(ratio).toLocaleString('en-US')+'× BASE BET';
-  $('maxWinFinalCopy').textContent=message+' Your virtual payout is '+capped.toLocaleString('en-IN',{maximumFractionDigits:1})+' VC. Select claim to add it to your virtual-credit balance.';
-  $('maxWinCollect').textContent=collectLabel;
-  $('maxWinFinal').classList.add('show');document.body.classList.add('maxwin-shake');burstParticles(particles);sound(tone);
-  await new Promise(resolve=>{$('maxWinCollect').onclick=()=>{$('maxWinFinal').classList.remove('show');document.body.classList.remove('maxwin-shake');resolve()}});
- }
-}
 
-function showDebugError(title,err){
- let panel=document.getElementById('vaultDebugError');
- if(!panel){panel=document.createElement('div');panel.id='vaultDebugError';panel.style.cssText='position:fixed;z-index:999999;left:16px;right:16px;bottom:16px;max-height:42vh;overflow:auto;background:#210d18;color:#fff;border:2px solid #ff7272;border-radius:12px;padding:14px 16px;box-shadow:0 10px 40px #000b;font:13px/1.45 ui-monospace,Consolas,monospace;white-space:pre-wrap;';document.body.appendChild(panel);}
- panel.innerHTML='';const h=document.createElement('strong');h.textContent=title+' — COPY THIS ERROR';h.style.cssText='display:block;color:#ffb2b2;font:700 15px/1.4 system-ui;margin-bottom:8px';panel.appendChild(h);const body=document.createElement('div');body.textContent=String(err&&err.stack||err&&err.message||err);panel.appendChild(body);const close=document.createElement('button');close.textContent='CLOSE ERROR';close.style.cssText='margin-top:10px;padding:7px 12px;border-radius:8px';close.onclick=()=>panel.remove();panel.appendChild(close);
-}
 
-async function spinCore(mode='standard'){
- if(busy)return;
- const buyTiers={'buy-normal':{tier:0,cost:FEATURE_COSTS.buyNormal},'buy-higher':{tier:1,cost:FEATURE_COSTS.buyHigher},'buy-mythic':{tier:2,cost:FEATURE_COSTS.buyMythic}};
- const singleSpins=SINGLE_SPINS;
- const purchase=buyTiers[mode],singleSpin=singleSpins[mode],isExtreme=mode==='extreme-spin';
- const isAnteSpin=!purchase&&!singleSpin&&!isExtreme&&anteEnabled;
- const cost=purchase?bet*purchase.cost:singleSpin?bet*(singleSpin.cost+(anteEnabled?FEATURE_COSTS.guardianBoost:0)):isExtreme?bet*FEATURE_COSTS.extreme:bet*FEATURE_COSTS.guardianBoost;
- if(balance<cost){toast('Not enough virtual credits for this mode.');return}
- let forcedTier=null,extremeOutcome='';
- if(isExtreme){const roll=Math.random();if(roll<EXTREME_ODDS.nothing){extremeOutcome='nothing'}else if(roll<EXTREME_ODDS.nothing+EXTREME_ODDS.normal){forcedTier=tierForGuardians(4);extremeOutcome='normal'}else if(roll<EXTREME_ODDS.nothing+EXTREME_ODDS.normal+EXTREME_ODDS.mythic){forcedTier=tierForGuardians(6);extremeOutcome='mythic'}else{forcedTier=tierForGuardians(8);extremeOutcome='epic'}}
- activeMode=mode;guardianChance=anteEnabled?.015:.01;busy=true;
- // Keep the side multiplier HUD in sync with the purchased single-spin feature.
- if(singleSpin){ladderState={current:singleSpin.mult,base:singleSpin.mult,progress:0,needed:1,max:singleSpin.mult,active:true,values:[singleSpin.mult]};}
- else{ladderState.active=false;}
- drawLadder();last=0;balance-=cost;spins++;ui();
- $('status').textContent=isExtreme?'The Extreme Spin fate is sealed…':purchase?'The Guardian is summoned…':singleSpin?'The multiplier sigil ignites…':isAnteSpin?'The ante sigils ignite…':'The vault stirs…';
- $('action').textContent=isExtreme?'EXTREME SPIN · 10×':purchase?'BONUS BUY · '+purchase.cost+'×':singleSpin?'MULTIPLIER SPIN · ×'+singleSpin.mult:isAnteSpin?'GUARDIAN BOOST · 1×':'Sigils in motion';
- $('modeInfo').textContent=isExtreme?'Extreme Spin costs 10× bet. Odds: 50% nothing, 30% Normal, 15% Mythic, 5% Epic.':purchase?'Purchased '+(['Normal','Hyper','Mythic'][purchase.tier])+' Bonus for '+purchase.cost+'× bet.':singleSpin?'Persistent '+singleSpin.label+' mode: this spin costs '+String(singleSpin.cost)+'× bet'+(anteEnabled?' with Guardian Boost active':'')+'. Every manual/Auto Spin keeps using this feature until disabled.':isAnteSpin?'Guardian Boost is ON: this spin costs 1× bet and uses 1.5% Guardian chance.':'Standard spin costs 1× your selected bet.';
- $('win').textContent='—';sound(240);$('machine').classList.remove('bonus-mode');
- if(isExtreme&&extremeOutcome==='nothing'){
-  board=newBoard();render();await animateSpin(1350);await wait(900);
-  // A no-bonus outcome means no bonus feature is awarded; it must not bypass ordinary cluster evaluation.
-  // Resolve the visible board using the same live cascade engine before settling this paid Extreme Spin.
-  $('status').textContent='EXTREME SPIN · NO BONUS · CHECKING BOARD';$('action').textContent='Resolving visible clusters';
-  const noBonusBoardResult=await runBoard(bet,1,false,10,true,false);
-  let noBonusReturn=Math.min(noBonusBoardResult.total*payoutFactorForMode('extreme-spin',false),bet*MAX_WIN_MULTIPLIER);
-  await playMaxWinSequence(noBonusReturn,bet);balance+=noBonusReturn;last=noBonusReturn;ui();
-  $('triggerCount').textContent='Extreme Spin result: NO BONUS';$('triggerCount').classList.remove('active');$('gTitle').textContent='The vault rejects the offering';
-  $('gText').textContent='No bonus feature was awarded. The visible board was still checked for ordinary winning clusters and cascades.';
-  await cinematic({kicker:'EXTREME SPIN · NO-BONUS OUTCOME',title:'THE VAULT DENIES YOU',mult:noBonusReturn?'+'+noBonusReturn.toFixed(1)+' VC':'NO BONUS',copy:noBonusReturn?'No bonus feature was awarded, but the board returned '+noBonusReturn.toFixed(1)+' virtual credits from resolved clusters.':'No bonus feature or winning cluster was awarded. The virtual-credit cost has been spent.',button:'RETURN TO THE VAULT'});
-  $('status').textContent='Extreme Spin · No bonus';$('win').textContent=noBonusReturn?'+'+noBonusReturn.toFixed(1)+' VC':'No discovery';$('action').textContent='Extreme Spin complete · no bonus'+(noBonusBoardResult.cascade?' · '+noBonusBoardResult.cascade+' cascade(s)':'');busy=false;guardianChance=anteEnabled?.015:.01;ui();toast(noBonusReturn?'No bonus; board cascades paid '+noBonusReturn.toFixed(1)+' VC.':'Extreme Spin: no bonus this time.');return;
- }
- board=newBoard();
- let purchasedGuardianCount=0,spots=[];
- if(purchase || (isExtreme && forcedTier)){
-  // Purchased bonuses and non-empty Extreme Spin rewards visibly land the exact Guardian count for the awarded tier.
-  purchasedGuardianCount=purchase?[4,5,6][purchase.tier]:forcedTier.threshold;
-  board=board.map(row=>row.map(sym=>sym.id==='guardian'?pickNonGuardian():sym));
-  spots=Array.from({length:R*C},(_,i)=>i);for(let i=0;i<purchasedGuardianCount;i++){const j=i+Math.floor(Math.random()*(spots.length-i));[spots[i],spots[j]]=[spots[j],spots[i]];}spots=spots.slice(0,purchasedGuardianCount);
-  for(const idx of spots)board[Math.floor(idx/C)][idx%C]=S[7];
- }
- render();await animateSpin(1350);await wait(1400);
- let gs=purchase?purchasedGuardianCount:board.flat().filter(s=>s.id==='guardian').length;
- let total=0,cascadeCount=0;
- if(purchase || (isExtreme && forcedTier)){
-  $('status').textContent='GUARDIANS LANDED · THE SEAL BREAKS';$('action').textContent=purchasedGuardianCount+' GUARDIANS · BURST CASCADE';
-  const tiles=[...$('board').querySelectorAll('.tile')];spots.forEach(idx=>{if(tiles[idx])tiles[idx].classList.add('guardian-burst')});sound(520);await wait(520);
-  // Burst the landed Guardians and refill their exact cells with fresh symbols, like a cascade drop.
-  for(const idx of spots){const r=Math.floor(idx/C),c=idx%C;const replacement=pickNonGuardian();board[r][c]=replacement;}
-  render();const refillTiles=[...$('board').querySelectorAll('.tile')];spots.forEach(idx=>{if(refillTiles[idx])refillTiles[idx].classList.add('reel-stop')});sound(360);await wait(850);refillTiles.forEach(t=>t.classList.remove('reel-stop'));
-  $('status').textContent='THE GUARDIANS HAVE AWAKENED';$('action').textContent='Guardian burst · checking for wins';await wait(250);
-  // IMPORTANT: resolve the board created by the Guardian burst before entering the purchased bonus.
-  // Previously the refilled trigger board was rendered but never passed through the cascade resolver.
-  // Keep its wins and cascade count inside this same paid action so the payout and RTP accounting include them.
-  const triggerCascadeResult=await runBoard(bet,1,false,10,true,false);
-  total+=triggerCascadeResult.total;cascadeCount+=triggerCascadeResult.cascade;
-  $('status').textContent=triggerCascadeResult.cascade?'GUARDIAN DROP · CASCADE COMPLETE':'GUARDIAN DROP · NO WINNING CLUSTER';
-  $('action').textContent=triggerCascadeResult.cascade?'TRIGGER CASCADE · '+triggerCascadeResult.cascade+' cascade(s)':'Trigger board checked · no cascade';
-  await wait(350);
- }
- $('triggerCount').textContent=purchase?'Bonus-buy Guardians: '+gs+' landed · '+(['Normal','Hyper','Mythic'][purchase.tier])+' feature':'Starting-board Guardians: '+gs+' / 4 needed';$('triggerCount').classList.toggle('active',gs>=4);
- const bonusTriggered=gs>=4||!!purchase||!!forcedTier;
- if(bonusTriggered){
-  let tier=forcedTier||(purchase?tierForGuardians([4,5,6][purchase.tier]):tierForGuardians(gs));activeGuardianRank=tier.rank;
-  if(!purchase&&!forcedTier&&gs>=4){const boardTier=tierForGuardians(gs);if(boardTier.rank>tier.rank)tier=boardTier;}
-  $('gTitle').textContent=tier.name+' unlocked';$('gText').textContent=(purchase?'Bonus purchased.':forcedTier?'Extreme Spin awarded '+tier.name+'.':gs+' Guardians answered the call.')+' Eligible Guardians: '+guardianRosterForTier(tier.rank)+'. '+tier.rounds+' bonus rounds · starting multiplier ×'+tier.baseMult+'.';$('machine').classList.add('bonus-mode');playGuardianSting();playWinSting(tier.rank===3?3:tier.rank===2?2:1);
-  await cinematic({kicker:isExtreme?'EXTREME SPIN REWARD':purchase?'THE VAULT IS SUMMONED':'THE SEAL IS BROKEN',title:isExtreme?'EXTREME SPIN · '+tier.name:purchase?'BONUS PURCHASED':tier.name+' UNLOCKED',mult:'×'+tier.baseMult,copy:isExtreme?'Your Extreme Spin reward is '+tier.name+'. It starts with '+tier.rounds+' rounds at ×'+tier.baseMult+'.':purchase?'You purchased the '+tier.name+': '+tier.rounds+' starting rounds at ×'+tier.baseMult+'.':gs+' Guardians appeared. '+tier.name+' unlocked with '+tier.rounds+' rounds, starting at ×'+tier.baseMult+'.',button:'ENTER THE BONUS'});
-  let roundNo=0,roundsRemaining=tier.rounds,roundSafety=0;bonusSessionTotal=0;bonusSessionActive=true;updateBonusWinHud(0,tier.name);updateBonusSpinsHud(roundsRemaining,tier.name,true);startLadder(tier.maxMult,tier.baseMult,tier.ladder||null);
-  while(roundsRemaining>0&&roundSafety<60){
-   roundSafety++;roundNo++;roundsRemaining--;updateBonusSpinsHud(roundsRemaining,tier.name,true);
-   let startMult=Math.min(ladderState.current,tier.maxMult);let tierAtRound=tier;
-   let sceneTitle=tier.name==='MYTHIC BONUS'?(roundNo===tier.rounds?'THE FINAL COSMIC REVELATION':'THE MYTHIC VAULT'):tier.name==='EPIC BONUS'?(roundNo===tier.rounds?'THE ANCIENT HEART':'THE ANCIENTS RISE'):tier.name==='HYPER BONUS'?(roundNo===tier.rounds?'THE GUARDIAN ASCENDANT':'THE GUARDIAN ASCENDS'):(roundNo===tier.rounds?'THE FINAL AWAKENING':roundNo===1?'THE VAULT OPENS':'THE COSMOS SHATTERS');
-   await cinematic({kicker:tier.name+' · ROUND '+roundNo+' · '+roundsRemaining+' REMAINING',title:sceneTitle,mult:'×'+startMult,copy:'One extra Guardian is added to this round’s board. After the board appears, 4 Guardians award +3 rounds, 5 award +5, 6–7 award +6, and 8+ award +8. Normal Bonus is capped at ×2; Hyper at ×5; Mythic at ×8. Epic uses its separate in-game ladder and cannot be purchased. A higher tier upgrades and restarts the feature. Starting multiplier: ×'+tier.baseMult+'. The multiplier advances after 2 winning cascades, then requires 3, then 4, and so on. Progress carries across retriggered rounds and resets on tier upgrade. A winning cluster is multiplied once only when at least one shining rune touches it; multiple runes do not stack. Cap: ×'+tier.maxMult+'. No extra bet is charged.',button:'PLAY BONUS ROUND',auto:true,autoDelay:650});
-   let result=await runBoard(bet,startMult,true,tier.maxMult);total+=result.total;bonusSessionTotal+=result.total;updateBonusWinHud(0,tier.name);cascadeCount+=result.cascade;ui();
-   let roundGs=result.guardiansAtStart;let triggerTier=tierForGuardians(roundGs);
-   $('triggerCount').textContent='Bonus-board Guardians: '+roundGs+' · '+triggerTier.name;$('triggerCount').classList.toggle('active',roundGs>=4);
-   if(triggerTier.rank>tier.rank){tier=triggerTier;activeGuardianRank=tier.rank;roundNo=0;roundsRemaining=tier.rounds;updateBonusSpinsHud(roundsRemaining,tier.name,true);startLadder(tier.maxMult,tier.baseMult,tier.ladder||null);$('gTitle').textContent='UPGRADED: '+tier.name;$('gText').textContent=roundGs+' Guardians appeared during the bonus. Eligible Guardians: '+guardianRosterForTier(tier.rank)+'. Feature upgraded and restarted: '+tier.rounds+' rounds, starting ×'+tier.baseMult+'.';await cinematic({kicker:'GUARDIAN EVOLUTION',title:tier.name+' UNLOCKED',mult:'×'+tier.baseMult,copy:roundGs+' Guardians appeared in the bonus board. The bonus has upgraded and restarted at '+tier.name+' with '+tier.rounds+' rounds and a fresh ×'+tier.baseMult+' multiplier. Previous virtual wins are kept.',button:'RESTART AT NEW TIER',auto:true,autoDelay:1100});
-   }else if(roundGs>=4){let extra=tierForGuardians(roundGs).retriggerRounds;roundsRemaining+=extra;updateBonusSpinsHud(roundsRemaining,tier.name,true);$('gTitle').textContent=tier.name+' EXTENDED';$('gText').textContent=roundGs+' Guardians appeared. +'+extra+' bonus rounds added; '+roundsRemaining+' rounds remain.';await cinematic({kicker:'GUARDIAN REAWAKENING',title:'BONUS ROUNDS AWARDED',mult:'+'+extra+' ROUNDS',copy:roundGs+' Guardians appeared. You earned '+extra+' additional rounds. '+roundsRemaining+' rounds remain in '+tier.name+'.',button:'CONTINUE BONUS',auto:true,autoDelay:850});}
-   if(tier!==tierAtRound&&tier.rank>tierAtRound.rank)continue;await wait(180);
-  }
-  await cinematic({kicker:tier.name+' COMPLETE',title:'THE VAULT REMEMBERS',mult:'+'+total.toFixed(1)+' VC',copy:'Your bonus feature paid '+total.toFixed(1)+' virtual credits in total. Bonus retriggers are capped at 60 rounds in this prototype to prevent endless loops.',button:'CLAIM VIRTUAL WIN'});bonusSessionActive=false;activeGuardianRank=0;updateBonusWinHud(0,tier.name);$('machine').classList.remove('bonus-mode');updateBonusSpinsHud(0,tier.name,false);ladderState.active=false;drawLadder();toast(tier.name+' COMPLETE · +'+total.toFixed(1)+' VC');
- }else{
-  $('gTitle').textContent='Guardian sleeps';$('gText').textContent='Find 4 Guardians for Normal, 5 for Hyper, 6–7 for Mythic, or 8 for Epic. Bonus boards add one extra Guardian. Bonus rounds now continue automatically after feature entry.';
-  let spinMult=singleSpin?singleSpin.mult:1;let result=await runBoard(bet,spinMult,false,spinMult>1?spinMult:10,true,!!singleSpin);total+=result.total;cascadeCount+=result.cascade;
- }
- // Apply the same mode-level payout calibration used by Math Lab before the global max-win cap.
- total=Math.min(total*payoutFactorForMode(mode,anteEnabled),bet*MAX_WIN_MULTIPLIER);await playMaxWinSequence(total,bet);balance+=total;last=total;ui();if(total){$('status').textContent='The vault yields';$('win').textContent='+'+total.toFixed(1)+' VC';if(gs<4)toast('+'+total.toFixed(1)+' VC discovered in '+cascadeCount+' cascades.')}else{$('status').textContent='The vault remains silent';$('win').textContent='No discovery';toast('No cluster this time. The vault remains silent.')}if(cascadeCount>=8)$('action').textContent='Cascade limit reached';else $('action').textContent=total?'Discovery · '+total.toFixed(1)+' VC':'Spin complete';busy=false;guardianChance=anteEnabled?.015:.01;ui();
-}
-// Guarded entry point: ensure an exception cannot leave the game permanently busy.
-async function spin(mode='standard'){
- if(busy)return;
- try{
-  await spinCore(mode);
- }catch(err){
-  console.error('Spin failed:',err);
-  busy=false;
-  try{
-   $('status').textContent='SPIN INTERRUPTED · READY TO RETRY';
-   $('action').textContent='Spin error — try again';
-   showDebugError('SPIN ERROR',err);toast('Spin error: '+(err&&err.message?err.message:String(err)));
-   ui();
-  }catch(uiErr){console.error('Recovery UI failed:',uiErr);}
- }finally{
-  if(busy){busy=false;try{ui()}catch(e){console.error(e)}}
- }
-}
 
-async function runAutoSpins(token){
-  while(autoRunning && token===autoLoopToken && autoRemaining>0){
-    if(balance < selectedSpinCost()){
-      autoRunning=false;autoRemaining=0;ui();toast('Auto Spin stopped: insufficient balance.');break;
-    }
-    await spin(activeSingleSpinMode||'standard');
-    if(!autoRunning || token!==autoLoopToken)break;
-    autoRemaining--;
-    $('autoInfo').textContent=autoRemaining+' automatic spins remaining · '+(activeSingleSpinMode?SINGLE_SPINS[activeSingleSpinMode].label+' feature':'standard spin')+(anteEnabled?' + Ante':'')+'. Stop anytime.';
-    if(autoRemaining<=0){autoRunning=false;ui();$('autoInfo').textContent='Auto Spin complete.';break;}
-    await wait(450);
-  }
-}
-$('autoToggle').onclick=()=>{
-  if(autoRunning){autoRunning=false;autoLoopToken++;$('autoInfo').textContent='Auto Spin stopped by player.';ui();return;}
-  if(busy)return;
-  autoRemaining=parseInt($('autoCount').value,10)||10;
-  autoRunning=true;const token=++autoLoopToken;
-  $('autoInfo').textContent='Auto Spin running · '+autoRemaining+' spins · '+(activeSingleSpinMode?SINGLE_SPINS[activeSingleSpinMode].label+' feature':'standard spin')+(anteEnabled?' + Ante':'')+'. Stop anytime.';
-  ui();runAutoSpins(token);
-};
-$('autoEnabled').onchange=()=>{if($('autoEnabled').checked&&!autoRunning)$('autoToggle').click();else if(!$('autoEnabled').checked&&autoRunning)$('autoToggle').click()};
-$('spin').onclick=()=>spin(activeSingleSpinMode||'standard');$('featureForgeBtn').onclick=()=>openFeatureModal($('featureForgeBtn'));$('featureClose').onclick=()=>closeFeatureModal();$('featureModal').onclick=e=>{if(e.target===$('featureModal'))closeFeatureModal()};$('buyNormal').onclick=()=>{if(!busy){closeFeatureModal();spin('buy-normal')}};$('buyHigher').onclick=()=>{if(!busy){closeFeatureModal();spin('buy-higher')}};$('buyMythic').onclick=()=>{if(!busy){closeFeatureModal();spin('buy-mythic')}};$('extremeSpin').onclick=()=>{if(!busy){closeFeatureModal();spin('extreme-spin')}};function toggleSingleSpinMode(mode){if(busy||autoRunning)return;activeSingleSpinMode=activeSingleSpinMode===mode?null:mode;activeMode=activeSingleSpinMode||'standard';if(activeSingleSpinMode){const f=SINGLE_SPINS[activeSingleSpinMode];ladderState={current:f.mult,base:f.mult,progress:0,needed:1,max:f.mult,active:true,values:[f.mult]};$('modeInfo').textContent='Persistent '+f.label+' mode enabled. Each Spin or Auto Spin costs '+(f.cost+(anteEnabled?FEATURE_COSTS.guardianBoost:0)).toFixed(1)+'× bet'+(anteEnabled?' including Ante':'')+' and applies '+f.label+' to every winning cluster. Select the active option again to disable.';toast(f.label+' SINGLE-SPIN MODE LOCKED');}else{ladderState={current:2,base:2,progress:0,needed:2,max:10,active:false,values:null};$('modeInfo').textContent=anteEnabled?'Guardian Boost is ON: regular spins cost 1× bet and use 1.5% Guardian chance.':'Standard spin mode restored · 1× bet.';toast('Single-spin feature disabled');}drawLadder();closeFeatureModal();ui()}$('multi10').onclick=()=>toggleSingleSpinMode('multi-10');$('multi50').onclick=()=>toggleSingleSpinMode('multi-50');$('multi200').onclick=()=>toggleSingleSpinMode('multi-200');$('anteOption').onclick=()=>{if(!busy){anteEnabled=!anteEnabled;guardianChance=anteEnabled?.015:.01;closeFeatureModal();$('modeInfo').textContent=anteEnabled?'Guardian Boost enabled: regular spins cost 1× bet until you disable it.':'Guardian Boost disabled: regular spins cost 1× bet.';ui();toast(anteEnabled?'GUARDIAN BOOST ENABLED · 1× BET':'GUARDIAN BOOST DISABLED · 1× BET')}};$('down').onclick=()=>{let i=BETS.indexOf(bet);if(i>0){bet=BETS[i-1];ui()}};$('up').onclick=()=>{let i=BETS.indexOf(bet);if(i<BETS.length-1){bet=BETS[i+1];ui()}};$('sound').onclick=()=>{soundOn=!soundOn;$('sound').textContent=soundOn?'♫ Sound On':'♫ Sound Off';if(soundOn){startAmbient();playWinSting(1);toast('COSMIC AUDIO ONLINE')}else stopAmbient()};$('turbo').onclick=()=>{turboMode=!turboMode;document.body.classList.toggle('turbo-mode',turboMode);$('turbo').classList.toggle('active',turboMode);$('turbo').setAttribute('aria-pressed',String(turboMode));$('turbo').textContent=turboMode?'⚡ Turbo On':'⚡ Turbo Off';toast(turboMode?'TURBO MODE · FAST ANIMATIONS':'NORMAL SPEED')};document.addEventListener('keydown',e=>{const featureModal=$('featureModal');if(featureModal.classList.contains('show')&&e.key==='Tab'){const focusables=[...featureModal.querySelectorAll('button:not(:disabled),input:not(:disabled),select:not(:disabled),[tabindex]:not([tabindex="-1"])')];if(focusables.length){const first=focusables[0],last=focusables[focusables.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}}}if(e.code==='Space'&&!e.repeat&&!e.target.matches('button,input,textarea,summary')&&!featureModal.classList.contains('show')){e.preventDefault();spin(activeSingleSpinMode||'standard')}if(e.key==='Escape'){if(featureModal.classList.contains('show'))closeFeatureModal();$('mathLab')?.style.setProperty('display','none')}});board=newBoard();render();ui();
 
-// Hidden math lab shortcut: Ctrl+Shift+M. Kept out of normal game UI.
-(function installMathLab(){
- const lab=document.getElementById('mathLab');if(!lab)return;
- document.addEventListener('keydown',e=>{if(e.ctrlKey&&e.shiftKey&&e.key.toLowerCase()==='m'){e.preventDefault();lab.style.display='block';}});
- document.getElementById('mathClose').onclick=()=>lab.style.display='none';
- const CAT=[['standard','Standard',1,0],['ante','Guardian Boost',FEATURE_COSTS.guardianBoost,.015],['multi10','×10 Multiplier',FEATURE_COSTS.multi10,0],['multi50','×50 Multiplier',FEATURE_COSTS.multi50,0],['multi200','×200 Multiplier',FEATURE_COSTS.multi200,0],['buy-normal','Normal Bonus Buy',FEATURE_COSTS.buyNormal,0],['buy-higher','Higher Bonus Buy',FEATURE_COSTS.buyHigher,0],['buy-mythic','Mythic Bonus Buy',FEATURE_COSTS.buyMythic,0],['extreme-spin','Extreme Spin',FEATURE_COSTS.extreme,0]];
- const CATMAP=Object.fromEntries(CAT.map(x=>[x[0],{name:x[1],cost:x[2],guardian:x[3]}]));Object.assign(CATMAP,{'multi10-ante':{name:'×10 + Guardian Boost',cost:FEATURE_COSTS.multi10+FEATURE_COSTS.guardianBoost,guardian:.015},'multi50-ante':{name:'×50 + Guardian Boost',cost:FEATURE_COSTS.multi50+FEATURE_COSTS.guardianBoost,guardian:.015},'multi200-ante':{name:'×200 + Guardian Boost',cost:FEATURE_COSTS.multi200+FEATURE_COSTS.guardianBoost,guardian:.015}});
- function simulate(n,seed,mode,mix){
-  let state=(seed>>>0)||1;const rnd=()=>{state=(Math.imul(1664525,state)+1013904223)>>>0;return state/4294967296};
-  const pick=(ante,bonus=false)=>{let x=rnd();if(x<.04)return 'wild';if(x<.085)return 'rune';const gc=bonus?.005:(ante?.015:.01);if(x<.085+gc)return 'guardian';return ['moon','star','eye','crystal','crown','key'][Math.floor(rnd()*6)]};
-  const pickNonGuardian=(ante,bonus=false)=>{for(let i=0;i<100;i++){const s=pick(ante,bonus);if(s!=='guardian')return s;}return ['moon','star','eye','crystal','crown','key'][Math.floor(rnd()*6)]};
-  const vals={moon:.21,star:.252,eye:.315,crystal:.42,crown:.525,key:.63,wild:WILD_PAYOUT_VALUE}; // These values are shared with the playable engine.
-  const tierFor=g=>{const t=canonicalTierForGuardians(g);return {rank:t.rank,name:t.name,rounds:t.rounds,retriggerRounds:t.retriggerRounds,base:t.baseMult,max:t.maxMult,ladder:t.ladder||null};};
-  const stats={};for(const [id,name,cost] of CAT)stats[id]={id,name,count:0,wagered:0,returned:0,wins:0,cascades:0,bonusTriggers:0,bonusRounds:0,retriggers:0,upgrades:0,zap:0,caps:0,errors:0,errorSamples:[]};for(const [id,cfg] of Object.entries(CATMAP))if(!stats[id])stats[id]={id,name:cfg.name,count:0,wagered:0,returned:0,wins:0,cascades:0,bonusTriggers:0,bonusRounds:0,retriggers:0,upgrades:0,zap:0,caps:0,errors:0,errorSamples:[]};
-  function makeBoard(ante,bonus=false){return Array.from({length:6},()=>Array.from({length:8},()=>pick(ante,bonus)))}
-  function getClusters(b){return findClustersForBoard(b,s=>s,s=>s==='rune'||s==='guardian').map(cl=>({id:cl.kind==='wild'?'wild':cl.s,cells:cl.cells,wildOnly:cl.kind==='wild'}));}
-  function fall(b,remove,ante,bonus=false){let rem=new Set(remove);for(let c=0;c<8;c++){let keep=[];for(let r=5;r>=0;r--)if(!rem.has(r*8+c))keep.push(b[r][c]);while(keep.length<6)keep.push(pick(ante,bonus));for(let r=5,i=0;r>=0;r--,i++)b[r][c]=keep[i]}}
-  function playBoard(b,bet,ante,opts,bonus=false,tier=null,startMult=null,ladderState=null){let total=0,casc=0,mult=bonus?(ladderState?ladderState.current:(startMult==null?tier.base:startMult)):1,zapUsed=false;const gs=b.flat().filter(x=>x==='guardian').length;
-   while(casc<8){let cs=getClusters(b);if(!cs.length&&!zapUsed&&rnd()<.05){zapUsed=true;const row=Math.floor(rnd()*6),start=Math.floor(rnd()*4),sym=['moon','star','eye','crystal','crown','key'][Math.floor(rnd()*6)];for(let c=start;c<start+4;c++)b[row][c]=sym;b[row][start+4]='wild';cs=getClusters(b);if(cs.length)opts.stat.zap++}if(!cs.length)break;
-    let runes=[];b.forEach((row,r)=>row.forEach((s,c)=>{if(s==='rune')runes.push(r*8+c)}));let payout=0;
-    for(const cl of cs){let set=new Set(cl.cells),touch=runes.some(ix=>{let r=Math.floor(ix/8),c=ix%8;return [[r-1,c],[r+1,c],[r,c-1],[r,c+1]].some(([y,x])=>y>=0&&y<6&&x>=0&&x<8&&set.has(y*8+x))});let pm=bonus?mult:(opts.multiplier||0);if(!pm&&!bonus&&mult<10)mult=Math.min(10,mult*2);const v=cl.wildOnly?WILD_PAYOUT_VALUE:(vals[cl.id]||1);payout+=simulatorClusterPayout(bet,v,cl.cells.length,pm||mult,bonus,!!opts.multiplier,touch)}
-    total+=payout;fall(b,[...new Set(cs.flatMap(x=>x.cells))],ante,bonus);casc++;
-    if(bonus&&ladderState&&ladderState.current<tier.max){ladderState.progress++;if(ladderState.progress>=ladderState.needed){const ladder=tier.ladder||Array.from({length:16},(_,i)=>Math.min(tier.max,tier.base*Math.pow(2,i)));const unique=[...new Set(ladder.map(v=>Math.min(v,tier.max)))],idx=unique.findIndex(v=>v>=ladderState.current),next=unique[Math.min(unique.length-1,Math.max(0,idx+1))]??ladderState.current;ladderState.progress=0;if(next>ladderState.current){ladderState.current=next;ladderState.needed++;}mult=ladderState.current;}}
-   }return {total,casc,gs,mult};}
-  function one(id){const st=stats[id],cfg=CATMAP[id],ante=id==='ante'||id.endsWith('-ante');st.count++;const bet=10,cost=bet*cfg.cost;st.wagered+=cost;const opts={stat:st,multiplier:(id==='multi10'||id==='multi10-ante')?10:(id==='multi50'||id==='multi50-ante')?50:(id==='multi200'||id==='multi200-ante')?200:0};let win=0,cas=0;
-   try{if(id==='extreme-spin'){let x=rnd();if(x<EXTREME_ODDS.nothing){/* No bonus still resolves an ordinary board in the live game. */const noBonusBoard=makeBoard(false,false);const noBonusResult=playBoard(noBonusBoard,bet,false,opts,false,null);win+=noBonusResult.total;cas+=noBonusResult.casc;win=Math.min(win*payoutFactorForMode(id,false),bet*MAX_WIN_MULTIPLIER);if(win>0)st.wins++;if(win>=bet*MAX_WIN_MULTIPLIER)st.caps++;st.returned+=win;st.cascades+=cas;return}let tier=tierFor(x<EXTREME_ODDS.nothing+EXTREME_ODDS.normal?4:x<EXTREME_ODDS.nothing+EXTREME_ODDS.normal+EXTREME_ODDS.mythic?6:8);st.bonusTriggers++;
-      // Mirror the live Extreme Spin Guardian landing, burst, refill and trigger-board cascade.
-      const gCount=tier.rank===0?4:tier.rank===2?6:8;let triggerBoard=makeBoard(false,false);for(let r=0;r<6;r++)for(let c=0;c<8;c++)if(triggerBoard[r][c]==='guardian')triggerBoard[r][c]=pickNonGuardian(false,false);
-      const spots=Array.from({length:48},(_,i)=>i);for(let i=0;i<gCount;i++){const j=i+Math.floor(rnd()*(spots.length-i));[spots[i],spots[j]]=[spots[j],spots[i]];}for(const ix of spots.slice(0,gCount))triggerBoard[Math.floor(ix/8)][ix%8]=pickNonGuardian(false,false);
-      const triggerResult=playBoard(triggerBoard,bet,false,opts,false,null);win+=triggerResult.total;cas+=triggerResult.casc;
-      let remaining=tier.rounds,safety=0,bonusMult=tier.base,ladderState={current:tier.base,base:tier.base,progress:0,needed:2,max:tier.max,values:tier.ladder||null};while(remaining>0&&safety++<60){remaining--;let b=makeBoard(false,true);const candidates=b.flatMap((row,r)=>row.map((sym,c)=>sym==='guardian'?-1:r*8+c)).filter(ix=>ix>=0);if(candidates.length){const ix=candidates[Math.floor(rnd()*candidates.length)];b[Math.floor(ix/8)][ix%8]='guardian';}let rr=playBoard(b,bet,false,opts,true,tier,bonusMult,ladderState);bonusMult=rr.mult;win+=rr.total;cas+=rr.casc;st.bonusRounds++;let nt=tierFor(rr.gs);if(nt.rank>tier.rank){tier=nt;remaining=tier.rounds;bonusMult=tier.base;ladderState={current:tier.base,base:tier.base,progress:0,needed:2,max:tier.max,values:tier.ladder||null};st.upgrades++}else if(rr.gs>=4){remaining+=nt.retriggerRounds;st.retriggers++}}}
-    else if(id.startsWith('buy-')){let tier=tierFor(id==='buy-normal'?4:id==='buy-higher'?5:6);st.bonusTriggers++;
-      // Mirror live play: clear any pre-existing Guardians, land the purchased count, burst them,
-      // refill those exact cells, then resolve cascades on the resulting trigger board before bonus rounds.
-      let triggerBoard=makeBoard(ante,false);for(let r=0;r<6;r++)for(let c=0;c<8;c++)if(triggerBoard[r][c]==='guardian')triggerBoard[r][c]=pickNonGuardian(ante,false);
-      const gCount=id==='buy-normal'?4:id==='buy-higher'?5:6,spots=Array.from({length:48},(_,i)=>i);for(let i=0;i<gCount;i++){const j=i+Math.floor(rnd()*(spots.length-i));[spots[i],spots[j]]=[spots[j],spots[i]];}
-      for(const ix of spots.slice(0,gCount))triggerBoard[Math.floor(ix/8)][ix%8]=pickNonGuardian(ante,false);
-      const triggerResult=playBoard(triggerBoard,bet,ante,opts,false,null);win+=triggerResult.total;cas+=triggerResult.casc;
-      let remaining=tier.rounds,safety=0,bonusMult=tier.base,ladderState={current:tier.base,base:tier.base,progress:0,needed:2,max:tier.max,values:tier.ladder||null};while(remaining>0&&safety++<60){remaining--;let b=makeBoard(ante,true);let candidates=b.flatMap((row,r)=>row.map((sym,c)=>sym==='guardian'?-1:r*8+c)).filter(ix=>ix>=0);if(candidates.length){let ix=candidates[Math.floor(rnd()*candidates.length)];b[Math.floor(ix/8)][ix%8]='guardian';}let rr=playBoard(b,bet,ante,opts,true,tier,bonusMult,ladderState);bonusMult=rr.mult;win+=rr.total;cas+=rr.casc;st.bonusRounds++;let nt=tierFor(rr.gs);if(nt.rank>tier.rank){tier=nt;remaining=tier.rounds;bonusMult=tier.base;ladderState={current:tier.base,base:tier.base,progress:0,needed:2,max:tier.max,values:tier.ladder||null};st.upgrades++}else if(rr.gs>=4){remaining+=nt.retriggerRounds;st.retriggers++}}}
-    else {let b=makeBoard(ante),g=b.flat().filter(x=>x==='guardian').length;if(g>=4){st.bonusTriggers++;let tier=tierFor(g),remaining=tier.rounds,safety=0,bonusMult=tier.base,ladderState={current:tier.base,base:tier.base,progress:0,needed:2,max:tier.max,values:tier.ladder||null};while(remaining>0&&safety++<60){remaining--;let bb=makeBoard(ante,true);let candidates=bb.flatMap((row,r)=>row.map((sym,c)=>sym==='guardian'?-1:r*8+c)).filter(ix=>ix>=0);if(candidates.length){let ix=candidates[Math.floor(rnd()*candidates.length)];bb[Math.floor(ix/8)][ix%8]='guardian';}let rr=playBoard(bb,bet,ante,opts,true,tier,bonusMult,ladderState);bonusMult=rr.mult;win+=rr.total;cas+=rr.casc;st.bonusRounds++;let nt=tierFor(rr.gs);if(nt.rank>tier.rank){tier=nt;remaining=tier.rounds;bonusMult=tier.base;ladderState={current:tier.base,base:tier.base,progress:0,needed:2,max:tier.max,values:tier.ladder||null};st.upgrades++}else if(rr.gs>=4){remaining+=nt.retriggerRounds;st.retriggers++}}}else{let rr=playBoard(b,bet,ante,opts,false,null);win+=rr.total;cas+=rr.casc}}
-    // Match live gameplay: calibrate the entire paid-action award, then enforce the same max-win cap.
-    win=Math.min(win*payoutFactorForMode(id,ante),bet*MAX_WIN_MULTIPLIER);if(win>0)st.wins++;if(win>=bet*MAX_WIN_MULTIPLIER)st.caps++;st.returned+=win;st.cascades+=cas;
-   }catch(e){st.errors++;if(st.errorSamples.length<5)st.errorSamples.push(String(e&&e.stack||e))}}
-  const ids=mode==='mixed'?CAT.filter(x=>mix[x[0]]>0).map(x=>x[0]):[mode];if(mode==='mixed'){let weights=ids.map(id=>mix[id]);for(let i=0;i<n;i++){let x=rnd()*weights.reduce((a,b)=>a+b,0),j=0;while(j<weights.length-1&&x>=weights[j]){x-=weights[j];j++}one(ids[j])}}else for(let i=0;i<n;i++)one(mode);
-  const used=Object.values(stats).filter(x=>x.count),totW=used.reduce((a,x)=>a+x.wagered,0),totR=used.reduce((a,x)=>a+x.returned,0);return {seed,n,mode,stats:used,wagered:totW,returned:totR,rtp:100*totR/Math.max(1,totW),errors:used.reduce((a,x)=>a+x.errors,0)};
- }
- function refreshMix(){let sum=CAT.reduce((a,x)=>a+Math.max(0,Number(document.getElementById('mix-'+x[0]).value)||0),0);document.getElementById('mixTotal').textContent='Mix total: '+sum+'%'+(sum===100?' · valid':' · must equal 100%');document.getElementById('mixTotal').style.color=sum===100?'#8dffba':'#ff9c9c';}
- document.getElementById('mathSelfTest').onclick=()=>{
-  const status=document.getElementById('mathSelfTestStatus'),results=[];
-  const blank=()=>Array.from({length:6},()=>Array(8).fill('guardian'));
-  const expect=(name,condition,detail='')=>results.push({name,pass:!!condition,detail});
-  try{
-   let b=blank();for(let c=0;c<5;c++)b[0][c]='moon';
-   let cs=findClustersForBoard(b,s=>s,s=>s==='rune'||s==='guardian');
-   expect('5 connected symbols win',cs.length===1&&cs[0].cells.length===5,`found ${cs.length} cluster(s)`);
-   b=blank();for(let i=0;i<4;i++)b[0][i]='moon';cs=findClustersForBoard(b,s=>s,s=>s==='rune'||s==='guardian');
-   expect('4 connected symbols do not win',cs.length===0,`found ${cs.length} cluster(s)`);
-   b=blank();for(let i=0;i<5;i++)b[i][i]='moon';cs=findClustersForBoard(b,s=>s,s=>s==='rune'||s==='guardian');
-   expect('diagonal-only symbols do not connect',cs.length===0,`found ${cs.length} cluster(s)`);
-   b=blank();b[0][0]='moon';b[0][1]='moon';b[0][2]='wild';b[0][3]='wild';b[0][4]='wild';b[0][5]='star';b[0][6]='star';cs=findClustersForBoard(b,s=>s,s=>s==='rune'||s==='guardian');
-   expect('Wild substitution supports two distinct symbol clusters',cs.length===2&&cs.every(x=>x.cells.length===5),`found ${cs.length} cluster(s)`);
-   b=blank();for(let c=0;c<5;c++)b[0][c]='wild';cs=findClustersForBoard(b,s=>s,s=>s==='rune'||s==='guardian');
-   expect('Wild-only cluster pays once',cs.length===1&&cs[0].kind==='wild'&&cs[0].cells.length===5,`found ${cs.length} cluster(s)`);
-   expect('base payout formula',Math.abs(baseClusterPayout(10,.42,5)-4.2)<1e-9,`10 bet × Void Crystal value 0.42 × 5/5 = ${baseClusterPayout(10,.42,5)}`);
-   expect('qualified multiplier payout',Math.abs(finalClusterPayout(10,.42,5,3,true)-12.6)<1e-9,`expected 12.6, got ${finalClusterPayout(10,.42,5,3,true)}`);
-   expect('unqualified cluster is not multiplied',Math.abs(finalClusterPayout(10,.42,5,3,false)-4.2)<1e-9,`expected 4.2, got ${finalClusterPayout(10,.42,5,3,false)}`);
-   expect('Math Lab bonus cluster without adjacent rune is not multiplied',Math.abs(simulatorClusterPayout(10,.42,5,3,true,false,false)-4.2)<1e-9,`expected 4.2, got ${simulatorClusterPayout(10,.42,5,3,true,false,false)}`);
-   expect('Math Lab bonus cluster with adjacent rune receives multiplier once',Math.abs(simulatorClusterPayout(10,.42,5,3,true,false,true)-12.6)<1e-9,`expected 12.6, got ${simulatorClusterPayout(10,.42,5,3,true,false,true)}`);
-   expect('Math Lab bonus cluster with multiple adjacent runes does not stack multiplier',Math.abs(simulatorClusterPayout(10,.42,5,3,true,false,true)-12.6)<1e-9,'rune adjacency is a boolean qualification, not a stacking count');
-   expect('paid multiplier mode intentionally qualifies every cluster',Math.abs(simulatorClusterPayout(10,.42,5,3,false,true,false)-12.6)<1e-9,'paid multiplier mode keeps its documented all-cluster behavior');
-   expect('multiplier ladder sequence includes the accepted Epic levels',JSON.stringify(ladderValues(1000,50,[50,100,200,300,500,750,1000]))===JSON.stringify([50,100,200,300,500,750,1000])&&nextMultiplierValue([50,100,200,300,500,750,1000],50)===100,'Epic: ×50 → ×100 → ×200 → ×300 → ×500 → ×750 → ×1,000');
-   const ladderProbe={current:2,base:2,progress:0,needed:2,max:10,active:true,values:null};
-   expect('ladder waits for 2 winning cascades, then 3, then 4',(()=>{const q={...ladderProbe};if(stepLadderProgress(q)||q.current!==2||q.progress!==1)return false;if(!stepLadderProgress(q)||q.current!==4||q.needed!==3||q.progress!==0)return false;for(let i=0;i<2;i++)if(stepLadderProgress(q))return false;if(!stepLadderProgress(q)||q.current!==8||q.needed!==4)return false;for(let i=0;i<3;i++)if(stepLadderProgress(q))return false;return stepLadderProgress(q)&&q.current===10&&q.needed===5;})(),'progress carries forward; required winning cascades increase by one after each level');
-   expect('Epic ladder caps at ×1,000 and preserves exact custom levels',(()=>{const q={current:750,base:50,progress:0,needed:2,max:1000,active:true,values:[50,100,200,300,500,750,1000]};return stepLadderProgress(q)===false&&q.current===750&&q.progress===1&&stepLadderProgress(q)===true&&q.current===1000&&q.needed===3&&stepLadderProgress(q)===false&&q.current===1000;})(),'Epic multiplier cannot exceed ×1,000');
-   const tierCases=[[4,3,2,2,3],[5,5,4,5,5],[6,6,8,8,6],[8,8,50,1000,8]];
-   expect('canonical Guardian tiers match rounds, multipliers, and retriggers',tierCases.every(([g,r,b,m,rt])=>{const t=canonicalTierForGuardians(g);return t.rounds===r&&t.baseMult===b&&t.maxMult===m&&t.retriggerRounds===rt;}),'checks Normal, Hyper, Mythic, and Epic');
-   expect('canonical feature prices match the requested configuration',FEATURE_COSTS.multi10===10&&FEATURE_COSTS.multi50===30&&FEATURE_COSTS.multi200===75&&FEATURE_COSTS.extreme===10&&FEATURE_COSTS.buyNormal===2.25&&FEATURE_COSTS.buyHigher===4.5&&FEATURE_COSTS.buyMythic===8,'Requested prices: ×10 costs 10×, ×50 costs 30×, ×200 costs 75×; bonus buys 2.25×/4.5×/8×; Extreme Spin 10×');
-   expect('multiplier labels and values match requested modes',SINGLE_SPINS['multi-10'].mult===10&&SINGLE_SPINS['multi-50'].mult===50&&SINGLE_SPINS['multi-200'].mult===200&&document.querySelector('#multi10 strong')?.textContent.includes('×10')&&document.querySelector('#multi50 strong')?.textContent.includes('×50')&&document.querySelector('#multi200 strong')?.textContent.includes('×200'),'labels and runtime multiplier values agree');
-   expect('payout calibration factors exist for every paid mode',CAT.every(([id])=>Number.isFinite(PAYOUT_FACTORS[id==='ante'?'guardianBoost':id])&&PAYOUT_FACTORS[id==='ante'?'guardianBoost':id]>0),'all nine paid modes have positive finite factors');
-   expect('live and simulator use the same mode-level payout factor',payoutFactorForMode('multi10')===PAYOUT_FACTORS.multi10&&payoutFactorForMode('multi-10')===PAYOUT_FACTORS.multi10&&payoutFactorForMode('multi-50')===PAYOUT_FACTORS.multi50&&payoutFactorForMode('multi-200')===PAYOUT_FACTORS.multi200&&payoutFactorForMode('extreme-spin')===PAYOUT_FACTORS['extreme-spin']&&payoutFactorForMode('standard',true)===PAYOUT_FACTORS.guardianBoost&&payoutFactorForMode('ante')===PAYOUT_FACTORS.guardianBoost,'same shared factor resolver is called by both paths');
-   expect('Extreme Spin no-bonus outcome resolves the visible board before returning',/const noBonusBoardResult=await runBoard\(bet,1,false,10,true,false\)/.test(spinCore.toString())&&/ordinary cluster evaluation/.test(spinCore.toString()),'no-bonus outcome still evaluates clusters and cascades');
-   expect('Extreme Spin outcome odds total 100%',Math.abs(Object.values(EXTREME_ODDS).reduce((a,x)=>a+x,0)-1)<1e-12,'50% no bonus + 30% Normal + 15% Mythic + 5% Epic');
-   expect('Math Lab no-bonus Extreme Spin resolves an ordinary board',(simulate.toString().includes("if(x<EXTREME_ODDS.nothing){/* No bonus still resolves an ordinary board in the live game. */const noBonusBoard=makeBoard(false,false);const noBonusResult=playBoard(noBonusBoard,bet,false,opts,false,null)")),'simulator no-bonus branch runs board/cascade resolution and records its return');
-   expect('Extreme Spin odds are displayed consistently',document.querySelector('#extremeSpin small')?.textContent.includes('50% nothing')&&document.querySelector('#extremeSpin small')?.textContent.includes('30% Normal')&&document.querySelector('#extremeSpin small')?.textContent.includes('15% Mythic')&&document.querySelector('#extremeSpin small')?.textContent.includes('5% Epic'),'visible feature text matches canonical odds');
-   expect('global max-win cap is 100,000×',MAX_WIN_MULTIPLIER===100000&&document.querySelector('#maxWinFinalValue')?.textContent.includes('100,000×'),'cap constant and player-facing label agree');
-   expect('visible feature prices match shared configuration',document.querySelector('#normalPrice')?.textContent.includes(String(FEATURE_COSTS.buyNormal))&&document.querySelector('#higherPrice')?.textContent.includes(String(FEATURE_COSTS.buyHigher))&&document.querySelector('#mythicPrice')?.textContent.includes(String(FEATURE_COSTS.buyMythic))&&document.querySelector('#extremePrice')?.textContent.includes(String(FEATURE_COSTS.extreme)),'UI prices match canonical config at current bet');
-   const fails=results.filter(x=>!x.pass);status.textContent=results.map(x=>`${x.pass?'PASS':'FAIL'} · ${x.name}${x.detail?' — '+x.detail:''}`).join('\n');status.style.color=fails.length?'#ff9c9c':'#8dffba';status.textContent+=`\n\n${results.length-fails.length}/${results.length} deterministic checks passed.`;
-  }catch(e){status.textContent='CHECK ERROR: '+String(e&&e.stack||e);status.style.color='#ff9c9c'}
- };
- CAT.forEach(x=>document.getElementById('mix-'+x[0]).addEventListener('input',refreshMix));refreshMix();
- document.getElementById('mathRun').onclick=async()=>{let btn=document.getElementById('mathRun'),status=document.getElementById('mathStatus'),out=document.getElementById('mathResults');let n=Number(document.getElementById('mathSpins').value)||100000,seed=Number(document.getElementById('mathSeed').value)||1,mode=document.getElementById('mathMode').value;let mix=Object.fromEntries(CAT.map(x=>[x[0],Math.max(0,Number(document.getElementById('mix-'+x[0]).value)||0)]));if(mode==='mixed'&&CAT.reduce((a,x)=>a+mix[x[0]],0)!==100){status.textContent='Fix the mix first: category percentages must total exactly 100%.';return}btn.disabled=true;status.textContent='Simulating '+n.toLocaleString()+' paid actions…';out.textContent='Running seeded simulation. Please wait.';await new Promise(r=>setTimeout(r,30));try{let r=simulate(n,seed,mode,mix);let lines=[`PAID ACTIONS SIMULATED: ${n.toLocaleString()}`,`SEED: ${r.seed} · PLAN: ${mode}`,`TOTAL WAGERED: ${r.wagered.toLocaleString('en-IN',{maximumFractionDigits:1})} VC`,`TOTAL RETURNED: ${r.returned.toLocaleString('en-IN',{maximumFractionDigits:1})} VC`,`COMBINED RTP: ${r.rtp.toFixed(3)}%`,`TOTAL SIMULATION ERRORS: ${r.errors}`,``,`CATEGORY BREAKDOWN (RTP = category return / category wager)`];for(let x of r.stats){lines.push('',`${x.name.toUpperCase()}: ${x.count.toLocaleString()} actions`, `  Wagered: ${x.wagered.toLocaleString('en-IN',{maximumFractionDigits:1})} VC · Returned: ${x.returned.toLocaleString('en-IN',{maximumFractionDigits:1})} VC · RTP: ${(100*x.returned/Math.max(1,x.wagered)).toFixed(3)}%`, `  Hit rate: ${(100*x.wins/Math.max(1,x.count)).toFixed(2)}% · Cascades: ${x.cascades} · Bonus triggers: ${x.bonusTriggers} · Bonus rounds: ${x.bonusRounds} · Retriggers: ${x.retriggers} · Upgrades: ${x.upgrades} · Zap: ${x.zap} · Cap hits: ${x.caps} · Errors: ${x.errors}`,...(x.errorSamples||[]).map((e,i)=>`  ERROR SAMPLE ${i+1}: ${e}`))}lines.push('', 'LIMITATION: Mode-level payout calibration is applied in both live gameplay and this simulator. The simulator still uses a separate seeded random stream and independently implemented bonus sequencing, so this is diagnostic evidence, not proof of exact live-game parity or certified RTP.');out.textContent=lines.join('\n');status.textContent='Run complete. Save the seed and category mix with the report.'}catch(e){status.textContent='Simulation failed: '+e.message;out.textContent=String(e.stack||e)}finally{btn.disabled=false}};
-})();
 
-// Startup board recovery: repaint once the browser has completed the initial layout.
-requestAnimationFrame(()=>{try{if(board&&board.length===R&&$('board')){render();$('board').style.visibility='visible';}}catch(err){console.error('Initial board render recovery failed:',err);}});
 
-// Stake Engine Bet Replay & RGS Consumer Architecture
-const stakeRoundHistory = [];
 
-function recordRoundHistory(entry) {
-  stakeRoundHistory.unshift(entry);
-  if (stakeRoundHistory.length > 30) stakeRoundHistory.pop();
-  updateReplayHistoryUI();
-}
 
-function updateReplayHistoryUI() {
-  const container = document.getElementById('replayHistoryList');
-  if (!container) return;
-  if (stakeRoundHistory.length === 0) {
-    container.innerHTML = '<div style="color:#888;font-size:11px;padding:6px;text-align:center">No spins completed in this session yet.</div>';
-    return;
-  }
-  container.innerHTML = stakeRoundHistory.map(r => `
-    <div style="display:flex;justify-content:space-between;align-items:center;padding:6px 8px;border-bottom:1px solid #251c36;font-family:monospace;font-size:11px">
-      <div>
-        <span style="color:#e8c879;font-weight:bold">#${r.id.substring(0, 14)}...</span>
-        <span style="color:#aaa;margin-left:6px">${r.mode} (${r.bet} VC)</span>
-      </div>
-      <div style="display:flex;align-items:center;gap:8px">
-        <span style="color:${r.win > 0 ? '#4ade80' : '#888'};font-weight:bold">${r.win > 0 ? '+' + r.win.toFixed(1) + ' VC' : '0 VC'}</span>
-        <button onclick="window.StakeEngine.replayRound('${r.id}')" style="padding:3px 8px;background:#352047;border:1px solid #b89bfb;color:#fce4a6;border-radius:5px;cursor:pointer;font-size:10px">Watch</button>
-      </div>
-    </div>
-  `).join('');
-}
 
-async function playReplayRound(round) {
-  if (busy) return;
-  const replayModal = document.getElementById('replayModal');
-  if (replayModal) replayModal.classList.remove('show');
-  busy = true;
-  toast('REPLAYING ROUND ' + round.id);
-  $('status').textContent = 'REPLAY IN PROGRESS · ROUND ' + round.id;
-  $('action').textContent = 'Viewing historical round';
-  
-  // Restore initial board
-  board = round.initialBoard.map(row => row.map(s => ({ ...s })));
-  render();
-  await animateSpin(800);
-  await wait(400);
-  
-  // Step through cascades
-  await runBoard(round.bet, 1, false, 10, true, false);
-  
-  $('status').textContent = 'REPLAY FINISHED · WIN: ' + round.win.toFixed(1) + ' VC';
-  $('action').textContent = 'Round replay complete';
-  toast('Replay finished: ' + round.win.toFixed(1) + ' VC');
-  busy = false;
-  ui();
-}
 
-window.StakeEngine = {
-  version: '1.0.4',
-  specification: 'Stake Engine v2.0',
-  replayRound: (id) => {
-    const found = stakeRoundHistory.find(r => r.id === id);
-    if (found) {
-      playReplayRound(found);
-    } else {
-      toast('Round ID ' + id + ' not found in session memory.');
-    }
-  },
-  playOutcome: async (outcomePayload) => {
-    if (busy) return;
-    toast('CONSUMING RGS OUTCOME');
-    busy = true;
-    board = outcomePayload.board.map(row => row.map(id => S.find(s => s.id === id) || S[0]));
-    render();
-    await animateSpin(1000);
-    balance += (outcomePayload.payout || 0);
-    last = outcomePayload.payout || 0;
-    busy = false;
-    ui();
-  },
-  getHistory: () => stakeRoundHistory
-};
 
-// UI hookups for Replay button & modal
-document.getElementById('replayBtn').onclick = () => {
-  document.getElementById('replayModal').classList.add('show');
-  updateReplayHistoryUI();
-};
-document.getElementById('replayClose').onclick = () => {
-  document.getElementById('replayModal').classList.remove('show');
-};
-document.getElementById('replaySubmitBtn').onclick = () => {
-  const val = document.getElementById('replayInput').value.trim();
-  if (val) window.StakeEngine.replayRound(val);
-};
 
-// URL query parameter check for ?replay= or ?roundId=
-window.addEventListener('DOMContentLoaded', () => {
-  const params = new URLSearchParams(window.location.search);
-  const replayId = params.get('replay') || params.get('roundId');
-  if (replayId) {
-    setTimeout(() => window.StakeEngine.replayRound(replayId), 1000);
-  }
-});
 
-window.addEventListener('pageshow',()=>{try{if($('board')&&!$('board').children.length){if(!board||!board.length)board=newBoard();render();}}catch(err){console.error('Board pageshow recovery failed:',err);}});
-})();
-</script></body></html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  "}]}  
