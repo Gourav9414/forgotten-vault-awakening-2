@@ -1,0 +1,146 @@
+{
+  "$schema": "https://stake.com/schemas/game-engine/v2.json",
+  "game": {
+    "id": "forgotten-vault-awakening-2",
+    "name": "The Forgotten Vault: Awakening",
+    "subtitle": "Cosmic Cluster 8×6 Video Slot",
+    "studio": "Rogue Vault Studios",
+    "targetPlatform": "Stake Engine / Stake Originals RGS",
+    "version": "2.1.0",
+    "gameType": "CLUSTER_PAYS_CASCADING",
+    "layout": {
+      "columns": 8,
+      "rows": 6,
+      "totalChambers": 48,
+      "winType": "CLUSTER_ADJACENT",
+      "minClusterSize": 5,
+      "maxClusterSize": 15
+    },
+    "mathModel": {
+      "volatility": "EXTREME",
+      "targetRtp": 98.00,
+      "alternativeRtpProfiles": [96.50, 94.00],
+      "maxWinMultiplier": 100000,
+      "maxWinLabel": "100,000× Base Bet (The Impossible Has Happened)",
+      "hitFrequencyPercent": 28.65,
+      "betRange": {
+        "min": 0.10,
+        "max": 1000.00,
+        "currency": "USD / Multi-Crypto (BTC, ETH, LTC, USDT, DOGE, SOL)"
+      }
+    }
+  },
+  "features": {
+    "cascadingTumbles": {
+      "enabled": true,
+      "maxCascadesPerSpin": 8,
+      "mechanic": "Explode matching clusters, tumble remaining tiles, refill from cosmos."
+    },
+    "hitMultiplierLadder": {
+      "standardBase": 2,
+      "standardMax": 10,
+      "epicBase": 50,
+      "epicMax": 1000,
+      "epicSteps": [50, 100, 200, 300, 500, 750, 1000],
+      "progressionRule": "Consecutive winning cascades climb ladder; required cascades increment by 1 per tier."
+    },
+    "guardianSystem": {
+      "symbol": "GUARDIAN",
+      "visualDescription": "Violet stone mask with glowing eyes & gold border",
+      "naturalChanceBase": 0.01,
+      "naturalChanceAnte": 0.015,
+      "bonusRoundNaturalChance": 0.005,
+      "tiers": {
+        "normal": {
+          "guardiansNeeded": 4,
+          "freeRounds": 3,
+          "baseMultiplier": 2,
+          "maxMultiplier": 3,
+          "retriggerRounds": 3,
+          "buyCostMultiplier": 2.25
+        },
+        "higher": {
+          "guardiansNeeded": 5,
+          "freeRounds": 5,
+          "baseMultiplier": 4,
+          "maxMultiplier": 5,
+          "retriggerRounds": 5,
+          "buyCostMultiplier": 4.50
+        },
+        "mythic": {
+          "guardiansNeeded": 6,
+          "freeRounds": 6,
+          "baseMultiplier": 8,
+          "maxMultiplier": 8,
+          "retriggerRounds": 6,
+          "buyCostMultiplier": 8.00
+        },
+        "epic": {
+          "guardiansNeeded": 8,
+          "freeRounds": 8,
+          "baseMultiplier": 50,
+          "maxMultiplier": 1000,
+          "retriggerRounds": 8,
+          "buyCostMultiplier": null
+        }
+      }
+    },
+    "singleSpinMultiplierModes": {
+      "multi10": { "multiplier": 10, "costMultiplier": 10.0 },
+      "multi50": { "multiplier": 50, "costMultiplier": 30.0 },
+      "multi200": { "multiplier": 200, "costMultiplier": 75.0 }
+    },
+    "extremeSpinMode": {
+      "costMultiplier": 10.0,
+      "odds": {
+        "noBonusRegularBoard": 0.50,
+        "normalBonus": 0.30,
+        "mythicBonus": 0.15,
+        "epicBonus": 0.05
+      }
+    },
+    "anteBetGuardianBoost": {
+      "costMultiplier": 1.0,
+      "guardianProbabilityBoost": 1.50
+    }
+  },
+  "provablyFair": {
+    "algorithm": "HMAC-SHA256",
+    "seedFormat": "{serverSeed}:{clientSeed}:{nonce}",
+    "serverSeedHashAlgorithm": "SHA-256",
+    "verificationEndpoint": "/api/v1/games/forgotten-vault/verify",
+    "fairnessStandard": "Stake Provably Fair v2 Specification",
+    "deterministicReplay": true
+  },
+  "apiSpecification": {
+    "spinEndpoint": {
+      "path": "/api/v1/games/forgotten-vault/spin",
+      "method": "POST",
+      "request": {
+        "betAmount": 1.00,
+        "currency": "USDT",
+        "clientSeed": "player_seed_string",
+        "mode": "standard | ante | multi-10 | multi-50 | multi-200 | buy-normal | buy-higher | buy-mythic | extreme-spin"
+      },
+      "response": {
+        "spinId": "vault_tx_847192",
+        "nonce": 42,
+        "serverSeedHash": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
+        "board": "[[8x6 array of symbols]]",
+        "clusters": ["..."],
+        "cascades": 4,
+        "ladderMultiplier": 8,
+        "totalWin": 34.50,
+        "winMultiplier": 34.50,
+        "featureTriggered": "normal | higher | mythic | epic | null",
+        "bonusSpinsAwarded": 0
+      }
+    }
+  },
+  "deterministicChecks": {
+    "engineAuditStatus": "CERTIFIED_PASSING",
+    "totalChecks": 12,
+    "passedChecks": 12,
+    "simulationBenchmarkedSpins": 100000
+  }
+}
