@@ -3,31 +3,34 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>The Forgotten Vault: Awakening</title>
+    <title>Forgotten Vault: Awakening</title>
     <style>
+      @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700;800;900&display=swap');
+
       :root {
-        --bg-1: #080b14;
-        --bg-2: #120d1f;
-        --bg-3: #1f1134;
-        --gold-1: #f8e6a9;
-        --gold-2: #f3c765;
-        --gold-3: #d79e41;
-        --gold-4: #9d6423;
-        --purple-1: #c391ff;
-        --purple-2: #8a5cff;
-        --purple-3: #432f76;
-        --blue-1: #6adaff;
-        --blue-2: #2e92ff;
-        --cyan-1: #b6f9ff;
-        --pink-1: #ff63e0;
-        --green-1: #7efad6;
-        --green-2: #2fd6a3;
-        --red-1: #ff5e63;
-        --panel: rgba(17, 12, 23, 0.96);
-        --panel-2: rgba(24, 16, 32, 0.96);
-        --panel-3: rgba(12, 10, 19, 0.96);
-        --line: rgba(244, 191, 80, 0.7);
-        --muted: rgba(215, 200, 255, 0.82);
+        --bg-0: #050910;
+        --bg-1: #0a0c18;
+        --bg-2: #160f2d;
+        --bg-3: #1e1737;
+        --gold-1: #f9efbf;
+        --gold-2: #f3c96a;
+        --gold-3: #d49c3d;
+        --gold-4: #956828;
+        --purple-1: #c39bff;
+        --purple-2: #8c5ef7;
+        --purple-3: #4d2f86;
+        --blue-1: #7ddcff;
+        --blue-2: #4a86ff;
+        --cyan-1: #d9fbff;
+        --pink-1: #ff6ae4;
+        --green-1: #8cf7d5;
+        --green-2: #2fe0ae;
+        --red-1: #ff5b64;
+        --line: rgba(245, 200, 106, 0.9);
+        --panel: rgba(14, 10, 22, 0.84);
+        --panel-soft: rgba(23, 16, 35, 0.9);
+        --panel-deep: rgba(6, 8, 16, 0.94);
+        --text-soft: rgba(216, 197, 255, 0.82);
       }
 
       * { box-sizing: border-box; }
@@ -35,45 +38,54 @@
       html, body {
         margin: 0;
         min-height: 100%;
-        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-        background:
-          radial-gradient(circle at 18% 12%, rgba(168, 96, 255, 0.42), transparent 16%),
-          radial-gradient(circle at 78% 16%, rgba(85, 166, 255, 0.38), transparent 19%),
-          radial-gradient(circle at 55% 75%, rgba(255, 100, 220, 0.12), transparent 24%),
-          linear-gradient(180deg, #130d1f 0%, #0a0d18 40%, #060910 100%);
+        width: 100%;
+        background: var(--bg-0);
         color: var(--gold-1);
+        font-family: 'Inter', sans-serif;
       }
 
-      body::before {
-        content: "";
+      body {
+        overflow-x: hidden;
+      }
+
+      .scene-bg {
         position: fixed;
+        inset: 0;
+        z-index: 0;
+        background:
+          radial-gradient(circle at 50% 12%, rgba(155, 97, 255, 0.38), transparent 18%),
+          radial-gradient(circle at 15% 55%, rgba(42, 126, 255, 0.18), transparent 18%),
+          radial-gradient(circle at 82% 58%, rgba(255, 97, 203, 0.16), transparent 16%),
+          linear-gradient(180deg, rgba(9, 7, 17, 0.15), rgba(5, 7, 15, 0.38));
+      }
+
+      .scene-bg::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image: url('assets/cosmic-vault-cinematic.svg');
+        background-size: cover;
+        background-position: center center;
+        filter: saturate(1.2) brightness(0.9) contrast(1.12);
+        opacity: 0.97;
+      }
+
+      .scene-bg::after {
+        content: "";
+        position: absolute;
         inset: 0;
         background:
-          radial-gradient(circle at 20% 15%, rgba(255,255,255,0.86), transparent 1.5px),
-          radial-gradient(circle at 30% 32%, rgba(169, 120, 255, 0.8), transparent 1.5px),
-          radial-gradient(circle at 60% 22%, rgba(255,255,255,0.75), transparent 1.5px),
-          radial-gradient(circle at 78% 18%, rgba(113, 196, 255, 0.7), transparent 1.5px),
-          radial-gradient(circle at 70% 60%, rgba(255,255,255,0.75), transparent 1.5px),
-          radial-gradient(circle at 88% 28%, rgba(255, 183, 246, 0.8), transparent 2px),
-          radial-gradient(circle at 48% 70%, rgba(255,255,255,0.72), transparent 1.6px);
-        opacity: 0.9;
-        pointer-events: none;
-      }
-
-      body::after {
-        content: "";
-        position: fixed;
-        inset: 0;
-        background: linear-gradient(180deg, transparent 0%, rgba(5, 8, 16, 0.18) 100%);
-        pointer-events: none;
+          linear-gradient(180deg, rgba(4, 7, 15, 0.14) 0%, rgba(4, 7, 15, 0.28) 100%),
+          radial-gradient(circle at 50% 72%, rgba(101, 42, 118, 0.2), transparent 28%);
       }
 
       .app {
         position: relative;
         z-index: 1;
-        max-width: 1500px;
-        margin: 0 auto;
-        padding: 18px 14px 26px;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        padding: 10px 14px 18px;
       }
 
       .topbar {
@@ -81,247 +93,271 @@
         align-items: center;
         justify-content: space-between;
         gap: 18px;
-        padding: 4px 20px 8px 12px;
+        padding: 8px 20px 0 14px;
       }
 
-      .brand {
+      .brand-wrap {
+        flex: 1;
         display: flex;
+        justify-content: center;
         align-items: center;
-        gap: 14px;
+        min-height: 130px;
+        position: relative;
       }
 
-      .brand-mark {
-        width: 72px;
-        height: 72px;
-        border-radius: 16px;
-        border: 2px solid rgba(247, 213, 120, 0.9);
-        display: grid;
-        place-items: center;
-        background: radial-gradient(circle at 30% 30%, rgba(204, 160, 255, 0.26), rgba(18, 13, 30, 0.96) 50%, rgba(8, 8, 16, 0.98));
-        box-shadow: 0 0 0 2px rgba(232, 181, 83, 0.18), 0 0 26px rgba(138, 92, 255, 0.38);
-        font-size: 34px;
-        text-shadow: 0 0 18px rgba(255, 210, 96, 0.8);
+      .brand-art {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        top: 0;
+        width: clamp(300px, 46vw, 760px);
+        height: 146px;
+        pointer-events: none;
+        opacity: 0.9;
+        filter: drop-shadow(0 0 18px rgba(160, 109, 255, 0.45));
       }
 
-      .brand-copy {
-        display: flex;
-        flex-direction: column;
-        gap: 2px;
+      .brand-art::before,
+      .brand-art::after {
+        content: "";
+        position: absolute;
+        inset: 34px 18px 18px;
+        border-radius: 50%;
+        background: radial-gradient(circle at center, rgba(241, 191, 89, 0.14), rgba(72, 34, 94, 0.08) 40%, transparent 72%);
+        filter: blur(12px);
       }
 
-      .brand-copy h1 {
-        margin: 0;
-        font-size: clamp(28px, 2.4vw, 40px);
+      .brand-art::after {
+        inset: 4px 30px 42px;
+        border-radius: 50%;
+        border: 2px solid rgba(255, 210, 118, 0.22);
+        background: none;
+        box-shadow: 0 0 28px rgba(138, 94, 255, 0.25);
+      }
+
+      .logo {
+        position: relative;
+        z-index: 1;
+        text-align: center;
+        text-transform: uppercase;
+        font-family: 'Cinzel', serif;
+        color: transparent;
+        background: linear-gradient(180deg, #fff6d4 0%, #f5d27a 12%, #f3b85a 24%, #ff7fce 52%, #8d63ff 72%, #f4d7a0 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        text-shadow: 0 0 28px rgba(129, 94, 255, 0.35);
+        letter-spacing: 0.08em;
+      }
+
+      .logo .title {
+        display: block;
+        font-size: clamp(24px, 3vw, 60px);
         line-height: 0.85;
-        letter-spacing: 0.16em;
-        text-transform: uppercase;
         font-weight: 900;
-        color: var(--gold-1);
-        text-shadow: 0 0 18px rgba(255, 168, 70, 0.65), 0 0 28px rgba(162, 107, 255, 0.6);
+        letter-spacing: 0.06em;
       }
 
-      .brand-copy small {
-        margin-left: 4px;
-        letter-spacing: 0.3em;
-        text-transform: uppercase;
-        color: rgba(225, 211, 254, 0.9);
-        font-size: 10px;
+      .logo .title .small {
+        display: block;
+        font-size: 0.28em;
+        letter-spacing: 0.32em;
+        margin-top: 8px;
       }
 
-      .header-actions {
+      .logo .subtitle {
+        display: block;
+        margin-top: 10px;
+        font-size: clamp(10px, 1.1vw, 16px);
+        letter-spacing: 0.48em;
+        color: #d7cbff;
+      }
+
+      .top-controls {
         display: flex;
         align-items: center;
-        gap: 12px;
+        gap: 10px;
+        padding-top: 12px;
       }
 
-      .pill {
-        min-width: 106px;
-        height: 42px;
-        border-radius: 12px;
-        border: 2px solid rgba(235, 196, 100, 0.9);
-        background: linear-gradient(180deg, rgba(38, 18, 49, 0.95), rgba(14, 10, 20, 0.96));
-        box-shadow: inset 0 0 12px rgba(153, 108, 255, 0.16), 0 0 18px rgba(161, 106, 255, 0.2);
-        color: var(--gold-1);
-        font-weight: 800;
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
+      .toolbar-btn {
         display: inline-flex;
         align-items: center;
         justify-content: center;
         gap: 8px;
-        font-size: 12px;
+        height: 38px;
+        min-width: 110px;
+        border-radius: 14px;
+        background: linear-gradient(180deg, rgba(34, 22, 43, 0.9), rgba(14, 11, 20, 0.96));
+        color: var(--gold-1);
+        border: 2px solid rgba(240, 193, 90, 0.8);
+        box-shadow: inset 0 0 12px rgba(144, 102, 255, 0.16), 0 0 14px rgba(116, 83, 240, 0.11);
+        font-size: 11px;
+        font-weight: 900;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
       }
 
-      .pill .icon {
+      .toolbar-btn .glyph {
+        width: 20px;
+        height: 20px;
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        width: 18px;
-        height: 18px;
-        border-radius: 6px;
-        background: rgba(244, 192, 86, 0.12);
-        border: 1px solid rgba(247, 203, 97, 0.65);
+        border-radius: 7px;
+        background: rgba(255, 202, 97, 0.12);
+        border: 1px solid rgba(255, 211, 118, 0.7);
+        font-size: 11px;
+        color: var(--gold-2);
       }
 
-      .pill.settings {
-        min-width: 48px;
-        width: 48px;
+      .toolbar-btn.menu {
+        width: 44px;
+        min-width: 44px;
+        padding: 0;
       }
 
-      .layout {
+      .game-shell {
         display: grid;
         grid-template-columns: 260px minmax(0, 1fr) 260px;
-        gap: 16px;
+        gap: 18px;
         align-items: start;
+        width: min(1500px, 100%);
+        margin: 0 auto;
+        padding-top: 6px;
       }
 
       .panel {
-        background: linear-gradient(180deg, rgba(20, 14, 28, 0.97), rgba(10, 9, 16, 0.97));
-        border: 2px solid rgba(232, 191, 84, 0.8);
-        border-radius: 16px;
-        box-shadow: inset 0 0 18px rgba(125, 88, 255, 0.08), 0 0 22px rgba(118, 82, 250, 0.18);
+        position: relative;
+        background: linear-gradient(180deg, rgba(15, 10, 24, 0.9), rgba(10, 9, 18, 0.95));
+        border: 2px solid rgba(245, 193, 76, 0.82);
+        border-radius: 18px;
+        box-shadow: inset 0 0 18px rgba(162, 119, 255, 0.14), 0 0 18px rgba(148, 96, 255, 0.16);
         overflow: hidden;
       }
 
-      .panel-title {
+      .panel::before {
+        content: "";
+        position: absolute;
+        inset: 8px;
+        border: 1px solid rgba(246, 211, 116, 0.1);
+        border-radius: 12px;
+        pointer-events: none;
+      }
+
+      .panel-header {
         margin: 0;
-        padding: 12px 12px 8px;
+        padding: 16px 14px 10px;
         font-size: 14px;
         letter-spacing: 0.18em;
         text-transform: uppercase;
-        font-weight: 900;
         color: var(--gold-1);
+        font-weight: 900;
       }
 
-      .guardian-list {
-        padding: 0 8px 12px;
+      .guardians {
+        padding: 0 10px 12px;
       }
 
       .guardian-item {
         display: grid;
-        grid-template-columns: 34px 1fr;
+        grid-template-columns: 36px minmax(0, 1fr);
         gap: 10px;
         align-items: center;
-        background: linear-gradient(180deg, rgba(27, 16, 37, 0.94), rgba(12, 10, 18, 0.95));
-        border: 1px solid rgba(230, 193, 89, 0.4);
-        border-radius: 12px;
-        padding: 8px 10px;
         min-height: 58px;
         margin-bottom: 8px;
+        padding: 8px 10px;
+        border-radius: 12px;
+        border: 1px solid rgba(238, 196, 92, 0.36);
+        background: linear-gradient(180deg, rgba(24, 16, 36, 0.94), rgba(11, 10, 17, 0.96));
+        box-shadow: inset 0 0 12px rgba(147, 101, 255, 0.09);
       }
 
       .guardian-item:last-child { margin-bottom: 0; }
 
-      .guardian-count {
-        width: 30px;
-        height: 30px;
+      .guardian-badge {
+        width: 32px;
+        height: 32px;
         border-radius: 50%;
-        background: radial-gradient(circle at 30% 30%, #f9f0bf, #e0b550 52%, #8f5a25 100%);
-        border: 2px solid rgba(255, 214, 122, 0.85);
         display: grid;
         place-items: center;
-        color: #2a130b;
         font-weight: 900;
-        box-shadow: 0 0 12px rgba(255, 179, 76, 0.42), inset 0 0 8px rgba(255,255,255,0.22);
+        color: rgba(28, 16, 10, 0.9);
+        background: radial-gradient(circle at 30% 30%, #fefae2, #e7bb5d 52%, #8d5726 100%);
+        border: 2px solid rgba(255, 211, 116, 0.85);
+        box-shadow: 0 0 15px rgba(255, 179, 82, 0.28), inset 0 0 8px rgba(255, 255, 255, 0.2);
       }
 
-      .guardian-meta {
+      .guardian-copy {
         display: flex;
         flex-direction: column;
         gap: 2px;
+        min-width: 0;
       }
 
-      .guardian-meta strong {
+      .guardian-copy strong {
         font-size: 11px;
         letter-spacing: 0.12em;
         text-transform: uppercase;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
 
-      .guardian-meta small {
+      .guardian-copy small {
         font-size: 8px;
         letter-spacing: 0.08em;
-        color: var(--muted);
+        color: var(--text-soft);
         text-transform: uppercase;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
 
-      .machine-wrap {
+      .center-stack {
         display: flex;
         flex-direction: column;
-      }
-
-      .machine-header {
-        text-align: center;
-        padding: 2px 4px 8px;
-      }
-
-      .hero-title {
-        margin: 0;
-        font-size: clamp(34px, 4vw, 80px);
-        line-height: 0.9;
-        letter-spacing: 0.07em;
-        font-weight: 900;
-        text-transform: uppercase;
-        color: transparent;
-        background: linear-gradient(180deg, #fbe7a5 0%, #f0bf5d 18%, #ff9c2f 35%, #d72dff 54%, #7b48ff 75%, #f2e5bc 100%);
-        -webkit-background-clip: text;
-        background-clip: text;
-        text-shadow: 0 0 18px rgba(255, 165, 58, 0.42), 0 0 30px rgba(119, 90, 255, 0.45);
-      }
-
-      .hero-title .sub {
-        display: block;
-        font-size: 0.23em;
-        letter-spacing: 0.2em;
-        margin-top: 8px;
-      }
-
-      .hero-title .small {
-        display: block;
-        font-size: 0.2em;
-        letter-spacing: 0.34em;
-        margin-top: 8px;
+        gap: 14px;
       }
 
       .machine {
         position: relative;
         border-radius: 22px;
-        border: 3px solid rgba(233, 191, 89, 0.9);
-        background: linear-gradient(180deg, rgba(22, 16, 35, 0.9), rgba(8, 10, 15, 0.96));
-        box-shadow: 0 0 0 2px rgba(233, 180, 75, 0.18), 0 0 24px rgba(141, 92, 255, 0.28), inset 0 0 26px rgba(90, 47, 131, 0.44);
-        overflow: hidden;
+        border: 3px solid rgba(244, 197, 98, 0.9);
+        background: linear-gradient(180deg, rgba(21, 15, 31, 0.78), rgba(8, 10, 16, 0.9));
+        box-shadow: insets 0 0 26px rgba(71, 152, 255, 0.08), 0 0 26px rgba(164, 103, 255, 0.18), 0 0 0 2px rgba(255, 208, 116, 0.12);
         padding: 18px;
+        min-height: 720px;
       }
 
-      .machine::before,
-      .machine::after {
+      .machine::before {
         content: "";
         position: absolute;
         inset: 16px;
-        border-radius: 18px;
-        border: 2px solid rgba(255, 211, 126, 0.12);
+        border-radius: 16px;
+        border: 2px solid rgba(255, 211, 127, 0.14);
         pointer-events: none;
       }
 
-      #board {
+      .board {
         position: relative;
         display: grid;
         grid-template-columns: repeat(8, minmax(0, 1fr));
         gap: 8px;
-        min-height: 620px;
         padding: 12px;
+        min-height: 620px;
         border-radius: 18px;
-        background: linear-gradient(180deg, rgba(28, 17, 39, 0.9), rgba(12, 10, 18, 0.96));
-        border: 2px solid rgba(239, 197, 92, 0.78);
-        box-shadow: inset 0 0 20px rgba(104, 72, 199, 0.22), inset 0 0 28px rgba(22, 32, 54, 0.4);
+        background: linear-gradient(180deg, rgba(22, 16, 34, 0.9), rgba(8, 9, 15, 0.94));
+        border: 2px solid rgba(249, 203, 98, 0.72);
+        box-shadow: inset 0 0 25px rgba(115, 89, 255, 0.14), inset 0 0 16px rgba(23, 47, 95, 0.28);
       }
 
       .tile {
         position: relative;
-        min-height: 82px;
+        min-height: 86px;
         border-radius: 16px;
-        border: 2px solid rgba(239, 198, 101, 0.8);
-        background: linear-gradient(180deg, rgba(17, 11, 27, 0.96), rgba(28, 17, 39, 0.96));
-        box-shadow: inset 0 0 18px rgba(86, 59, 159, 0.62), 0 0 14px rgba(118, 74, 255, 0.18);
+        border: 2px solid rgba(241, 190, 91, 0.82);
+        background: linear-gradient(135deg, rgba(20, 17, 30, 0.96), rgba(18, 13, 23, 0.96));
+        box-shadow: inset 0 0 16px rgba(97, 76, 196, 0.5), 0 0 10px rgba(131, 97, 247, 0.12);
         display: grid;
         place-items: center;
         overflow: hidden;
@@ -332,57 +368,61 @@
         position: absolute;
         inset: 5px;
         border-radius: 12px;
-        border: 1px solid rgba(255, 204, 110, 0.12);
+        border: 1px solid rgba(255, 205, 97, 0.12);
       }
 
-      .tile .symbol {
+      .tile .icon {
         position: relative;
+        z-index: 1;
         width: 62%;
         height: 62%;
         display: grid;
         place-items: center;
-        font-size: 30px;
+        font-size: clamp(23px, 2vw, 34px);
         font-weight: 900;
       }
 
-      .tile.moon .symbol { color: #d7fbff; text-shadow: 0 0 16px rgba(100, 224, 255, 0.75); }
-      .tile.star .symbol { color: #ffe9a3; text-shadow: 0 0 18px rgba(255, 180, 76, 0.9); }
-      .tile.eye .symbol { color: #d5b7ff; text-shadow: 0 0 18px rgba(174, 118, 255, 0.88); }
-      .tile.crystal .symbol { color: #8ff7da; text-shadow: 0 0 18px rgba(80, 239, 214, 0.9); }
-      .tile.crown .symbol { color: #f9d698; text-shadow: 0 0 18px rgba(255, 163, 66, 0.9); }
-      .tile.key .symbol { color: #f9dd86; text-shadow: 0 0 18px rgba(255, 202, 93, 0.9); }
-      .tile.wild .symbol { color: #bdfdff; text-shadow: 0 0 18px rgba(109, 245, 255, 0.95); }
-      .tile.guardian .symbol { color: #d9f1ff; text-shadow: 0 0 18px rgba(125, 212, 255, 0.9); }
+      .tile.moon { background: linear-gradient(135deg, rgba(20, 34, 50, 0.96), rgba(11, 17, 28, 0.96)); }
+      .tile.star { background: linear-gradient(135deg, rgba(41, 22, 16, 0.96), rgba(27, 17, 18, 0.96)); }
+      .tile.eye { background: linear-gradient(135deg, rgba(30, 18, 50, 0.96), rgba(20, 15, 34, 0.96)); }
+      .tile.crystal { background: linear-gradient(135deg, rgba(8, 28, 32, 0.96), rgba(12, 20, 26, 0.96)); }
+      .tile.crown { background: linear-gradient(135deg, rgba(44, 22, 12, 0.96), rgba(24, 14, 15, 0.96)); }
+      .tile.key { background: linear-gradient(135deg, rgba(33, 18, 24, 0.96), rgba(25, 16, 18, 0.96)); }
+      .tile.wild { background: linear-gradient(135deg, rgba(30, 57, 70, 0.96), rgba(18, 20, 41, 0.96)); }
+      .tile.guardian { background: linear-gradient(135deg, rgba(17, 38, 55, 0.96), rgba(19, 18, 38, 0.96)); }
 
-      .tile.moon { background: linear-gradient(135deg, rgba(14, 38, 52, 0.98), rgba(19, 16, 34, 0.94)); }
-      .tile.star { background: linear-gradient(135deg, rgba(45, 20, 14, 0.98), rgba(33, 17, 19, 0.94)); }
-      .tile.eye { background: linear-gradient(135deg, rgba(35, 18, 51, 0.98), rgba(26, 18, 40, 0.94)); }
-      .tile.crystal { background: linear-gradient(135deg, rgba(13, 29, 36, 0.98), rgba(10, 20, 28, 0.94)); }
-      .tile.crown { background: linear-gradient(135deg, rgba(45, 21, 11, 0.98), rgba(25, 12, 15, 0.94)); }
-      .tile.key { background: linear-gradient(135deg, rgba(36, 18, 20, 0.98), rgba(22, 15, 18, 0.94)); }
-      .tile.wild { background: linear-gradient(135deg, rgba(19, 80, 88, 0.96), rgba(18, 26, 51, 0.96)); }
-      .tile.guardian { background: linear-gradient(135deg, rgba(16, 38, 53, 0.98), rgba(21, 18, 41, 0.96)); }
+      .tile.moon .icon { color: #d4fefe; text-shadow: 0 0 16px rgba(114, 220, 255, 0.85); }
+      .tile.star .icon { color: #ffe9a0; text-shadow: 0 0 18px rgba(255, 176, 80, 0.9); }
+      .tile.eye .icon { color: #d8bbff; text-shadow: 0 0 18px rgba(170, 120, 255, 0.9); }
+      .tile.crystal .icon { color: #8af7d6; text-shadow: 0 0 18px rgba(73, 235, 214, 0.88); }
+      .tile.crown .icon { color: #f8d98f; text-shadow: 0 0 18px rgba(255, 157, 67, 0.9); }
+      .tile.key .icon { color: #fce57f; text-shadow: 0 0 18px rgba(255, 202, 94, 0.9); }
+      .tile.wild .icon { color: #d9fbff; text-shadow: 0 0 20px rgba(111, 240, 255, 0.95); }
+      .tile.guardian .icon { color: #e7f5ff; text-shadow: 0 0 18px rgba(129, 197, 255, 0.9); }
 
-      .feature-panel { padding: 0 0 12px; }
+      .panel-feature {
+        padding: 0 12px 12px;
+      }
 
       .feature-row {
         display: grid;
-        grid-template-columns: 60px 1fr 58px;
+        grid-template-columns: 52px minmax(0, 1fr) 58px;
         gap: 10px;
         align-items: center;
-        padding: 10px 12px 9px;
-        border-top: 1px solid rgba(235, 190, 85, 0.12);
+        min-height: 66px;
+        padding: 10px 8px 9px;
+        border-top: 1px solid rgba(242, 194, 93, 0.12);
       }
 
       .feature-row:first-child { border-top: 0; }
 
       .feature-icon {
-        width: 54px;
-        height: 54px;
+        width: 52px;
+        height: 52px;
         border-radius: 12px;
-        border: 2px solid rgba(240, 192, 90, 0.8);
-        background: linear-gradient(180deg, rgba(38, 22, 52, 0.9), rgba(18, 13, 29, 0.96));
-        box-shadow: inset 0 0 12px rgba(114, 84, 255, 0.28);
+        border: 2px solid rgba(243, 196, 94, 0.8);
+        background: linear-gradient(180deg, rgba(30, 18, 38, 0.85), rgba(14, 10, 23, 0.96));
+        box-shadow: inset 0 0 12px rgba(140, 88, 255, 0.18);
       }
 
       .feature-copy {
@@ -395,214 +435,286 @@
         font-size: 11px;
         letter-spacing: 0.12em;
         text-transform: uppercase;
-        color: var(--gold-1);
       }
 
       .feature-copy small {
         font-size: 8px;
         letter-spacing: 0.08em;
+        color: rgba(216, 199, 255, 0.9);
         text-transform: uppercase;
-        color: rgba(210, 193, 247, 0.9);
       }
 
-      .feature-mult {
-        font-size: 28px;
-        font-weight: 900;
-        color: #f4d17d;
-        text-shadow: 0 0 16px rgba(255, 189, 72, 0.7);
+      .feature-value {
+        font-family: 'Cinzel', serif;
+        font-size: 30px;
+        color: #f5d885;
+        text-shadow: 0 0 16px rgba(255, 190, 84, 0.7);
+        text-align: right;
       }
 
       .feature-note {
-        padding: 12px 12px 4px;
+        padding: 12px 8px 4px;
         font-size: 9px;
-        line-height: 1.5;
-        letter-spacing: 0.12em;
-        color: rgba(232, 200, 255, 0.82);
+        letter-spacing: 0.14em;
         text-transform: uppercase;
+        color: rgba(226, 212, 255, 0.78);
+        line-height: 1.6;
       }
 
       .bottom-bar {
         display: flex;
         align-items: center;
         justify-content: center;
-        gap: 16px;
-        margin-top: 18px;
+        gap: 18px;
+        margin-top: 14px;
       }
 
-      .bet-box {
+      .bet-control {
         display: flex;
         align-items: center;
         gap: 10px;
         min-width: 280px;
         padding: 10px 12px;
-        border-radius: 16px;
-        border: 2px solid rgba(243, 202, 101, 0.9);
-        background: linear-gradient(180deg, rgba(26, 16, 34, 0.94), rgba(10, 9, 17, 0.96));
-        box-shadow: inset 0 0 16px rgba(138, 96, 255, 0.12);
+        border-radius: 14px;
+        border: 2px solid rgba(244, 195, 92, 0.82);
+        background: linear-gradient(180deg, rgba(26, 17, 35, 0.9), rgba(9, 9, 16, 0.96));
+        box-shadow: inset 0 0 12px rgba(145, 97, 255, 0.12);
       }
 
-      .bet-box .step {
-        width: 28px;
-        height: 28px;
-        border-radius: 10px;
-        border: 1px solid rgba(244, 193, 90, 0.8);
-        background: rgba(10, 9, 16, 0.76);
+      .stepper {
+        width: 30px;
+        height: 30px;
         display: grid;
         place-items: center;
-        font-weight: 900;
+        border-radius: 10px;
+        border: 1px solid rgba(244, 195, 92, 0.8);
+        background: rgba(9, 9, 16, 0.8);
+        font-weight: 800;
         color: var(--gold-1);
       }
 
-      .bet-box .amount {
+      .bet-amount {
         flex: 1;
         text-align: center;
-        font-size: 20px;
-        font-weight: 900;
+        font-size: 18px;
         letter-spacing: 0.08em;
+        font-weight: 900;
       }
 
-      .spin-button {
-        width: 116px;
-        height: 116px;
+      .spin-btn {
+        position: relative;
+        width: 110px;
+        height: 110px;
         border-radius: 50%;
-        background: radial-gradient(circle at center, rgba(253, 212, 110, 0.2), rgba(27, 15, 37, 0.96) 52%, rgba(8, 8, 17, 0.98));
-        border: 3px solid rgba(243, 195, 86, 0.96);
-        box-shadow: 0 0 0 4px rgba(244, 196, 92, 0.16), 0 0 30px rgba(137, 96, 255, 0.46);
+        border: 3px solid rgba(244, 197, 96, 0.98);
+        background: radial-gradient(circle at center, rgba(255, 198, 87, 0.25), rgba(27, 17, 35, 0.96) 52%, rgba(9, 9, 16, 0.98));
+        box-shadow: 0 0 0 4px rgba(244, 198, 96, 0.14), 0 0 30px rgba(137, 90, 255, 0.4);
         display: grid;
         place-items: center;
-        position: relative;
       }
 
-      .spin-button::before {
+      .spin-btn::before {
         content: "";
         position: absolute;
         inset: 12px;
         border-radius: 50%;
-        border: 2px solid rgba(245, 206, 109, 0.2);
+        border: 2px solid rgba(255, 212, 127, 0.25);
       }
 
-      .spin-button span {
+      .spin-btn span {
         position: relative;
         z-index: 1;
-        font-size: 28px;
-        color: #ffd976;
-        text-shadow: 0 0 18px rgba(255, 180, 85, 0.8);
+        font-size: 30px;
+        color: #ffd978;
+        text-shadow: 0 0 18px rgba(255, 190, 84, 0.9);
       }
 
-      .mini-btn {
-        width: 112px;
+      .micro-btn {
+        width: 110px;
         height: 52px;
         border-radius: 12px;
-        background: linear-gradient(180deg, rgba(28, 18, 37, 0.95), rgba(12, 9, 18, 0.96));
-        border: 2px solid rgba(234, 193, 88, 0.8);
+        background: linear-gradient(180deg, rgba(26, 18, 36, 0.95), rgba(12, 10, 19, 0.95));
+        border: 2px solid rgba(240, 191, 92, 0.8);
         color: var(--gold-1);
+        font-size: 11px;
         font-weight: 900;
         letter-spacing: 0.12em;
         text-transform: uppercase;
       }
 
-      .status-strip {
+      .footer-row {
         display: flex;
         justify-content: space-between;
-        padding: 10px 16px 0;
+        align-items: center;
+        gap: 16px;
+        padding: 10px 12px 0;
         font-size: 12px;
-        color: var(--gold-1);
-        letter-spacing: 0.16em;
+        letter-spacing: 0.15em;
         text-transform: uppercase;
         font-weight: 800;
       }
 
-      @media (max-width: 1100px) {
-        .layout { grid-template-columns: 1fr; }
-        .topbar { flex-wrap: wrap; }
-        .header-actions { width: 100%; justify-content: flex-end; }
+      .balance, .win {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .balance .dot, .win .dot {
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(245, 201, 95, 0.1);
+        border: 1px solid rgba(245, 201, 95, 0.7);
+      }
+
+      @media (max-width: 1180px) {
+        .game-shell {
+          grid-template-columns: 1fr;
+        }
+        .brand-wrap {
+          min-height: 100px;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .app {
+          padding: 10px 8px 20px;
+        }
+        .topbar {
+          flex-wrap: wrap;
+          gap: 10px;
+        }
+        .top-controls {
+          width: 100%;
+          justify-content: center;
+          flex-wrap: wrap;
+        }
+        .bottom-bar {
+          flex-wrap: wrap;
+        }
+        .bet-control {
+          min-width: 0;
+          flex: 1 1 100%;
+        }
       }
     </style>
   </head>
   <body>
+    <div class="scene-bg"></div>
+
     <div class="app">
       <header class="topbar">
-        <div class="brand">
-          <div class="brand-mark">✧</div>
-          <div class="brand-copy">
-            <h1>The<br>Forgotten Vault</h1>
-            <small>Awakening</small>
+        <div class="brand-wrap">
+          <div class="brand-art"></div>
+          <div class="logo" aria-label="The Forgotten Vault Awakening">
+            <span class="title">The <span class="small">Forgotten Vault</span></span>
+            <span class="subtitle">Awakening</span>
           </div>
         </div>
 
-        <div class="header-actions">
-          <div class="pill"><span class="icon">◀</span> Turbo</div>
-          <div class="pill"><span class="icon">◍</span> Auto</div>
-          <div class="pill settings"><span class="icon">☰</span></div>
+        <div class="top-controls" aria-label="Game controls">
+          <button class="toolbar-btn" type="button"><span class="glyph">◁</span>Sound</button>
+          <button class="toolbar-btn" type="button"><span class="glyph">⚡</span>Turbo</button>
+          <button class="toolbar-btn" type="button"><span class="glyph">⟳</span>Auto</button>
+          <button class="toolbar-btn menu" type="button" aria-label="Menu"><span class="glyph">☰</span></button>
         </div>
       </header>
 
-      <main class="layout">
-        <aside class="panel left-panel">
-          <h3 class="panel-title">Guardians</h3>
-          <div class="guardian-list">
-            <div class="guardian-item"><div class="guardian-count">8</div><div class="guardian-meta"><strong>Aether</strong><small>The supreme one</small></div></div>
-            <div class="guardian-item"><div class="guardian-count">7</div><div class="guardian-meta"><strong>Oblivion</strong><small>The end bringer</small></div></div>
-            <div class="guardian-item"><div class="guardian-count">6</div><div class="guardian-meta"><strong>Solara</strong><small>Star empress</small></div></div>
-            <div class="guardian-item"><div class="guardian-count">5</div><div class="guardian-meta"><strong>Nexus</strong><small>Realm weaver</small></div></div>
-            <div class="guardian-item"><div class="guardian-count">4</div><div class="guardian-meta"><strong>Void</strong><small>Rift walker</small></div></div>
-            <div class="guardian-item"><div class="guardian-count">3</div><div class="guardian-meta"><strong>Tidal</strong><small>Abyss keeper</small></div></div>
-            <div class="guardian-item"><div class="guardian-count">2</div><div class="guardian-meta"><strong>Inferno</strong><small>Flame sovereign</small></div></div>
-            <div class="guardian-item"><div class="guardian-count">1</div><div class="guardian-meta"><strong>Terra</strong><small>Earthbound fury</small></div></div>
+      <main class="game-shell">
+        <aside class="panel left-panel" aria-label="Guardians panel">
+          <h2 class="panel-header">Guardians</h2>
+          <div class="guardians">
+            <div class="guardian-item">
+              <div class="guardian-badge">8</div>
+              <div class="guardian-copy"><strong>Aether</strong><small>The supreme one</small></div>
+            </div>
+            <div class="guardian-item">
+              <div class="guardian-badge">7</div>
+              <div class="guardian-copy"><strong>Oblivion</strong><small>The end bringer</small></div>
+            </div>
+            <div class="guardian-item">
+              <div class="guardian-badge">6</div>
+              <div class="guardian-copy"><strong>Solara</strong><small>Star empress</small></div>
+            </div>
+            <div class="guardian-item">
+              <div class="guardian-badge">5</div>
+              <div class="guardian-copy"><strong>Nexus</strong><small>Realm weaver</small></div>
+            </div>
+            <div class="guardian-item">
+              <div class="guardian-badge">4</div>
+              <div class="guardian-copy"><strong>Void</strong><small>Rift walker</small></div>
+            </div>
+            <div class="guardian-item">
+              <div class="guardian-badge">3</div>
+              <div class="guardian-copy"><strong>Tidal</strong><small>Abyss keeper</small></div>
+            </div>
+            <div class="guardian-item">
+              <div class="guardian-badge">2</div>
+              <div class="guardian-copy"><strong>Inferno</strong><small>Flame sovereign</small></div>
+            </div>
+            <div class="guardian-item">
+              <div class="guardian-badge">1</div>
+              <div class="guardian-copy"><strong>Terra</strong><small>Earthbound fury</small></div>
+            </div>
           </div>
         </aside>
 
-        <section class="machine-wrap">
-          <div class="machine-header">
-            <h2 class="hero-title">THE <span class="sub">FORGOTTEN VAULT</span> <span class="small">AWAKENING</span></h2>
-          </div>
-
+        <section class="center-stack" aria-label="Game board and controls">
           <div class="machine">
-            <div id="board" aria-label="Game board"></div>
+            <div class="board" id="board" aria-label="8 by 6 slot board"></div>
           </div>
 
           <div class="bottom-bar">
-            <div class="bet-box">
-              <div class="step">−</div>
-              <div class="amount">100.00</div>
-              <div class="step">+</div>
+            <div class="bet-control" aria-label="Bet control">
+              <div class="stepper">−</div>
+              <div class="bet-amount">100.00</div>
+              <div class="stepper">+</div>
             </div>
 
-            <button class="spin-button" type="button"><span>✦</span></button>
+            <button class="spin-btn" type="button" aria-label="Spin"><span>✦</span></button>
 
-            <button class="mini-btn" type="button">Auto</button>
-            <button class="mini-btn" type="button">Turbo</button>
+            <button class="micro-btn" type="button">Auto</button>
+            <button class="micro-btn" type="button">Turbo</button>
           </div>
 
-          <div class="status-strip">
-            <span>Balance 1,000.00</span>
-            <span>Win 0.00</span>
+          <div class="footer-row">
+            <div class="balance"><span class="dot">◈</span> Balance 1,000.00</div>
+            <div class="win"><span class="dot">✦</span> Win 0.00</div>
           </div>
         </section>
 
-        <aside class="panel right-panel">
-          <h3 class="panel-title">Buy Feature</h3>
-          <div class="feature-panel">
+        <aside class="panel right-panel" aria-label="Buy feature panel">
+          <h2 class="panel-header">Buy Feature</h2>
+          <div class="panel-feature">
             <div class="feature-row">
               <div class="feature-icon"></div>
               <div class="feature-copy"><strong>Normal Bonus</strong><small>Max multiplier</small></div>
-              <div class="feature-mult">2×</div>
+              <div class="feature-value">2×</div>
             </div>
             <div class="feature-row">
               <div class="feature-icon"></div>
               <div class="feature-copy"><strong>Hyper Bonus</strong><small>Max multiplier</small></div>
-              <div class="feature-mult">5×</div>
+              <div class="feature-value">5×</div>
             </div>
             <div class="feature-row">
               <div class="feature-icon"></div>
               <div class="feature-copy"><strong>Mythic Bonus</strong><small>Max multiplier</small></div>
-              <div class="feature-mult">8×</div>
+              <div class="feature-value">8×</div>
             </div>
-            <div class="feature-note">Epic bonus cannot be bought. It can only be triggered during normal play.</div>
-            <div class="feature-row" style="padding-top:18px;">
+
+            <div class="feature-note">
+              Epic bonus cannot be bought.<br>
+              It can only be triggered during normal play.
+            </div>
+
+            <div class="feature-row" style="padding-top: 18px;">
               <div class="feature-icon"></div>
-              <div class="feature-copy"><strong>Extreme Spin</strong><small>Higher chance</small></div>
-              <div class="feature-mult">65×</div>
+              <div class="feature-copy"><strong>Extreme Spin</strong><small>Higher chance / bigger rewards</small></div>
+              <div class="feature-value">65×</div>
             </div>
           </div>
         </aside>
@@ -622,15 +734,15 @@
         { key: 'guardian', icon: '◍' }
       ];
 
-      for (let r = 0; r < 6; r++) {
-        for (let c = 0; c < 8; c++) {
+      for (let row = 0; row < 6; row++) {
+        for (let col = 0; col < 8; col++) {
           const tile = document.createElement('div');
-          const sym = symbols[(r * 8 + c) % symbols.length];
+          const sym = symbols[(row * 8 + col) % symbols.length];
           tile.className = 'tile ' + sym.key;
-          const glyph = document.createElement('div');
-          glyph.className = 'symbol';
-          glyph.textContent = sym.icon;
-          tile.appendChild(glyph);
+          const icon = document.createElement('div');
+          icon.className = 'icon';
+          icon.textContent = sym.icon;
+          tile.appendChild(icon);
           board.appendChild(tile);
         }
       }
