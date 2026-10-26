@@ -1,116 +1,64 @@
 # ✧ The Forgotten Vault: Awakening
-### Cosmic Cluster 8×6 Video Slot — Stake Engine & Stake Originals Platform Submission
 
-> NOTE: This repository is a prototype and local publication bundle intended for validation work. It is not a certified production Stake Engine deployment. Official Stake SDK validation, RGS compliance checks, and ACP approval are still pending.
+**Cosmic fantasy cluster-slot prototype · 8 columns × 6 rows · Virtual credits only**
 
-[![Stake Engine Ready](https://img.shields.io/badge/Stake%20Engine-Ready-00e701?style=for-the-badge&logo=stake)](https://stake.com)
-[![RTP](https://img.shields.io/badge/Target%20RTP-98.00%25-blueviolet?style=for-the-badge)](#mathematical-specifications)
-[![Volatility](https://img.shields.io/badge/Volatility-EXTREME-red?style=for-the-badge)](#game-mechanics)
-[![Max Win](https://img.shields.io/badge/Max%20Win-100%2C000%C3%97-gold?style=for-the-badge)](#features)
-[![Provably Fair](https://img.shields.io/badge/Provably%20Fair-HMAC--SHA256-brightgreen?style=for-the-badge)](#provably-fair)
+> **Release status:** Work in progress. This repository is not a certified production Stake Engine deployment. Official Stake SDK validation, authoritative RGS integration, ACP upload, and approval remain pending. The 98% RTP is a target, not a verified result.
 
-> **"Beyond the veil of forgotten stars... Align the ancient sigils. Awaken what sleeps beneath the cosmos."**
+![Status](https://img.shields.io/badge/Release-Prototype-orange?style=for-the-badge)
+![Target RTP](https://img.shields.io/badge/Target%20RTP-98%25-blueviolet?style=for-the-badge)
+![Max win cap](https://img.shields.io/badge/Prototype%20cap-100%2C000%C3%97-gold?style=for-the-badge)
 
----
+> “Beyond the veil of forgotten stars... Align the ancient sigils. Awaken what sleeps beneath the cosmos.”
 
-## ✦ Overview
+## Current prototype
 
-**The Forgotten Vault: Awakening** is a production-ready, high-volatility 8×6 cluster slot machine engineered specifically for the **Stake Casino Engine** and Remote Gaming Server (RGS) architecture. This repo contains the local publication bundle, desktop prototype, and internal validation artifacts used to prepare the game for official Stake-side SDK and ACP review.
+- **Board:** 8 columns × 6 rows (48 tiles).
+- **Wins:** clusters of 5 or more matching symbols connected orthogonally.
+- **Cascades:** winning symbols are removed and replaced.
+- **Guardian tiers:** Normal (4), Hyper (5), Mythic (6–7), and Epic (8+). Epic is gameplay-triggered and cannot be purchased.
+- **Feature modes:** Guardian Boost, single-spin ×10/×50/×200 modes, bonus buys, and Extreme Spin.
+- **Max-win display:** 100,000× prototype cap.
+- **Credits:** virtual credits only. No deposits, withdrawals, or real-money payouts.
 
-The repository is a work-in-progress submission package rather than a certified production release.
+## Repository entry points
 
----
+- `forgotten-vault.html` — current standalone playable prototype.
+- `assets/cosmic-vault-cinematic.svg` — vector environment artwork.
+- `math/index.json` — local math publication candidate manifest.
+- `math/lookup_tables/` — mode lookup tables.
+- `math/game_logic/` — compressed game-logic data.
+- `scripts/validate-math.mjs` — local structural checks for publication files.
+- `scripts/validate-math-official.mjs` — local manifest/path check only; it is **not** the official Stake SDK validator.
+- `scripts/normalize-math-publication.mjs` — lookup-table publication normalization utility.
 
-## ✦ Core Game Mechanics
+## Local use
 
-- **Grid:** 8 Columns × 6 Rows (48 Sigil Chambers).
-- **Cluster Pays:** 5 or more connected orthogonal matching sigils form a winning cluster.
-- **Cascading Tumbles:** Winning clusters explode, surviving relics drop to the bottom, and new cosmic sigils fill the chambers from above (up to 8 cascades per spin).
-- **Hit Multiplier Ladder:** Consecutive cascades advance the multiplier ladder:
-  - Standard Mode: **×2 → ×4 → ×6 → ×8 → ×10**
-  - Epic Awakening: Climbs all the way to **×1,000**!
-- **Max Win Cap:** Hard ceiling at **100,000× base bet** with animated milestone sequence.
+Open `forgotten-vault.html` in a modern browser for the standalone virtual-credit prototype.
 
----
-
-## ✦ Guardian Awakening Feature Tiers
-
-Landing **4 or more Guardian masks** triggers the ancient bonus round with guaranteed extra Guardians and escalating multipliers:
-
-| Tier | Guardians Needed | Free Rounds | Multiplier Range | Retrigger Rounds | Direct Buy Cost |
-| :--- | :---: | :---: | :---: | :---: | :---: |
-| **Normal** | 4 | 3 Rounds | ×2 – ×3 | +3 Rounds | 2.25× Bet |
-| **Higher** | 5 | 5 Rounds | ×4 – ×5 | +5 Rounds | 4.50× Bet |
-| **Mythic** | 6–7 | 6 Rounds | ×8 | +6 Rounds | 8.00× Bet |
-| **Epic** | 8+ | 8 Rounds | ×50 – **×1,000** | +8 Rounds | N/A (Feature Only) |
-
----
-
-## ✦ Stake Feature Modes & Buy Options
-
-- **Extreme Spin (10× Bet):** The signature high-roller streaming feature:
-  - `50%` chance: Ordinary cosmic board resolution
-  - `30%` chance: Guaranteed Normal Bonus
-  - `15%` chance: Guaranteed Mythic Bonus
-  - `5%` chance: Guaranteed **Epic Bonus** (×50 to ×1,000 ladder!)
-- **Single-Spin Multiplier Modes:**
-  - `×10 Multiplier Spin` (10× bet)
-  - `×50 Multiplier Spin` (30× bet)
-  - `×200 Multiplier Spin` (75× bet)
-- **Guardian Boost (Ante Bet):** Boosts natural Guardian drop chance from 1.0% to 1.5%.
-
----
-
-## ✦ Stake Submission Files
-
-This repository contains the local package assembled for Stake submission review:
-
-1. **`STAKE_ENGINE_SUBMISSION.json`**: Machine-readable game specification and RGS integration schema.
-2. **`GAME_DESIGN_DOCUMENT.md`**: Formal Game Design Document with feature and rules notes.
-3. **`forgotten-vault-simulator-fix.html`**: Master self-contained game bundle and interactive Math Lab simulator.
-4. **`math/`**: Local publication bundle for validation review.
-
----
-
-## ✦ Mathematical Verification & Diagnostics
-
-The built-in Math Lab test suite executes internal simulations and is used for local review. The current values are design targets and are not yet official Stake certification results.
-
-- **Target RTP:** 98.00%
-- **Volatility:** Extreme
-- **Max Win Cap:** 100,000×
-- **Official SDK validation:** pending
-- **ACP approval:** pending
-
----
-
-## ✦ Provably Fair Implementation
-
-The prototype is intended to align with the **Stake Provably Fair v2 Standard**:
-- Server seed hashed via SHA-256 before spin placement.
-- Client seed fully player-customizable.
-- Deterministic outcome generator:
-  $$\text{Seed} = \text{HMAC-SHA256}(\text{serverSeed}, \text{clientSeed} : \text{nonce})$$
-- Full post-spin cryptographic verification available in-game.
-
----
-
-## ✦ How to Run Locally
+For the repository's Node-based math utilities:
 
 ```bash
-# Clone the repository
-git clone https://github.com/Gourav9414/forgotten-vault-awakening-2.git
-cd forgotten-vault-awakening-2
-
-# Install dependencies
 npm install
-
-# Start development server
-npm run dev
+npm run validate:math
+npm run validate:math:official
 ```
 
-Visit `http://localhost:3000` to launch the game.
+These commands are local checks, not official SDK validation or RTP certification. Run them from the repository root. Inspect every reported warning or failure before preparing a submission.
+
+## Math and release readiness
+
+- **RTP target:** 98%; not verified or certified.
+- **Current math status:** `PENDING_OFFICIAL_STAKE_SDK_VALIDATION`.
+- **Payout calibration:** v104 candidate is intentionally held unchanged unless explicitly requested.
+- **RGS:** the standalone HTML prototype is not a substitute for an authoritative RGS integration.
+- **Official submission:** SDK schema/format validation, lookup-to-logic consistency, RGS compliance, ACP upload, and approval remain to be completed.
+
+## Important limitations
+
+The standalone browser prototype and the math publication candidate are separate parts of the project. A successful spin in the browser does not prove that the published lookup tables, compressed game logic, RTP, or official RGS flow are correct. No production-readiness, certification, or provably-fair guarantee should be inferred from this repository until the corresponding independent checks pass.
 
 ---
 
-**Built by Rogue Vault Studios for Stake Engine review**
+**Project:** The Forgotten Vault: Awakening  
+**Studio label:** Rogue Vault Studios  
+**Repository:** https://github.com/Gourav9414/forgotten-vault-awakening-2
