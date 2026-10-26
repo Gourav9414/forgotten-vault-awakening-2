@@ -211,6 +211,55 @@ body:after{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;backg
 @media(max-width:1050px){.app{padding:8px}.layout{grid-template-columns:minmax(0,1fr) minmax(0,2fr)}.machine{grid-column:2;grid-row:1 / span 3}.sidebar>.guardian-key,.sidebar>.card:has(.guardian-key){grid-column:1;grid-row:1}.sidebar>.balance-card{grid-column:1;grid-row:2}.sidebar>.card:has(#featureForgeBtn){grid-column:1;grid-row:3}.sidebar>.card:has(.feature){grid-column:1;grid-row:4}.sidebar>.rules{grid-column:1;grid-row:5}.board{min-height:320px;max-height:none}.brand{position:static;transform:none}.top{justify-content:space-between}.actions{flex-wrap:wrap}}
 @media(max-width:650px){.top{align-items:flex-start;flex-direction:column}.brand{position:static;transform:none;text-align:left}.brand h1{font-size:24px}.actions{margin-left:0}.hero{margin:8px 0}.layout{display:flex;flex-direction:column}.machine{order:1}.sidebar{display:flex;flex-direction:column}.sidebar>.card{order:initial}.board{min-height:0;max-height:none}.sidebar>.guardian-key,.sidebar>.card:has(.guardian-key),.sidebar>.balance-card,.sidebar>.card:has(#featureForgeBtn),.sidebar>.card:has(.feature),.sidebar>.rules{grid-column:auto;grid-row:auto}.spin{min-height:72px;max-width:84px}.spin:after{font-size:48px}}
 
+
+/* REFERENCE LAYOUT FIX v2 — real three-column cabinet and persistent controls */
+body{background:linear-gradient(180deg,#05030a20,#05030a66),url('https://raw.githubusercontent.com/Gourav9414/forgotten-vault-awakening-2/main/assets/cosmic-vault-cinematic.svg') center/cover fixed,#070611}
+.app{max-width:1900px;padding:8px 12px}
+.top{min-height:62px}.brand{left:50%;top:0}.brand h1{font-size:clamp(22px,3.4vw,48px)}
+.hero{margin:10px 0 6px}.layout{display:grid;grid-template-columns:minmax(190px,.82fr) minmax(420px,2.35fr) minmax(230px,.95fr);gap:10px;align-items:start}
+.machine{grid-column:2;grid-row:1;padding:8px}
+.sidebar{display:flex;flex-direction:column;gap:8px;min-width:0}
+.sidebar>.balance-card{order:2}
+.sidebar>.card:has(.guardian-key){order:1}
+.sidebar>.card:has(#featureForgeBtn){order:3}
+.sidebar>.card:has(.feature){order:4}
+.sidebar>.rules{order:5}
+.sidebar>.card{padding:9px}
+.sidebar>.card h3{font-size:12px}
+.board-area{display:block}.mult-ladder{display:none}
+.board{min-height:380px;max-height:calc(100vh - 270px);aspect-ratio:8/6;gap:4px}
+.machine-head{margin-bottom:7px}.frame{padding:5px}
+.guardian-key{display:grid;grid-template-columns:1fr;gap:5px}
+.guardian-key>div{padding:4px}
+.guardian-mini{width:40px;height:40px;flex-basis:40px}
+.guardian-key p{font-size:9px;line-height:1.3}
+#referenceGuardianRail{display:flex;flex-direction:column;gap:5px}
+.ref-guardian{display:grid;grid-template-columns:31px 42px minmax(0,1fr);align-items:center;gap:6px;padding:4px 6px;border:1px solid #a86c2d;border-radius:8px;background:linear-gradient(100deg,#291a2d,#08070c);min-height:55px;box-shadow:inset 0 1px #fff2}
+.ref-guardian .rank{display:grid;place-items:center;width:29px;height:29px;border:2px solid #eab44e;border-radius:50%;font-size:18px;font-weight:900;color:#fff0bf;background:#07060b}
+.ref-guardian .portrait{width:40px;height:44px;display:grid;place-items:center;border-radius:7px;font-size:27px;background:radial-gradient(circle,#6d43a8,#0a0712 75%);border:1px solid #dba43e;filter:drop-shadow(0 0 5px #9d59ff)}
+.ref-guardian b{font-size:11px;color:#ffe3a0;display:block}.ref-guardian small{font-size:8px;color:#eee0ff;display:block}
+#referenceBuyPanel{display:flex;flex-direction:column;gap:7px}
+#referenceBuyPanel .ref-buy{display:flex;align-items:center;gap:8px;text-align:left;width:100%;min-height:68px;padding:7px;border:1px solid #dca344;border-radius:9px;color:#fff2c6;background:linear-gradient(100deg,#123d27,#07100c);cursor:pointer}
+#referenceBuyPanel .ref-buy:nth-child(2){background:linear-gradient(100deg,#123b66,#080d1b)}
+#referenceBuyPanel .ref-buy:nth-child(3){background:linear-gradient(100deg,#59330d,#100907)}
+#referenceBuyPanel .ref-buy .portrait{font-size:27px;min-width:42px;text-align:center}
+#referenceBuyPanel .ref-buy b{display:block;font-size:12px}
+#referenceBuyPanel .ref-buy small{display:block;font-size:9px;color:#f6e7bd}
+#referenceBuyPanel .ref-buy strong{font-size:21px;color:#ffdf72;margin-left:auto;white-space:nowrap}
+#referenceBuyPanel .ref-note{text-align:center;font-size:10px;color:#f1d9ff;padding:5px}
+#referenceExtreme{display:flex;align-items:center;gap:10px;border:1px solid #b77d34;border-radius:10px;padding:10px;background:radial-gradient(circle at 25% 50%,#7120a5,#160b20 65%);color:#fff}
+#referenceExtreme b{font-size:13px}#referenceExtreme strong{font-size:25px;color:#ffbfff;margin-left:auto}
+#referenceBottomControls{grid-column:1/4;grid-row:2;display:grid;grid-template-columns:minmax(160px,1fr) minmax(180px,1.2fr) minmax(180px,1fr) minmax(150px,1fr);align-items:center;gap:12px;padding:10px 14px;border:2px solid #d99d3b;border-radius:15px;background:linear-gradient(100deg,#100b12,#08060b 45%,#1a0e1c);box-shadow:0 0 0 2px #4e2615,0 0 24px #ff9d2b35}
+#referenceBottomControls .balance-inline{color:#ffe5a2;font-size:12px;font-weight:800}
+#referenceBottomControls .balance-inline strong{font-size:20px;color:white;margin-left:8px}
+#referenceBottomControls .controls-bet{display:flex;align-items:center;justify-content:center;gap:12px;color:#ffdf82}
+#referenceBottomControls .controls-bet b{font-size:20px;color:white}
+#referenceBottomControls .controls-auto{display:flex;flex-direction:column;gap:5px}
+#referenceBottomControls #spin{margin:0;max-width:88px;min-height:76px;justify-self:center}
+#referenceBottomControls #featureForgeBtn{margin-top:4px}
+#referenceBottomControls .winbox{margin:0}
+@media(max-width:1000px){.layout{grid-template-columns:minmax(155px,.7fr) minmax(350px,2fr)}.machine{grid-column:2;grid-row:1 / span 2}#referenceBottomControls{grid-column:1/3;grid-template-columns:1fr 1fr}.sidebar{grid-column:1;grid-row:1}.sidebar>.rules{display:none}.board{min-height:300px;max-height:none}}
+@media(max-width:650px){.layout{display:flex;flex-direction:column}.machine{order:1;width:100%}.sidebar{order:2;width:100%}#referenceBottomControls{order:3;width:100%;grid-template-columns:1fr 1fr}.board{min-height:0;max-height:none}.brand{position:static;transform:none}.top{display:flex;flex-wrap:wrap}.hero{margin:6px 0}}
 </style><style>
 /* Consolidated v18 polish: subtle build marker and accessible focus states */
 :focus-visible{outline:2px solid #e8c66d;outline-offset:3px}
@@ -259,6 +308,28 @@ body:before{content:"";position:fixed;inset:-20%;pointer-events:none;z-index:0;o
   </div>
 </div>
 <div id="mathLab" style="display:none;position:fixed;inset:0;z-index:1000;background:#05030cf5;overflow:auto;padding:20px"><div style="max-width:900px;margin:20px auto;background:#17122a;border:1px solid #a184ca;border-radius:16px;padding:20px;color:#f8f2ff;font:14px system-ui"><div style="display:flex;justify-content:space-between;align-items:center;gap:12px"><h2 style="color:#f2ca78;margin:0">FULL-GAME MATH LAB · DIAGNOSTIC TESTING</h2><button id="mathClose" style="padding:8px 12px">Close ✕</button></div><p style="color:#cbb9e6;line-height:1.5">Hidden developer tool · virtual credits only. Runs seeded diagnostics using shared cluster detection, base-payout, final-payout, multiplier-step, feature-price, and Extreme Spin odds configuration. The simulator applies the same mode-level payout factors and maximum-win cap as the live game. Bonus sequencing and random streams remain separately implemented; this lab is not an exact replay of the live engine and cannot certify RTP.</p><div style="display:flex;gap:12px;flex-wrap:wrap;align-items:end;margin:14px 0"><label>Total paid actions <select id="mathSpins" style="display:block;padding:8px;margin-top:5px"><option>10000</option><option>25000</option><option>50000</option><option selected>100000</option></select></label><label>Seed <input id="mathSeed" value="20261024" type="number" style="display:block;padding:8px;margin-top:5px;width:150px"></label><label>Test plan <select id="mathMode" style="display:block;padding:8px;margin-top:5px"><option value="mixed">Mixed features (weighted)</option><option value="standard">Standard only</option><option value="ante">Ante only</option><option value="multi10">×10 multiplier only</option><option value="multi50">×50 multiplier only</option><option value="multi200">×200 multiplier only</option><option value="multi10-ante">×10 + Guardian Boost</option><option value="multi50-ante">×50 + Guardian Boost</option><option value="multi200-ante">×200 + Guardian Boost</option><option value="buy-normal">Normal Bonus Buy only</option><option value="buy-higher">Higher Bonus Buy only</option><option value="buy-mythic">Mythic Bonus Buy only</option><option value="extreme-spin">Extreme Spin only</option></select></label><button id="mathRun" style="padding:10px 15px;background:#ffe7a5;border:0;border-radius:8px;font-weight:800">RUN SIMULATION</button><button id="mathSelfTest" style="padding:10px 15px;background:#b9e8ff;border:0;border-radius:8px;font-weight:800">RUN ENGINE CHECKS</button></div><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px;margin:12px 0"><label style="font-size:12px">Standard %<input id="mix-standard" type="number" min="0" max="100" value="35" style="display:block;width:100%;padding:7px"></label><label style="font-size:12px">Ante %<input id="mix-ante" type="number" min="0" max="100" value="20" style="display:block;width:100%;padding:7px"></label><label style="font-size:12px">×10 %<input id="mix-multi10" type="number" min="0" max="100" value="10" style="display:block;width:100%;padding:7px"></label><label style="font-size:12px">×50 %<input id="mix-multi50" type="number" min="0" max="100" value="8" style="display:block;width:100%;padding:7px"></label><label style="font-size:12px">×200 %<input id="mix-multi200" type="number" min="0" max="100" value="5" style="display:block;width:100%;padding:7px"></label><label style="font-size:12px">Normal Buy %<input id="mix-buy-normal" type="number" min="0" max="100" value="8" style="display:block;width:100%;padding:7px"></label><label style="font-size:12px">Higher Buy %<input id="mix-buy-higher" type="number" min="0" max="100" value="5" style="display:block;width:100%;padding:7px"></label><label style="font-size:12px">Mythic Buy %<input id="mix-buy-mythic" type="number" min="0" max="100" value="4" style="display:block;width:100%;padding:7px"></label><label style="font-size:12px">Extreme %<input id="mix-extreme-spin" type="number" min="0" max="100" value="5" style="display:block;width:100%;padding:7px"></label></div><div id="mixTotal" style="font-weight:700;color:#ffe29a">Mix total: 100%</div><div id="mathSelfTestStatus" style="color:#b9e8ff;margin:10px 0">Deterministic checks not run yet.</div><div id="mathStatus" style="color:#ffe29a;margin:10px 0">Ready.</div><pre id="mathResults" style="white-space:pre-wrap;overflow-wrap:anywhere;background:#0b0814;border:1px solid #51416e;border-radius:10px;padding:14px;min-height:150px;color:#e8dfff">Choose a run size and click Run Simulation.</pre><p style="font-size:12px;color:#aaa1c3">Scope note: cluster detection and payout helpers are shared with the playable engine. Feature sequencing and random-number streams are still independently simulated. Run deterministic checks and multiple seeds; this output is not RTP certification.</p></div></div><div class="cinematic" id="cinematic"><div class="cinema-card"><div class="cinema-kicker" id="cinemaKicker">THE VAULT HAS CHOSEN</div><h2 class="cinema-title" id="cinemaTitle">GUARDIAN AWAKENED</h2><div class="cinema-mult" id="cinemaMult">×2</div><p class="cinema-copy" id="cinemaCopy">The bonus round begins.</p><button class="cinema-btn" id="cinemaBtn">ENTER THE BONUS</button></div></div><script>
+(()=>{try{
+ const layout=document.querySelector('.layout'), machine=document.querySelector('#machine'), sidebar=document.querySelector('.sidebar');
+ if(!layout||!machine||!sidebar||document.querySelector('#referenceGuardianRail'))return;
+ const left=document.createElement('section');left.className='card';left.id='referenceGuardianRail';left.innerHTML='<h3>GUARDIANS</h3>'+[
+ [8,'AETHER','THE SUPREME ONE','👑','#f4c76a'],[7,'OBLIVION','THE END BRINGER','🌑','#9b59ff'],[6,'SOLARA','STAR EMPRESS','🌟','#ffae42'],[5,'NEXUS','REALM WEAVER','🔷','#408bff'],[4,'VOID','RIFT WALKER','🌌','#9a63ff'],[3,'TIDAL','ABYSS KEEPER','🌊','#3cbfff'],[2,'INFERNO','FLAME SOVEREIGN','🔥','#ff563e'],[1,'TERRA','EARTHBOUND FURY','🌿','#58d78b']
+ ].map(g=>'<div class="ref-guardian"><span class="rank">'+g[0]+'</span><span class="portrait" style="color:'+g[4]+'">'+g[3]+'</span><span><b>'+g[1]+'</b><small>'+g[2]+'</small></span></div>').join('');
+ const right=document.createElement('aside');right.className='card';right.id='referenceBuyPanel';right.innerHTML='<h3>BUY FEATURE</h3><div class="ref-note">CHOOSE A BONUS ROUND</div>';
+ const modal=document.querySelector('#featureModal');
+ const defs=[['buyNormal','NORMAL BONUS','MAX MULTIPLIER','2×','🌿'],['buyHigher','HYPER BONUS','MAX MULTIPLIER','5×','🔷'],['buyMythic','MYTHIC BONUS','MAX MULTIPLIER','8×','🌟']];
+ defs.forEach(d=>{const src=document.getElementById(d[0]);const b=document.createElement('button');b.type='button';b.className='ref-buy';b.innerHTML='<span class="portrait">'+d[4]+'</span><span><b>'+d[1]+'</b><small>'+d[2]+'</small></span><strong>'+d[3]+'</strong>';b.addEventListener('click',()=>src&&src.click());right.appendChild(b);});
+ const note=document.createElement('div');note.className='ref-note';note.textContent='EPIC BONUS CANNOT BE BOUGHT. IT CAN ONLY BE TRIGGERED DURING NORMAL PLAY.';right.appendChild(note);
+ const extreme=document.createElement('button');extreme.type='button';extreme.id='referenceExtreme';extreme.innerHTML='<span><b>EXTREME SPIN</b><br><small>Higher chance · bigger rewards</small></span><strong>65×</strong>';extreme.addEventListener('click',()=>document.getElementById('extremeSpin')?.click());right.appendChild(extreme);
+ const oldCards=[...sidebar.querySelectorAll(':scope > .card')];const controls=oldCards.find(x=>x.querySelector('#featureForgeBtn'));const balance=oldCards.find(x=>x.querySelector('#balance'));
+ const bottom=document.createElement('section');bottom.id='referenceBottomControls';bottom.className='card';
+ if(balance){const bal=document.createElement('div');bal.className='balance-inline';bal.innerHTML='▣ BALANCE <strong id="referenceBalance">1,000.00</strong>';bottom.appendChild(bal);const sync=()=>{const x=document.getElementById('balance');const y=document.getElementById('referenceBalance');if(x&&y)y.textContent=x.textContent+'.00';};setInterval(sync,300);sync();}
+ if(controls){const bet=controls.querySelector('.betrow');const spin=controls.querySelector('#spin');const auto=controls.querySelector('.autoplay-row');const toggle=controls.querySelector('#autoToggle');const forge=controls.querySelector('#featureForgeBtn');const win=controls.querySelector('.winbox');const betWrap=document.createElement('div');betWrap.className='controls-bet';betWrap.innerHTML='<span>BET</span>';if(bet)betWrap.appendChild(bet);bottom.appendChild(betWrap);if(spin)bottom.appendChild(spin);const autoWrap=document.createElement('div');autoWrap.className='controls-auto';if(auto)autoWrap.appendChild(auto);if(toggle)autoWrap.appendChild(toggle);bottom.appendChild(autoWrap);const misc=document.createElement('div');if(forge)misc.appendChild(forge);if(win)misc.appendChild(win);bottom.appendChild(misc);}
+ layout.insertBefore(left,machine);layout.appendChild(right);layout.appendChild(bottom);
+ // Hide redundant legacy sidebar while retaining its untouched mechanics/IDs in the document.
+ sidebar.style.display='none';
+ }catch(e){console.warn('Reference layout enhancement:',e);}})();
+</script>
+<script>
 (()=>{'use strict';
 const C=8,R=6,BETS=[5,10,20,50],START=1000;
 const S=[
