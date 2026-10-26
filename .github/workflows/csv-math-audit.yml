@@ -1,0 +1,22 @@
+name: CSV math audit
+
+on:
+  push:
+    branches:
+      - 'fix/normalizer-column-mapping*'
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  csv-math-audit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Audit all CSV probability totals and weighted returns
+        run: node scripts/audit-csv-math.mjs
