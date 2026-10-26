@@ -3,6 +3,7 @@ name: CSV math audit
 on:
   push:
     branches:
+      - main
       - 'fix/normalizer-column-mapping*'
   pull_request:
     branches:
