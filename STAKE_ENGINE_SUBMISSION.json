@@ -138,9 +138,10 @@
     }
   },
   "deterministicChecks": {
-    "engineAuditStatus": "CERTIFIED_PASSING",
-    "totalChecks": 12,
-    "passedChecks": 12,
-    "simulationBenchmarkedSpins": 100000
+    "engineAuditStatus": "PENDING_OFFICIAL_STAKE_SDK_VALIDATION",
+    "totalChecks": 0,
+    "passedChecks": 0,
+    "simulationBenchmarkedSpins": 0,
+    "validationNotes": "Official Stake SDK publication validation and ACP approval are still pending."
   }
 }

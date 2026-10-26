@@ -1,6 +1,8 @@
 # ✧ The Forgotten Vault: Awakening
 ### Cosmic Cluster 8×6 Video Slot — Stake Engine & Stake Originals Platform Submission
 
+> NOTE: This repository is a prototype and local publication bundle intended for validation work. It is not a certified production Stake Engine deployment. Official Stake SDK validation, RGS compliance checks, and ACP approval are still pending.
+
 [![Stake Engine Ready](https://img.shields.io/badge/Stake%20Engine-Ready-00e701?style=for-the-badge&logo=stake)](https://stake.com)
 [![RTP](https://img.shields.io/badge/Target%20RTP-98.00%25-blueviolet?style=for-the-badge)](#mathematical-specifications)
 [![Volatility](https://img.shields.io/badge/Volatility-EXTREME-red?style=for-the-badge)](#game-mechanics)
@@ -13,9 +15,9 @@
 
 ## ✦ Overview
 
-**The Forgotten Vault: Awakening** is a production-ready, high-volatility 8×6 cluster slot machine engineered specifically for the **Stake Casino Engine** and Remote Gaming Server (RGS) architecture.
+**The Forgotten Vault: Awakening** is a production-ready, high-volatility 8×6 cluster slot machine engineered specifically for the **Stake Casino Engine** and Remote Gaming Server (RGS) architecture. This repo contains the local publication bundle, desktop prototype, and internal validation artifacts used to prepare the game for official Stake-side SDK and ACP review.
 
-Developed with self-contained Web Audio synthesis, zero-latency SVG asset rendering, and a fully audited mathematical model supporting customizable RTP targets (98.00% primary, 96.50% & 94.00% alternative profiles).
+The repository is a work-in-progress submission package rather than a certified production release.
 
 ---
 
@@ -61,29 +63,30 @@ Landing **4 or more Guardian masks** triggers the ancient bonus round with guara
 
 ## ✦ Stake Submission Files
 
-This repository contains the complete package for platform submission and math certification:
+This repository contains the local package assembled for Stake submission review:
 
 1. **`STAKE_ENGINE_SUBMISSION.json`**: Machine-readable game specification and RGS integration schema.
-2. **`GAME_DESIGN_DOCUMENT.md`**: Complete formal Game Design Document with math formulas and paytables.
+2. **`GAME_DESIGN_DOCUMENT.md`**: Formal Game Design Document with feature and rules notes.
 3. **`forgotten-vault-simulator-fix.html`**: Master self-contained game bundle and interactive Math Lab simulator.
-4. **`src/engine/`**: Standalone TypeScript provably fair slot engine and Monte Carlo validator.
+4. **`math/`**: Local publication bundle for validation review.
 
 ---
 
 ## ✦ Mathematical Verification & Diagnostics
 
-The built-in Math Lab test suite executes 100,000+ simulated spins and validates **12/12 deterministic assertions**:
-- ✓ Guardian tier payouts, rounds, and retrigger synchronization
-- ✓ Feature pricing formulas and payout calibration parity
-- ✓ Extreme Spin 100% odds distribution check
-- ✓ 100,000× max-win hard cap enforcement
-- ✓ 0 simulation errors over 1,000,000 test trials
+The built-in Math Lab test suite executes internal simulations and is used for local review. The current values are design targets and are not yet official Stake certification results.
+
+- **Target RTP:** 98.00%
+- **Volatility:** Extreme
+- **Max Win Cap:** 100,000×
+- **Official SDK validation:** pending
+- **ACP approval:** pending
 
 ---
 
 ## ✦ Provably Fair Implementation
 
-Implemented under the **Stake Provably Fair v2 Standard**:
+The prototype is intended to align with the **Stake Provably Fair v2 Standard**:
 - Server seed hashed via SHA-256 before spin placement.
 - Client seed fully player-customizable.
 - Deterministic outcome generator:
@@ -106,8 +109,8 @@ npm install
 npm run dev
 ```
 
-Visit `http://localhost:3000` to launch the game!
+Visit `http://localhost:3000` to launch the game.
 
 ---
 
-**Built by Rogue Vault Studios for Stake Engine**
+**Built by Rogue Vault Studios for Stake Engine review**

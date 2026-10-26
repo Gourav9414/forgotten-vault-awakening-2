@@ -10,24 +10,18 @@
 **Volatility Rating:** EXTREME  
 **Maximum Exposure Cap:** 100,000× Base Bet  
 
+> Validation status: this repository contains a local publication bundle and prototype logic for internal review only. Official Stake Engine SDK validation, ACP upload, and RGS compliance checks remain pending.
+
 ---
 
 ## 1. Executive Summary & Pitch
 
-**The Forgotten Vault: Awakening** is an intense, high-volatility cosmic slot machine that merges ancient cosmic artifact mythology with modern cluster-cascade dynamics. Set across 48 Sigil Chambers (8 columns × 6 rows), players unlock hidden vault chambers through consecutive clusters that trigger the escalating Hit Multiplier Ladder, culminating in the **100,000× Max Win** ("The Impossible Has Happened").
+**The Forgotten Vault: Awakening** is an intense, high-volatility cosmic slot machine that merges ancient cosmic artifact mythology with modern cluster-cascade dynamics. Set across 48 Sigil Chambers, the game uses stacked archetypal wins, cascading tumbles and escalating bonus triggers designed for high-roller Stake-style entertainment.
 
 ### Key Innovations for Stake Players:
 1. **8×6 Cosmic Cluster Pays:** Any 5 or more horizontally or vertically adjacent matching sigils form a winning cluster. Winning sigils burst, tumble downward, and draw fresh cosmic relics from above.
-2. **Guardian Awakening System:** Landing 4 or more Guardian masks unlocks escalating bonus tiers:
-   - **4 Guardians → Normal Bonus** (3 rounds, base ×2, max ×3)
-   - **5 Guardians → Higher Bonus** (5 rounds, base ×4, max ×5)
-   - **6–7 Guardians → Mythic Bonus** (6 rounds, base ×8, max ×8)
-   - **8+ Guardians → Epic Bonus** (8 rounds, base ×50, climbing to **×1,000** on the Epic ladder!)
-3. **Extreme Spin Mode (10× Bet):** Designed for high-roller Stake streaming entertainment:
-   - 50% chance: Ordinary board resolution
-   - 30% chance: Guaranteed Normal Bonus Round
-   - 15% chance: Guaranteed Mythic Bonus Round
-   - 5% chance: Guaranteed Epic Bonus Round (×50 to ×1,000 multiplier!)
+2. **Guardian Awakening System:** Landing 4 or more Guardian masks unlocks escalating bonus tiers.
+3. **Extreme Spin Mode (10× Bet):** Designed for high-roller Stake streaming entertainment.
 4. **Multiplier Modes & Direct Bonus Buys:** Instant feature buy access from 2.25× up to 75× bet for single-spin persistent multipliers (×10, ×50, ×200).
 
 ---
@@ -82,27 +76,22 @@ Consecutive winning cascades climb the chamber's Multiplier Ladder. Progress car
 
 ## 5. Mathematical Calibration & Simulation Diagnostics
 
-The game includes the integrated **Math Lab diagnostic test suite** verifying 100,000+ spins:
+This repository contains a local Math Lab diagnostic test suite intended for internal review and publication bundle checks. The release is not yet certified by the official Stake SDK or ACP workflow.
 
-- **Target Return to Player (RTP):** 98.00%
-- **Hit Frequency:** ~28.6%
-- **Max Win Cap:** 100,000× base bet enforced with ceiling clamp
-- **Error Rate:** 0 simulation errors over 1,000,000 Monte Carlo trials
-- **Test Suite Results:** All 12/12 deterministic verification assertions pass with zero failures:
-  - Canonical Guardian tiers match rounds, multipliers, and retriggers (PASS)
-  - Canonical feature prices match requested configuration (PASS)
-  - Multiplier labels and runtime values agree (PASS)
-  - Payout calibration factors exist for every paid mode (PASS)
-  - Live and simulator use the same mode-level payout factor (PASS)
-  - Extreme Spin no-bonus outcome resolves visible board (PASS)
-  - Extreme Spin odds total 100% (PASS)
-  - Global max-win cap is 100,000× (PASS)
+The current local validation status is:
+
+- **Target Return to Player (RTP):** 98.00% (design target only)
+- **Hit Frequency:** ~28.6% (design target only)
+- **Max Win Cap:** 100,000× base bet (design target only)
+- **Official SDK validation:** Pending
+- **RGS compliance validation:** Pending
+- **ACP upload acceptance:** Pending
 
 ---
 
 ## 6. Stake Provably Fair Compliance
 
-The game complies with the **Stake Provably Fair v2 Standard**:
+The game design intends to align with the **Stake Provably Fair v2 Standard**:
 
 ```
 hash = HMAC_SHA256(serverSeed, clientSeed + ":" + nonce)
@@ -110,7 +99,9 @@ hash = HMAC_SHA256(serverSeed, clientSeed + ":" + nonce)
 
 1. **Pre-Spin Commitment:** The SHA-256 hash of the server seed is delivered to the client prior to placing the wager.
 2. **Client Seed Freedom:** The player may customize their client seed at any time.
-3. **Deterministic Verification:** Once the server seed is revealed upon rotation, the player can verify every single tile position, cascade sequence, and cluster payout using the built-in Provably Fair Verifier.
+3. **Deterministic Verification:** Once the server seed is revealed, the player can verify the board, cascades, and cluster payout using the built-in verification process.
+
+The repository is intended as a public-facing prototype and not as a certified production deployment until the official Stake validation process is complete.
 
 ---
 
@@ -148,4 +139,4 @@ hash = HMAC_SHA256(serverSeed, clientSeed + ":" + nonce)
 
 ## 8. Summary for Stake Review Team
 
-**The Forgotten Vault: Awakening** is fully self-contained, requires no external dependencies or remote asset CDNs, features ultra-smooth CSS/SVG rendering with zero lag, and has passed all mathematical diagnostics. It is ready for deployment onto the Stake platform.
+**The Forgotten Vault: Awakening** is a self-contained prototype and publication bundle intended for local validation, engineering review and future ACP submission. It is not yet a production-certified Stake Engine deployment. Official SDK validation, ACP acceptance, and RGS integration approval remain pending.
