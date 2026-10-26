@@ -1,0 +1,22 @@
+name: Normalizer regression tests
+
+on:
+  push:
+    branches:
+      - 'fix/normalizer-column-mapping*'
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  normalizer-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Run normalizer regression tests
+        run: node --test scripts/normalize-math-publication.test.mjs
