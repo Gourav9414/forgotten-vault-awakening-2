@@ -141,8 +141,8 @@ async function main() {
   const maxWinCap = 100000;
 
   for (const mode of manifest.modes ?? []) {
-    const tablePath = path.join(repoRoot, mode.lookup ?? mode.table ?? mode.weights ?? '');
-    const logicPath = path.join(repoRoot, mode.book ?? mode.events ?? mode.game_logic ?? '');
+    const tablePath = path.join(mathDir, mode.lookup ?? mode.table ?? mode.weights ?? '');
+    const logicPath = path.join(mathDir, mode.book ?? mode.events ?? mode.game_logic ?? '');
 
     if (!mode.lookup && !mode.table && !mode.weights) {
       problems.push(`${mode.name}: mode entry does not include a lookup file reference.`);
