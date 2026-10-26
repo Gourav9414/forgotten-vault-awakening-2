@@ -64,6 +64,26 @@ button:hover{filter:brightness(1.12)}
 @media(max-width:700px){.app{padding:9px}.top{align-items:flex-start;flex-wrap:wrap}.top .actions{flex-wrap:wrap;justify-content:flex-end}.hero:before{letter-spacing:.6em}.machine{padding:8px!important}.board{gap:3px!important}.card{padding:12px!important}}
 @media(prefers-reduced-motion:reduce){body:before{animation:none}*,*:before,*:after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 
+
+/* Phase 2: richer symbol rendering and readable cinematic tile states; visual-only */
+.tile{position:relative;isolation:isolate;overflow:hidden;border:1px solid #8060ad;background:radial-gradient(ellipse at 50% 24%,#5c397b 0%,#241637 48%,#0b0817 100%);box-shadow:inset 0 1px #fff3,inset 0 -12px 18px #03020a99,0 3px 7px #0009;transition:border-color .22s,box-shadow .22s,transform .22s,filter .22s}
+.tile:before{content:"";position:absolute;inset:1px;border-radius:6px;pointer-events:none;background:linear-gradient(135deg,#fff2,transparent 28%,transparent 70%,#d5a5ff0c);z-index:1}
+.tile:after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.55;background:radial-gradient(ellipse at 50% 50%,transparent 35%,#03020b66 100%);z-index:1}
+.tile svg{position:relative;z-index:2;width:88%;height:88%;filter:drop-shadow(0 0 4px #cda0ff55) drop-shadow(0 4px 5px #000c);transition:transform .25s,filter .25s}
+.tile:hover svg{transform:translateY(-2px) scale(1.06);filter:drop-shadow(0 0 9px #f5d28b99) drop-shadow(0 4px 5px #000c)}
+.tile.guardian-tile{border-color:#e6b86e;background:radial-gradient(ellipse at 50% 35%,#9d4f58 0%,#422044 48%,#130b20 100%);box-shadow:inset 0 0 15px #ffbf6840,0 0 9px #e9a25d22}
+.tile.guardian-tile svg{filter:drop-shadow(0 0 7px #ffb66a99) drop-shadow(0 3px 4px #000)}
+.tile.wild-tile{border-color:#8deeff;background:radial-gradient(ellipse at 50% 35%,#167aa3 0%,#152b51 52%,#080a19 100%);box-shadow:inset 0 0 18px #5be8ff33,0 0 10px #37c8ff22}
+.tile.wild-tile svg{filter:drop-shadow(0 0 8px #66eaffaa)}
+.tile.special:not(.guardian-tile):not(.wild-tile){border-color:#d58fff;background:radial-gradient(ellipse at 50% 35%,#713d9a 0%,#28183f 55%,#0d091b 100%);box-shadow:inset 0 0 14px #cf82ff26}
+.tile.win{z-index:4;border-color:#fff0b4;background:radial-gradient(ellipse,#fff0b4 0%,#c28bff 20%,#42265e 68%,#130b22 100%);box-shadow:0 0 0 1px #fff2b877,0 0 14px #ffe6a5,0 0 32px #b96cff88,inset 0 0 20px #fff5;animation:cinematicWinPulse .38s ease-in-out infinite alternate}
+.tile.win svg{filter:drop-shadow(0 0 10px #fff4b8) brightness(1.3);transform:scale(1.08)}
+@keyframes cinematicWinPulse{from{transform:scale(.94);filter:brightness(1)}to{transform:scale(1.025);filter:brightness(1.35)}}
+.reels-running .tile.reel-spin svg{filter:blur(2px) brightness(1.6) drop-shadow(0 0 8px #a86bff);transform:scale(.92)}
+.reels-running .tile.reel-stop{border-color:#ffe4a3;box-shadow:0 0 12px #e6b86e77,inset 0 1px #fff5}
+#board{perspective:900px;transform-style:preserve-3d}
+@media(max-width:520px){.tile{border-radius:4px}.tile svg{width:94%;height:94%}}
+
 </style><style>
 /* Consolidated v18 polish: subtle build marker and accessible focus states */
 :focus-visible{outline:2px solid #e8c66d;outline-offset:3px}
