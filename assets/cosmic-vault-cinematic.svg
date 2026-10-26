@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice">
+<defs>
+ <linearGradient id="sky" x2="0" y2="1"><stop stop-color="#09051c"/><stop offset=".45" stop-color="#211044"/><stop offset=".78" stop-color="#100b2a"/><stop offset="1" stop-color="#03040d"/></linearGradient>
+ <radialGradient id="nebula"><stop stop-color="#a94cff" stop-opacity=".72"/><stop offset=".4" stop-color="#5634c8" stop-opacity=".36"/><stop offset="1" stop-color="#1b0c3b" stop-opacity="0"/></radialGradient>
+ <radialGradient id="portal"><stop stop-color="#fff4c2"/><stop offset=".12" stop-color="#ffdc85"/><stop offset=".28" stop-color="#bf75ff"/><stop offset=".55" stop-color="#5933cb" stop-opacity=".7"/><stop offset="1" stop-color="#29124c" stop-opacity="0"/></radialGradient>
+ <linearGradient id="gold" x2="1" y2="1"><stop stop-color="#fff0b2"/><stop offset=".28" stop-color="#c99446"/><stop offset=".55" stop-color="#f5d98b"/><stop offset="1" stop-color="#4e2d69"/></linearGradient>
+ <linearGradient id="stone" x2="1" y2="1"><stop stop-color="#563778"/><stop offset=".4" stop-color="#21172f"/><stop offset="1" stop-color="#070711"/></linearGradient>
+ <linearGradient id="fall" x2="0" y2="1"><stop stop-color="#a7f8ff" stop-opacity=".1"/><stop offset=".5" stop-color="#63aaff" stop-opacity=".8"/><stop offset="1" stop-color="#9c5cff" stop-opacity=".05"/></linearGradient>
+ <filter id="blur"><feGaussianBlur stdDeviation="30"/></filter>
+ <filter id="glow"><feGaussianBlur stdDeviation="7" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+ <pattern id="stars" width="173" height="151" patternUnits="userSpaceOnUse"><circle cx="12" cy="22" r="1.5" fill="#fff0c0"/><circle cx="76" cy="48" r="1" fill="#bca7ff"/><circle cx="132" cy="19" r="1.4" fill="#9beeff"/><circle cx="48" cy="112" r="1.2" fill="#fff"/><circle cx="154" cy="91" r=".8" fill="#e4c6ff"/><path d="M104 128v7m-3.5-3.5h7" stroke="#ffe7a3" stroke-width=".7"/></pattern>
+</defs>
+<rect width="1600" height="1000" fill="url(#sky)"/>
+<ellipse cx="800" cy="210" rx="700" ry="360" fill="url(#nebula)"/>
+<ellipse cx="800" cy="140" rx="390" ry="290" fill="url(#portal)" opacity=".95"/>
+<g fill="none" stroke-linecap="round" filter="url(#glow)" opacity=".8"><ellipse cx="800" cy="150" rx="250" ry="102" stroke="#c68bff" stroke-width="7" transform="rotate(-15 800 150)"/><ellipse cx="800" cy="150" rx="205" ry="80" stroke="#ffe7a3" stroke-width="3" transform="rotate(18 800 150)"/><ellipse cx="800" cy="150" rx="305" ry="125" stroke="#794cff" stroke-width="5" transform="rotate(8 800 150)"/></g>
+<rect width="1600" height="1000" fill="url(#stars)" opacity=".85"/>
+<!-- distant broken celestial spires -->
+<g fill="#100b25" stroke="#8c62bd" stroke-opacity=".6" stroke-width="3">
+<path d="M390 600 410 310 431 350 448 250 466 600Z"/><path d="M490 550 516 365 535 392 555 302 574 590Z"/><path d="M1018 590 1040 360 1058 390 1084 260 1104 610Z"/><path d="M1132 600 1153 310 1174 350 1195 230 1218 630Z"/>
+<path d="M640 510 660 380 675 410 695 330 714 510Z"/><path d="M880 510 901 380 920 405 938 326 960 540Z"/>
+</g>
+<!-- monumental side pillars -->
+<g stroke="url(#gold)" stroke-width="5">
+<path d="M0 1000V245L62 170 124 245V1000Z" fill="url(#stone)"/><path d="M12 1000V255L62 202 112 255V1000Z" fill="none" stroke-opacity=".6"/>
+<path d="M1600 1000V245L1538 170 1476 245V1000Z" fill="url(#stone)"/><path d="M1588 1000V255L1538 202 1488 255V1000Z" fill="none" stroke-opacity=".6"/>
+</g>
+<g fill="none" stroke="#73dcff" stroke-width="7" filter="url(#glow)" opacity=".78"><path d="M98 300Q110 420 94 600T105 900"/><path d="M1502 300Q1490 420 1506 600T1495 900"/></g>
+<g fill="url(#gold)" stroke="#170c2a" stroke-width="5">
+<path d="M0 260 62 138 124 260 105 281 62 218 19 281Z"/><path d="M1600 260 1538 138 1476 260 1495 281 1538 218 1581 281Z"/>
+<path d="M0 600 62 548 124 600 110 624 62 590 14 624Z"/><path d="M1600 600 1538 548 1476 600 1490 624 1538 590 1586 624Z"/>
+</g>
+<!-- suspended islands -->
+<g fill="url(#stone)" stroke="#9c73cb" stroke-width="2"><path d="M150 690 260 665 312 704 276 741 205 733Z"/><path d="M1288 710 1390 672 1450 704 1416 742 1340 740Z"/><path d="M390 790 440 770 476 800 455 824 416 821Z"/><path d="M1130 800 1170 770 1212 796 1191 825 1150 822Z"/></g>
+<!-- luminous falls -->
+<path d="M205 400Q220 570 190 820L230 850Q240 590 228 400Z" fill="url(#fall)" filter="url(#glow)"/><path d="M1390 400Q1370 570 1410 820L1370 850Q1360 590 1370 400Z" fill="url(#fall)" filter="url(#glow)"/>
+<!-- foreground broken platform -->
+<path d="M0 845 120 815 260 848 365 817 500 855 630 830 800 858 960 827 1110 852 1240 818 1390 848 1510 814 1600 844V1000H0Z" fill="url(#stone)" stroke="#d0a55d" stroke-width="5"/>
+<path d="M0 885 160 862 310 900 480 872 650 908 800 882 970 910 1140 875 1300 903 1460 868 1600 888" fill="none" stroke="#a57bd4" stroke-width="3" opacity=".7"/>
+<g fill="none" stroke="#f4d18a" stroke-width="3" opacity=".9"><path d="M620 1000 800 875 980 1000"/><path d="M700 1000 800 913 900 1000"/><ellipse cx="800" cy="902" rx="150" ry="30"/><ellipse cx="800" cy="902" rx="95" ry="18"/></g>
+<g fill="#fff1b0" filter="url(#glow)"><circle cx="800" cy="875" r="5"/><circle cx="62" cy="540" r="5"/><circle cx="1538" cy="540" r="5"/><circle cx="260" cy="665" r="4"/><circle cx="1390" cy="672" r="4"/></g>
+<rect width="1600" height="1000" fill="#080515" opacity=".16"/>
+</svg>
