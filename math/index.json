@@ -5,7 +5,7 @@
   "math_specification_version": "2.0.0",
   "target_rtp": 0.98,
   "status": "PENDING_OFFICIAL_STAKE_SDK_VALIDATION",
-  "notes": "This bundle is intended for local validation and static review only. Official Stake Engine publication acceptance still requires SDK validation, RGS compliance checks, and ACP approval.",
+  "notes": "This bundle is a local publication candidate for validation review. Official Stake SDK publication acceptance, ACP upload and RGS approval remain pending.",
   "modes": [
     {
       "name": "standard",
