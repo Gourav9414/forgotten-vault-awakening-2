@@ -106,6 +106,34 @@ body.turbo-mode .tile.guardian-tile:not(.win){animation-duration:.8s!important}
 body.turbo-mode .tile.win{animation-duration:.18s,.45s!important}
 body.turbo-mode .toast{transition-duration:.1s!important}
 
+
+/* CINEMATIC VISUAL PASS — live playable UI */
+body{background-color:#070511;background-image:linear-gradient(180deg,rgba(4,2,16,.08),rgba(5,3,17,.22) 35%,rgba(5,3,17,.72) 100%),url('https://raw.githubusercontent.com/Gourav9414/forgotten-vault-awakening-2/main/assets/cosmic-vault-backdrop.svg'),radial-gradient(ellipse at 50% 0%,#4c267b 0%,#15102c 43%,#05040c 100%);background-position:center top;background-size:cover;background-attachment:fixed}
+body:after{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.24;background:linear-gradient(115deg,transparent 0%,#a56dff10 28%,transparent 46%,#56dffff0 49%,transparent 51%),radial-gradient(ellipse at 50% 0%,transparent 20%,#05030a66 100%);mix-blend-mode:screen;animation:vaultAura 12s ease-in-out infinite alternate}
+@keyframes vaultAura{from{opacity:.12;filter:hue-rotate(0deg)}to{opacity:.3;filter:hue-rotate(18deg)}}
+.app{max-width:1520px;padding:clamp(10px,1.5vw,22px)}
+.brand .logo{background:linear-gradient(145deg,#54378a,#171026 58%,#3a245b);border:1px solid #f3d18a;box-shadow:0 0 22px #a96cff55,inset 0 0 16px #ffe6a022;text-shadow:0 0 15px #f7d78c}
+.brand h1,.hero h2{background:linear-gradient(180deg,#fff6d7 5%,#f5cf79 48%,#b9752c 90%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 3px 10px #7b35d777)}
+.hero{position:relative;padding:15px 12px 18px;margin:12px 0 15px;border:1px solid #d4ae6a66;border-radius:18px;background:linear-gradient(90deg,transparent,#130b25b8 22%,#130b25d9 50%,#130b25b8 78%,transparent);box-shadow:0 0 38px #813bff22}
+.hero:before{content:"✦  ✧  ✦";display:block;color:#f5d88f;letter-spacing:1.1em;font-size:12px;text-shadow:0 0 15px #bb7aff}
+.machine,.card{border-color:#c79a58;background:linear-gradient(145deg,rgba(38,22,60,.94),rgba(7,6,20,.94) 72%);box-shadow:0 18px 50px #000b,0 0 26px #8d4dff25,inset 0 1px #fff3,inset 0 0 0 2px #d8ac5c12}
+.machine{position:relative;overflow:hidden}
+.machine:before{content:"";position:absolute;inset:0;pointer-events:none;border-radius:inherit;background:linear-gradient(115deg,#fff0 0%,#e7c46b0a 32%,#c28aff10 50%,#fff0 68%);background-size:220% 100%;animation:frameSheen 9s linear infinite}
+@keyframes frameSheen{from{background-position:200% 0}to{background-position:-20% 0}}
+.frame{border:2px solid #d7b76d;background:linear-gradient(145deg,#50336c,#171027 45%,#070611);box-shadow:0 0 0 2px #56357c,0 0 30px #a85cff42,0 0 55px #e4b65a17,inset 0 0 24px #c78bff17}
+.tile{border:1px solid #8b6a9e;background:linear-gradient(145deg,#3b2855 0%,#171126 55%,#090712 100%);box-shadow:inset 0 1px #fff3,inset 0 -8px 18px #0008,0 2px 4px #0009}
+.tile svg{filter:drop-shadow(0 0 4px #b88bff55) drop-shadow(0 2px 3px #000d)}
+.tile.win{border-color:#fff0a6;box-shadow:0 0 8px #ffdf77,0 0 23px #ffbf4caa,inset 0 0 14px #fff2a955}
+.spin{position:relative;overflow:hidden;background:linear-gradient(115deg,#fff0b5,#e3ad48 35%,#fff0a8 50%,#b87828 72%,#ffe8a2);background-size:220% 100%;box-shadow:0 0 18px #e9b95355,inset 0 1px #fff9;color:#24122f;animation:spinButtonGleam 5s linear infinite}
+@keyframes spinButtonGleam{from{background-position:200% 0}to{background-position:-20% 0}}
+.buttons button,.sound,.step,.autoplay-toggle{border-color:#8d6baf;background:linear-gradient(145deg,#302043,#141020);box-shadow:inset 0 1px #fff2,0 3px 10px #0005}
+.card h3{color:#f0d18a;text-shadow:0 0 10px #e2ae4d33}
+.cinematic{background:radial-gradient(ellipse at 50% 38%,#6635aacc 0%,#140b2aee 46%,#030209f7 100%);backdrop-filter:blur(10px)}
+.cinema-card{position:relative;overflow:hidden;border:1px solid #f1d28a;background:linear-gradient(150deg,#35204f,#100a20 60%,#080610);box-shadow:0 0 0 2px #6b438b,0 0 70px #a86aff88,inset 0 0 35px #f2ca7818}
+.cinema-card:before{content:"✧";position:absolute;top:-38px;left:calc(50% - 48px);font-size:96px;color:#f5d47e;text-shadow:0 0 28px #9f5cff;opacity:.5}
+@media(max-width:850px){.app{padding:8px}.hero{margin:8px 0 10px}.layout{grid-template-columns:minmax(0,1fr)}.sidebar{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.board-area{grid-template-columns:minmax(0,1fr) 88px}.machine,.card{padding:9px}}
+@media(prefers-reduced-motion:reduce){body:after,.machine:before,.spin{animation:none!important;transition:none!important}}
+
 </style><style>
 /* Consolidated v18 polish: subtle build marker and accessible focus states */
 :focus-visible{outline:2px solid #e8c66d;outline-offset:3px}
