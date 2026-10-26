@@ -1,0 +1,81 @@
+{
+  "game_id": "forgotten-vault-awakening-2",
+  "title": "The Forgotten Vault: Awakening",
+  "version": "1.0.4",
+  "math_specification_version": "2.0.0",
+  "target_rtp": 0.98,
+  "modes": [
+    {
+      "name": "standard",
+      "cost": 1.0,
+      "rtp": 0.98,
+      "max_win": 100000,
+      "table": "lookup_tables/standard.csv",
+      "game_logic": "game_logic/standard.jsonl.zst"
+    },
+    {
+      "name": "ante",
+      "cost": 1.0,
+      "rtp": 0.98,
+      "max_win": 100000,
+      "table": "lookup_tables/ante.csv",
+      "game_logic": "game_logic/ante.jsonl.zst"
+    },
+    {
+      "name": "multi10",
+      "cost": 10.0,
+      "rtp": 0.98,
+      "max_win": 100000,
+      "table": "lookup_tables/multi10.csv",
+      "game_logic": "game_logic/multi10.jsonl.zst"
+    },
+    {
+      "name": "multi50",
+      "cost": 30.0,
+      "rtp": 0.98,
+      "max_win": 100000,
+      "table": "lookup_tables/multi50.csv",
+      "game_logic": "game_logic/multi50.jsonl.zst"
+    },
+    {
+      "name": "multi200",
+      "cost": 75.0,
+      "rtp": 0.98,
+      "max_win": 100000,
+      "table": "lookup_tables/multi200.csv",
+      "game_logic": "game_logic/multi200.jsonl.zst"
+    },
+    {
+      "name": "buy-normal",
+      "cost": 2.25,
+      "rtp": 0.98,
+      "max_win": 100000,
+      "table": "lookup_tables/buy-normal.csv",
+      "game_logic": "game_logic/buy-normal.jsonl.zst"
+    },
+    {
+      "name": "buy-higher",
+      "cost": 4.5,
+      "rtp": 0.98,
+      "max_win": 100000,
+      "table": "lookup_tables/buy-higher.csv",
+      "game_logic": "game_logic/buy-higher.jsonl.zst"
+    },
+    {
+      "name": "buy-mythic",
+      "cost": 8.0,
+      "rtp": 0.98,
+      "max_win": 100000,
+      "table": "lookup_tables/buy-mythic.csv",
+      "game_logic": "game_logic/buy-mythic.jsonl.zst"
+    },
+    {
+      "name": "extreme-spin",
+      "cost": 10.0,
+      "rtp": 0.98,
+      "max_win": 100000,
+      "table": "lookup_tables/extreme-spin.csv",
+      "game_logic": "game_logic/extreme-spin.jsonl.zst"
+    }
+  ]
+}
