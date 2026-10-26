@@ -21,8 +21,8 @@ async function main() {
   }
 
   for (const mode of manifest.modes) {
-    const modePath = path.join(repoRoot, mode.lookup || mode.table || mode.weights || '');
-    const logicPath = path.join(repoRoot, mode.book || mode.events || mode.game_logic || '');
+    const modePath = path.join(mathDir, mode.lookup || mode.table || mode.weights || '');
+    const logicPath = path.join(mathDir, mode.book || mode.events || mode.game_logic || '');
     if (!mode.lookup && !mode.table) {
       throw new Error(`Mode ${mode.name} requires a lookup path.`);
     }
@@ -37,7 +37,7 @@ async function main() {
     }
   }
 
-  console.log('Manifest validated: required keys are present and mode file references resolve.');
+  console.log('Local manifest/path validation passed. This script is not the official Stake Engine SDK validator.');
 }
 
 main().catch((err) => {
