@@ -58,3 +58,12 @@ jobs:
               });
             '
           done
+
+      - name: Inspect book record schema for consistency audit
+        shell: bash
+        run: |
+          set -euo pipefail
+          for book in math/game_logic/*.jsonl.zst; do
+            echo "SCHEMA SAMPLE $book"
+            zstd -dc "$book" | sed -n '1p'
+          done
