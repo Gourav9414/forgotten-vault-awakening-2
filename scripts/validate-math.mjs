@@ -131,6 +131,16 @@ async function main() {
     'extreme-spin',
   ];
 
+  if (new Set((manifest.modes ?? []).map((mode) => mode.name)).size !== (manifest.modes ?? []).length) {
+    problems.push('Manifest contains duplicate mode names.');
+  }
+  if (manifest.target_rtp !== 0.98) {
+    warnings.push(`Manifest target RTP is ${manifest.target_rtp}; expected project target is 0.98.`);
+  }
+  if (manifest.status !== 'PENDING_OFFICIAL_STAKE_SDK_VALIDATION') {
+    warnings.push(`Unexpected publication status: ${manifest.status}.`);
+  }
+
   const modeNames = (manifest.modes ?? []).map((mode) => mode.name);
   for (const expected of expectedModeNames) {
     if (!modeNames.includes(expected)) {
@@ -181,6 +191,15 @@ async function main() {
     const ids = rows.map((row) => row.id);
     if (new Set(ids).size !== ids.length) {
       problems.push(`${mode.name}: Duplicate CSV ids found.`);
+    }
+    if (rows.some((row) => !Number.isSafeInteger(row.id) || row.id < 0)) {
+      problems.push(`${mode.name}: CSV ids must be non-negative safe integers.`);
+    }
+    if (rows.some((row) => row.second < 0 || row.third < 0)) {
+      problems.push(`${mode.name}: CSV payout/weight/probability values must not be negative.`);
+    }
+    if (rows.length !== 500) {
+      warnings.push(`${mode.name}: Expected 500 lookup rows for the current candidate, found ${rows.length}.`);
     }
 
     const sortedIds = [...ids].sort((a, b) => a - b);
