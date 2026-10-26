@@ -153,6 +153,64 @@ body:after{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opaci
 @media(max-width:850px){.app{padding:8px}.hero{margin:8px 0 10px}.layout{grid-template-columns:minmax(0,1fr)}.sidebar{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.board-area{grid-template-columns:minmax(0,1fr) 88px}.machine,.card{padding:9px}}
 @media(prefers-reduced-motion:reduce){body:after,.machine:before,.spin{animation:none!important;transition:none!important}}
 
+
+/* FINAL REFERENCE INTEGRATION — cosmic gold cabinet, guardian rail, centered 8×6 board */
+:root{--bg:#070611;--panel:#100b18;--gold:#ffd56f;--purple:#9b4dff;--muted:#e0d1f4;--line:#a56b26}
+body{background:linear-gradient(180deg,rgba(4,3,14,.12),rgba(4,3,14,.28) 50%,rgba(4,3,14,.55)),url('https://raw.githubusercontent.com/Gourav9414/forgotten-vault-awakening-2/main/assets/cosmic-vault-cinematic.svg') center center/cover fixed,#070611}
+body:after{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;background:radial-gradient(ellipse at center,transparent 35%,#02010866 100%);box-shadow:inset 0 0 100px #0008}
+.app{max-width:1800px;width:100%;padding:12px 16px 10px;z-index:1}
+.top{position:relative;justify-content:flex-end;min-height:46px;margin-bottom:2px}
+.brand{position:absolute;left:50%;top:0;transform:translateX(-50%);justify-content:center;min-width:0;z-index:3;text-align:center}
+.brand .logo{display:none}
+.brand h1{font-family:Georgia,'Times New Roman',serif;font-size:clamp(23px,3vw,46px);line-height:.95;letter-spacing:.04em;color:#ffdf83;text-shadow:0 3px 0 #5e2509,0 0 12px #ff9b24,0 0 28px #a34dff;border:0;padding:0;background:none}
+.brand small{display:block;color:#ffe2ff;font-weight:900;font-size:clamp(9px,1vw,15px);letter-spacing:.48em;text-shadow:0 0 10px #ad43ff}
+.actions{margin-left:auto;z-index:4;align-self:flex-start}
+.tag{display:none}
+.sound{border:1px solid #e4b64e!important;border-radius:13px!important;background:linear-gradient(145deg,#21131b,#07060b)!important;color:#fff0bf!important;box-shadow:0 0 12px #ffb52b33,inset 0 1px #fff3}
+.hero{margin:38px auto 10px;min-height:34px}
+.hero>small,.hero h2,.hero p{display:none}
+.layout{grid-template-columns:minmax(205px, .85fr) minmax(480px,2.45fr) minmax(220px,.9fr);gap:10px;align-items:stretch}
+.machine{grid-column:2;grid-row:1;min-width:0;padding:9px;border:2px solid #d99b35;border-radius:18px;background:linear-gradient(145deg,#140c20eF,#05040bed);box-shadow:0 0 0 2px #542b17,0 0 28px #ff9d2b44,inset 0 0 20px #ffcb5418;position:relative}
+.machine:before{content:"";position:absolute;inset:3px;border:1px solid #ffe2a05c;border-radius:12px;pointer-events:none}
+.machine-head{color:#ffdda0;margin:0 4px 7px;font-size:11px}
+.machine-head b{color:#ffe18a;text-shadow:0 0 10px #ff9d2b;letter-spacing:.15em}
+.frame{padding:6px;border:2px solid #eab447;border-radius:13px;background:linear-gradient(145deg,#6c3718,#160b18 25%,#06050b 80%,#a86421);box-shadow:0 0 0 2px #49210f,0 0 22px #ff9c2b44,inset 0 0 20px #ffc04a22}
+.board-area{display:block}
+.board{gap:4px;aspect-ratio:8/6;max-height:calc(100vh - 300px);min-height:390px;grid-template-columns:repeat(8,minmax(0,1fr));}
+.tile{border:1px solid #b57a2c;border-radius:6px;background:linear-gradient(145deg,#25212e,#09080f 75%);box-shadow:inset 0 1px #fff2,inset 0 -5px 10px #000a,0 2px 3px #000a;overflow:hidden}
+.tile svg{width:94%;height:94%;filter:drop-shadow(0 0 5px #000) drop-shadow(0 0 5px currentColor)}
+.mult-ladder{display:none}
+.trigger-count{margin:6px 4px 0;color:#ffda8c}
+.foot{margin:6px 4px 0;color:#f4d9a2}
+.sidebar{display:contents}
+.sidebar>.card{min-width:0;border:2px solid #b9802c;border-radius:14px;padding:11px;background:linear-gradient(145deg,#170d1cfa,#05040bf5);box-shadow:0 0 0 2px #49210f,0 0 18px #ffb02b2c,inset 0 0 15px #ffcc5310}
+.sidebar>.card h3{font-size:clamp(10px,.9vw,14px);text-align:center;color:#ffdc76;letter-spacing:.1em;text-shadow:0 0 9px #ff9b2b;margin-bottom:10px}
+.sidebar>.guardian-key,.sidebar>.card:has(.guardian-key){grid-column:1;grid-row:1;align-self:start}
+.sidebar>.balance-card{grid-column:1;grid-row:2;align-self:start}
+.sidebar>.card:has(.feature-options),.sidebar>.card:has(#featureForgeBtn){grid-column:3;grid-row:1;align-self:start}
+.sidebar>.card:has(.feature){grid-column:3;grid-row:2;align-self:start}
+.sidebar>.rules{grid-column:3;grid-row:3;align-self:start}
+.guardian-key{display:flex;flex-direction:column;gap:6px}
+.guardian-key>div{display:flex;align-items:center;gap:9px;padding:6px;border:1px solid #a87934;border-radius:9px;background:linear-gradient(100deg,#25172b,#0b0810)}
+.guardian-mini{width:48px;height:48px;flex:0 0 48px}
+.guardian-key p{font-size:10px;line-height:1.35}
+.guardian-key b{color:#ffe3a0}
+.balance{font-size:clamp(22px,2vw,32px);color:#fff0bd}
+.balance-card .stats{color:#d9c6ec}
+.betrow{justify-content:center;gap:13px}
+.step{border-color:#d9a443;background:linear-gradient(145deg,#28191b,#09070c);color:#ffe17a;box-shadow:0 0 8px #ffb02b22}
+.spin{width:min(100%,300px);display:block;margin:12px auto 8px;min-height:76px;border:3px solid #ffe19a;border-radius:50%;aspect-ratio:1/1;max-width:108px;padding:12px;background:radial-gradient(circle at 35% 25%,#ffec9c,#ff9b2d 35%,#c52bdf 60%,#3c105e 78%);color:#fff3ad;font-size:0;box-shadow:0 0 0 5px #6c3517,0 0 0 8px #e4ad40,0 0 28px #ff8d2d,inset 0 0 20px #fff8;position:relative}
+.spin:after{content:"⟳";font-size:60px;line-height:1;text-shadow:0 2px 0 #9b3113,0 0 15px #fff5}
+.buttons button,.autoplay-toggle,.forge-btn{border:1px solid #e0ac43!important;background:linear-gradient(145deg,#21151b,#09070b)!important;color:#ffe8a6!important;box-shadow:0 0 8px #ffb02b1c}
+.feature-option{border-color:#bc7e30!important;background:linear-gradient(100deg,#142b1c,#07100c 75%)!important}
+.feature-option:nth-of-type(2){background:linear-gradient(100deg,#102e50,#070d1a 75%)!important}
+.feature-option:nth-of-type(3){background:linear-gradient(100deg,#472b10,#100a08 75%)!important}
+.winbox{border-color:#9b6b2a;background:#110b14}
+.footer{color:#dfc69d;font-size:10px}
+.modal .dialog{border-color:#d8a644!important;box-shadow:0 0 35px #a84dff44}
+@media(max-width:1050px){.app{padding:8px}.layout{grid-template-columns:minmax(0,1fr) minmax(0,2fr)}.machine{grid-column:2;grid-row:1 / span 3}.sidebar>.guardian-key,.sidebar>.card:has(.guardian-key){grid-column:1;grid-row:1}.sidebar>.balance-card{grid-column:1;grid-row:2}.sidebar>.card:has(#featureForgeBtn){grid-column:1;grid-row:3}.sidebar>.card:has(.feature){grid-column:1;grid-row:4}.sidebar>.rules{grid-column:1;grid-row:5}.board{min-height:320px;max-height:none}.brand{position:static;transform:none}.top{justify-content:space-between}.actions{flex-wrap:wrap}}
+@media(max-width:650px){.top{align-items:flex-start;flex-direction:column}.brand{position:static;transform:none;text-align:left}.brand h1{font-size:24px}.actions{margin-left:0}.hero{margin:8px 0}.layout{display:flex;flex-direction:column}.machine{order:1}.sidebar{display:flex;flex-direction:column}.sidebar>.card{order:initial}.board{min-height:0;max-height:none}.sidebar>.guardian-key,.sidebar>.card:has(.guardian-key),.sidebar>.balance-card,.sidebar>.card:has(#featureForgeBtn),.sidebar>.card:has(.feature),.sidebar>.rules{grid-column:auto;grid-row:auto}.spin{min-height:72px;max-width:84px}.spin:after{font-size:48px}}
+
 </style><style>
 /* Consolidated v18 polish: subtle build marker and accessible focus states */
 :focus-visible{outline:2px solid #e8c66d;outline-offset:3px}
