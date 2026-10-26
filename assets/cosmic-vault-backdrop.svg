@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+<defs>
+ <radialGradient id="space"><stop stop-color="#251b68"/><stop offset=".48" stop-color="#080b2b"/><stop offset="1" stop-color="#03030d"/></radialGradient>
+ <radialGradient id="neb"><stop stop-color="#743bff" stop-opacity=".7"/><stop offset="1" stop-color="#3212a8" stop-opacity="0"/></radialGradient>
+ <linearGradient id="gold" x2="0" y2="1"><stop stop-color="#fff0ad"/><stop offset=".4" stop-color="#c88736"/><stop offset="1" stop-color="#3e1d0a"/></linearGradient>
+ <linearGradient id="water" x2="0" y2="1"><stop stop-color="#a7ffff" stop-opacity=".9"/><stop offset=".5" stop-color="#3a82ff" stop-opacity=".55"/><stop offset="1" stop-color="#7c2dff" stop-opacity=".08"/></linearGradient>
+ <linearGradient id="armor" x2="1" y2="1"><stop stop-color="#b9f5ff"/><stop offset=".35" stop-color="#3d4ca5"/><stop offset=".7" stop-color="#17143f"/><stop offset="1" stop-color="#d6a34e"/></linearGradient>
+ <filter id="glow"><feGaussianBlur stdDeviation="15"/></filter>
+ <filter id="shine"><feGaussianBlur stdDeviation="3"/></filter>
+ <pattern id="stars" width="137" height="113" patternUnits="userSpaceOnUse"><circle cx="9" cy="19" r="1.3" fill="#fff"/><circle cx="69" cy="72" r=".8" fill="#8fdcff"/><circle cx="118" cy="37" r="1.1" fill="#d9a8ff"/><path d="M42 7v8M38 11h8" stroke="#fff" stroke-opacity=".55"/></pattern>
+</defs>
+<rect width="1920" height="1080" fill="url(#space)"/><rect width="1920" height="1080" fill="url(#stars)"/>
+<ellipse cx="270" cy="235" rx="410" ry="340" fill="url(#neb)"/><ellipse cx="1660" cy="370" rx="420" ry="400" fill="url(#neb)"/>
+<g opacity=".8"><circle cx="285" cy="200" r="150" fill="#b84dff" opacity=".25" filter="url(#glow)"/><circle cx="285" cy="200" r="116" fill="#15133e" stroke="#b974ff" stroke-width="7"/><circle cx="285" cy="200" r="135" fill="none" stroke="#ffbd63" stroke-width="3" stroke-dasharray="20 16"/><path d="M150 170Q285 90 414 178" fill="none" stroke="#9e7bff" stroke-width="5"/></g>
+<!-- distant cosmic waterfalls -->
+<g opacity=".78"><path d="M80 390L180 280 280 365 330 760 0 870 0 520Z" fill="#17112d" stroke="url(#gold)" stroke-width="7"/><path d="M190 300L235 330 250 770 180 820Z" fill="url(#water)"/><path d="M1600 270L1720 180 1840 290 1920 490 1920 850 1630 770Z" fill="#15122e" stroke="url(#gold)" stroke-width="7"/><path d="M1710 260L1760 280 1770 780 1700 800Z" fill="url(#water)"/></g>
+<!-- ruined temple towers -->
+<g fill="#0c0a20" stroke="url(#gold)" stroke-width="7">
+ <path d="M70 850V480L105 430 140 480V850Z"/><path d="M45 480L105 420 165 480Z"/><path d="M35 850H175L155 820H55Z"/>
+ <path d="M235 910V585L265 545 295 585V910Z"/><path d="M210 585L265 530 320 585Z"/>
+ <path d="M1550 900V530L1590 470 1630 530V900Z"/><path d="M1525 530L1590 460 1655 530Z"/>
+ <path d="M1740 900V450L1780 390 1820 450V900Z"/><path d="M1710 450L1780 370 1850 450Z"/>
+</g>
+<g stroke="#7e5bff" stroke-width="5" opacity=".85" fill="none"><path d="M104 500V810M265 610V870M1590 540V870M1780 470V850"/><path d="M80 540h50M240 640h50M1565 575h50M1755 510h50"/></g>
+<!-- floating rock islands -->
+<g fill="#100d2a" stroke="#6043a0" stroke-width="4"><path d="M0 880L150 820 280 870 360 980 240 1080H0Z"/><path d="M1920 840L1800 800 1700 870 1620 980 1730 1080H1920Z"/><path d="M380 970l90-35 70 28-40 72-120 45Z"/><path d="M1450 980l85-48 80 32-50 78-100 30Z"/></g>
+<!-- colossal guardian on right -->
+<g transform="translate(1490 115)">
+ <ellipse cx="175" cy="255" rx="195" ry="260" fill="#4e67ff" opacity=".32" filter="url(#glow)"/>
+ <circle cx="175" cy="178" r="150" fill="none" stroke="#c78aff" stroke-width="8" opacity=".65"/><circle cx="175" cy="178" r="170" fill="none" stroke="#ffcf79" stroke-width="3" stroke-dasharray="22 15" opacity=".8"/>
+ <path d="M70 180L30 75 102 110 140 25 180 100 228 18 250 110 322 70 282 190Z" fill="url(#armor)" stroke="url(#gold)" stroke-width="8"/>
+ <path d="M80 150Q175 70 270 150L300 250 260 330 175 375 90 330 50 250Z" fill="url(#armor)" stroke="#c9b1ff" stroke-width="8"/>
+ <path d="M80 205L140 220 112 245Z M210 220L270 205 238 245Z" fill="#2df5ff" stroke="#bfffff" stroke-width="5" filter="url(#shine)"/>
+ <path d="M145 270L175 250 205 270 175 300Z" fill="#131334" stroke="#f5d18a" stroke-width="5"/>
+ <path d="M95 325L55 420 95 505 175 460 255 505 295 420 255 325 215 365 175 385 135 365Z" fill="url(#armor)" stroke="url(#gold)" stroke-width="9"/>
+ <path d="M110 380L175 415 240 380 220 455 175 480 130 455Z" fill="#18245e" stroke="#67eaff" stroke-width="5"/>
+ <path d="M70 425L5 510 90 490M280 425L345 510 260 490" fill="none" stroke="#d6a34e" stroke-width="20"/>
+</g>
+<!-- central floating crystal and runes -->
+<g transform="translate(960 340)" opacity=".75"><circle r="115" fill="#6c3bff" opacity=".18" filter="url(#glow)"/><path d="M0-95L58-20 38 72 0 110-38 72-58-20Z" fill="#3c64ff" fill-opacity=".25" stroke="#7ef6ff" stroke-width="4"/><path d="M0-65L34-12 0 75-34-12Z" fill="#adfaff" fill-opacity=".3" stroke="#d3ffff" stroke-width="3"/><circle r="145" fill="none" stroke="#a982ff" stroke-width="3" stroke-dasharray="4 16"/></g>
+<!-- atmospheric foreground -->
+<path d="M0 980Q250 890 450 990T900 985T1400 975T1920 940V1080H0Z" fill="#060616" opacity=".75"/>
+<path d="M0 1010Q260 940 500 1015T980 1000T1450 1010T1920 970" fill="none" stroke="#5e50ff" stroke-width="4" opacity=".55"/>
+</svg>
