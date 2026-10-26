@@ -1,0 +1,60 @@
+name: Math book integrity checks
+
+on:
+  push:
+    branches:
+      - 'fix/normalizer-column-mapping*'
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  math-book-integrity:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Install Zstandard CLI
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes zstd
+      - name: Validate compressed books and JSONL syntax
+        shell: bash
+        run: |
+          set -euo pipefail
+          shopt -s nullglob
+          books=(math/game_logic/*.jsonl.zst)
+          if [ "${#books[@]}" -eq 0 ]; then
+            echo "FAIL: no .jsonl.zst books found"
+            exit 1
+          fi
+          for book in "${books[@]}"; do
+            echo "Checking $book"
+            zstd -t "$book"
+            zstd -dc "$book" | node --input-type=module -e '
+              let input = "";
+              process.stdin.setEncoding("utf8");
+              process.stdin.on("data", chunk => input += chunk);
+              process.stdin.on("end", () => {
+                const lines = input.split(/\r?\n/).filter(line => line.trim().length > 0);
+                if (lines.length === 0) {
+                  console.error("FAIL: decompressed book is empty");
+                  process.exitCode = 1;
+                  return;
+                }
+                for (let i = 0; i < lines.length; i++) {
+                  try {
+                    const row = JSON.parse(lines[i]);
+                    if (row === null || typeof row !== "object" || Array.isArray(row)) {
+                      throw new Error("JSONL record must be an object");
+                    }
+                  } catch (error) {
+                    console.error("FAIL: invalid JSON on line " + (i + 1) + ": " + error.message);
+                    process.exitCode = 1;
+                    return;
+                  }
+                }
+                console.log("PASS: " + lines.length + " valid JSONL records");
+              });
+            '
+          done
