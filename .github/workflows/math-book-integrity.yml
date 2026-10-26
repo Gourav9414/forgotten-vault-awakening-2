@@ -67,3 +67,6 @@ jobs:
             echo "SCHEMA SAMPLE $book"
             zstd -dc "$book" | sed -n '1p'
           done
+
+      - name: Compare CSV IDs and payouts with decompressed books
+        run: python3 scripts/audit-book-csv-consistency.py
