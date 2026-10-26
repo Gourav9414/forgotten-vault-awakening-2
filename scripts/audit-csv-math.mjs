@@ -15,7 +15,7 @@ for (const mode of manifest.modes ?? []) {
     continue;
   }
 
-  const file = path.join(root, relative);
+  const file = path.join(root, 'math', relative);
   const lines = (await fs.readFile(file, 'utf8')).trim().split(/\r?\n/);
   const header = lines.shift();
   if (header !== 'id,payout,probability') {
