@@ -9,7 +9,9 @@
     "preview": "vite preview",
     "validate:math": "node scripts/validate-math.mjs",
     "validate:math:official": "node scripts/validate-math-official.mjs",
-    "normalize:math": "node scripts/normalize-math-publication.mjs"
+    "normalize:math": "node scripts/normalize-math-publication.mjs",
+    "test:prototype": "node scripts/test-prototype.mjs",
+    "audit:math": "node scripts/audit-math.mjs"
   },
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^7.3.1",
