@@ -722,7 +722,7 @@
           <div class="panel-feature">
             <button class="feature-row feature-buy featureForgeBtn" id="featureForgeBtn" data-feature="normal" type="button" aria-label="Buy Normal Bonus for 2.25 times bet"><span class="feature-icon">✧</span><span class="feature-copy"><strong>Normal Bonus</strong><small>Buy for 2.25× bet</small></span><span class="feature-value">2×</span></button>
             <button class="feature-row feature-buy" data-feature="higher" type="button" aria-label="Buy Hyper Bonus for 4.5 times bet"><span class="feature-icon">✦</span><span class="feature-copy"><strong>Hyper Bonus</strong><small>Buy for 4.5× bet</small></span><span class="feature-value">5×</span></button>
-            <button class="feature-row feature-buy" data-feature="mythic" type="button" aria-label="Buy Mythic Bonus for 7.5 times bet"><span class="feature-icon">✹</span><span class="feature-copy"><strong>Mythic Bonus</strong><small>Buy for 7.5× bet</small></span><span class="feature-value">8×</span></button>
+            <button class="feature-row feature-buy" data-feature="mythic" type="button" aria-label="Buy Mythic Bonus for 8 times bet"><span class="feature-icon">✹</span><span class="feature-copy"><strong>Mythic Bonus</strong><small>Buy for 8× bet</small></span><span class="feature-value">8×</span></button>
 
             <div class="feature-note">
               Epic bonus cannot be bought.<br>
@@ -783,7 +783,7 @@
             button.disabled = busy || balance < cost;
           });
         };
-        const featureCost = feature => currentBet() * ({ normal: 2.25, higher: 4.5, mythic: 7.5, extreme: 65 }[feature] || 1);
+        const featureCost = feature => currentBet() * ({ normal: 2.25, higher: 4.5, mythic: 8, extreme: 65 }[feature] || 1);
         const randomSymbol = () => symbols[Math.floor(Math.random() * symbols.length)];
         function renderBoard(state) {
           board.replaceChildren();
