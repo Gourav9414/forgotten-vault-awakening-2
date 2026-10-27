@@ -772,8 +772,14 @@
           currentConfig = payload.config || null;
           currentBalance = payload.balance || null;
           showStatus(payload.message || (rgsReady ? 'Connected to Stake Engine.' : 'Stake Engine session is not ready.'));
+          spinButton.disabled = !rgsReady || Boolean(payload.activeRound?.active);
+          if (currentBalance) {
+            const balanceNode = document.querySelector('.balance');
+            if (balanceNode) balanceNode.textContent = 'Balance ' + currentBalance.amount + ' ' + currentBalance.currency;
+          }
           if (payload.activeRound?.active) {
-            showStatus('An active Stake Engine round was restored. Do not place another bet until it is resolved.');
+            const roundAmount = payload.activeRound.amount;
+            showStatus('An active Stake Engine round was restored' + (roundAmount != null ? ' (bet amount ' + roundAmount + ')' : '') + '. Do not place another bet until it is resolved.');
             spinButton.disabled = true;
           }
         }
