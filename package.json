@@ -11,7 +11,8 @@
     "validate:math:official": "node scripts/validate-math-official.mjs",
     "normalize:math": "node scripts/normalize-math-publication.mjs",
     "test:prototype": "node scripts/test-prototype.mjs",
-    "audit:math": "node scripts/audit-math.mjs"
+    "audit:math": "node scripts/audit-math.mjs",
+    "test:rgs": "node scripts/test-rgs-bridge.mjs"
   },
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^7.3.1",
