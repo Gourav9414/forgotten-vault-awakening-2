@@ -19,10 +19,24 @@ check('Core board dimensions are represented in source', () => {
   assert.match(html, /repeat\(8[, ]/i);
   assert.match(html, /6\s*rows|repeat\(6/i);
 });
-check('Game includes spin, auto-play, and feature controls', () => {
-  assert.match(html, /id=["']spin["']/i);
-  assert.match(html, /autoToggle/i);
-  assert.match(html, /featureForgeBtn/i);
+check('Game includes wired spin, bet, auto-play, turbo, and feature controls', () => {
+  for (const id of ['spin','betDown','betUp','autoToggle','turboToggle','featureForgeBtn','toolbarAuto','toolbarTurbo','soundToggle','menuButton']) {
+    assert.match(html, new RegExp('id=["\\\\']' + id + '["\\\\']', 'i'), 'missing control ' + id);
+  }
+  assert.match(html, /addEventListener\\(['"]click['"]/i);
+  assert.match(html, /function runSpin\\(/);
+  assert.match(html, /function findClusters\\(/);
+  assert.match(html, /data-feature=["'](normal|higher|mythic|extreme)["']/i);
+});
+check('All eight Guardian portrait treatments exist', () => {
+  assert.equal((html.match(/class=["']guardian-portrait["']/g) || []).length, 8);
+  for (const name of ['Aether','Oblivion','Solara','Nexus','Void','Tidal','Inferno','Terra']) assert.match(html, new RegExp(name, 'i'));
+});
+check('Virtual-credit safety and limitations are visible', () => {
+  assert.match(html, /PROTOTYPE DISCLAIMER/);
+  assert.match(html, /VIRTUAL CREDITS ONLY/);
+  assert.match(html, /RTP NOT CERTIFIED/);
+  assert.match(html, /100[, ]?000|100000/);
 });
 check('Game includes a 100,000x prototype cap marker', () => {
   assert.match(html, /100[, ]?000|100000/);
