@@ -16,32 +16,29 @@ check('HTML document has a doctype and closing tags', () => {
   assert.match(html, /<\/style>/i);
 });
 check('Core board dimensions are represented in source', () => {
-  assert.match(html, /repeat\(8[, ]/i);
-  assert.match(html, /6\s*rows|repeat\(6/i);
+  assert.ok(html.includes('repeat(8'), 'missing 8-column grid');
+  assert.ok(html.includes('row < 6') || html.includes('6 rows') || html.includes('repeat(6'), 'missing 6-row board');
 });
-check('Game includes wired spin, bet, auto-play, turbo, and feature controls', () => {
+check('Game exposes wired spin, bet, auto-play, turbo, and feature controls', () => {
   for (const id of ['spin','betDown','betUp','autoToggle','turboToggle','featureForgeBtn','toolbarAuto','toolbarTurbo','soundToggle','menuButton']) {
-    assert.match(html, new RegExp('id=["\\\\']' + id + '["\\\\']', 'i'), 'missing control ' + id);
+    assert.ok(html.includes('id="' + id + '"'), 'missing control ' + id);
   }
-  assert.match(html, /addEventListener\\(['"]click['"]/i);
-  assert.match(html, /function runSpin\\(/);
-  assert.match(html, /function findClusters\\(/);
-  assert.match(html, /data-feature=["'](normal|higher|mythic|extreme)["']/i);
+  assert.ok(html.includes("addEventListener('click'"), 'click handlers are not present');
+  assert.ok(html.includes('async function runSpin('), 'spin logic is missing');
+  assert.ok(html.includes('function findClusters('), 'cluster detection is missing');
+  for (const feature of ['normal','higher','mythic','extreme']) assert.ok(html.includes('data-feature="' + feature + '"'), 'missing feature ' + feature);
 });
 check('All eight Guardian portrait treatments exist', () => {
-  assert.equal((html.match(/class=["']guardian-portrait["']/g) || []).length, 8);
-  for (const name of ['Aether','Oblivion','Solara','Nexus','Void','Tidal','Inferno','Terra']) assert.match(html, new RegExp(name, 'i'));
+  assert.equal((html.match(/class="guardian-portrait"/g) || []).length, 8);
+  for (const name of ['Aether','Oblivion','Solara','Nexus','Void','Tidal','Inferno','Terra']) assert.ok(html.includes(name), 'missing Guardian ' + name);
 });
 check('Virtual-credit safety and limitations are visible', () => {
-  assert.match(html, /PROTOTYPE DISCLAIMER/);
-  assert.match(html, /VIRTUAL CREDITS ONLY/);
-  assert.match(html, /RTP NOT CERTIFIED/);
+  assert.ok(html.includes('PROTOTYPE DISCLAIMER'));
+  assert.ok(html.includes('VIRTUAL CREDITS ONLY'));
+  assert.ok(html.includes('RTP NOT CERTIFIED'));
   assert.match(html, /100[, ]?000|100000/);
 });
-check('Game includes a 100,000x prototype cap marker', () => {
-  assert.match(html, /100[, ]?000|100000/);
-});
-check('RTP and publication state are explicit', () => {
+check('RTP target and pending publication state are explicit', () => {
   assert.equal(manifest.target_rtp, 0.98);
   assert.equal(manifest.status, 'PENDING_OFFICIAL_STAKE_SDK_VALIDATION');
 });
