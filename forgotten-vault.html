@@ -342,7 +342,6 @@
         position: relative;
         display: grid;
         grid-template-columns: repeat(8, minmax(0, 1fr));
-        grid-template-rows: repeat(6, minmax(0, 1fr));
         gap: 8px;
         padding: 12px;
         min-height: 620px;
@@ -602,35 +601,6 @@
           flex: 1 1 100%;
         }
       }
-
-      /* Interactive prototype polish */
-      .guardian-item { grid-template-columns: 64px minmax(0,1fr); min-height: 68px; }
-      .guardian-portrait { width: 58px; height: 58px; border-radius: 12px; display:grid; place-items:center; position:relative; overflow:hidden; border:1px solid rgba(255,220,137,.82); box-shadow:inset 0 0 20px rgba(255,255,255,.12),0 0 18px rgba(143,91,255,.22); }
-      .guardian-portrait::before { content:""; position:absolute; width:44px; height:44px; border-radius:50%; background:radial-gradient(circle, var(--portrait-glow), transparent 72%); filter:blur(3px); }
-      .guardian-portrait span { position:relative; font-size:29px; color:#fff3c4; text-shadow:0 0 12px var(--portrait-glow),0 2px 2px #090711; }
-      .guardian-item:nth-child(1) .guardian-portrait { --portrait-glow:#a783ff; background:linear-gradient(145deg,#362267,#101324); }
-      .guardian-item:nth-child(2) .guardian-portrait { --portrait-glow:#bd76ff; background:linear-gradient(145deg,#351b55,#090c1c); }
-      .guardian-item:nth-child(3) .guardian-portrait { --portrait-glow:#ffbf55; background:linear-gradient(145deg,#754023,#211225); }
-      .guardian-item:nth-child(4) .guardian-portrait { --portrait-glow:#6fe9ff; background:linear-gradient(145deg,#17485b,#101426); }
-      .guardian-item:nth-child(5) .guardian-portrait { --portrait-glow:#bd8bff; background:linear-gradient(145deg,#34204f,#0b0b19); }
-      .guardian-item:nth-child(6) .guardian-portrait { --portrait-glow:#4adfff; background:linear-gradient(145deg,#13536b,#0a1324); }
-      .guardian-item:nth-child(7) .guardian-portrait { --portrait-glow:#ff7545; background:linear-gradient(145deg,#71251e,#1a1020); }
-      .guardian-item:nth-child(8) .guardian-portrait { --portrait-glow:#73e7a7; background:linear-gradient(145deg,#245c48,#101a24); }
-      .stepper { cursor:pointer; }
-      button:disabled { opacity:.45; cursor:not-allowed; filter:grayscale(.5); }
-      button, .stepper { transition:transform .14s ease, filter .14s ease, box-shadow .14s ease; }
-      button:not(:disabled):hover, .stepper:hover { transform:translateY(-1px); filter:brightness(1.18); }
-      .toolbar-btn[aria-pressed="true"], .micro-btn[aria-pressed="true"] { background:linear-gradient(180deg,#7050a4,#251b42); box-shadow:0 0 15px rgba(166,112,255,.35); }
-      .feature-row { border-radius:10px; }
-      .feature-buy { width:100%; text-align:left; color:inherit; border:0; cursor:pointer; background:transparent; font:inherit; }
-      .feature-buy:focus-visible, button:focus-visible, .stepper:focus-visible { outline:2px solid #fff0ac; outline-offset:3px; }
-      .feature-row.feature-disabled { opacity:.55; }
-      .game-message { min-height:20px; text-align:center; color:#f9e5a4; font-size:11px; letter-spacing:.08em; text-shadow:0 0 12px rgba(168,117,255,.6); }
-      .prototype-disclaimer { text-align:center; margin-top:12px; color:rgba(225,215,245,.68); font-size:9px; letter-spacing:.08em; }
-      .tile.winning { animation:tileWin .42s ease-in-out infinite alternate; border-color:#fff2b1; }
-      @keyframes tileWin { from { transform:scale(.96); filter:brightness(1.2); } to { transform:scale(1.03); filter:brightness(1.8); box-shadow:0 0 25px rgba(255,221,121,.75); } }
-      @media (max-width:1180px) { .guardian-item { grid-template-columns:64px minmax(0,1fr); } .guardians { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:7px; } .guardian-item { margin:0; } }
-      @media (max-width:640px) { .guardians { grid-template-columns:1fr 1fr; } .guardian-item { grid-template-columns:42px minmax(0,1fr); padding:6px; } .guardian-portrait { width:38px;height:42px; } .guardian-portrait span {font-size:22px;} .bet-control {min-width:0;} .spin-btn {width:84px;height:84px;} .micro-btn {width:86px;} }
     </style>
   </head>
   <body>
@@ -647,10 +617,10 @@
         </div>
 
         <div class="top-controls" aria-label="Game controls">
-          <button class="toolbar-btn" id="soundToggle" type="button" aria-pressed="false"><span class="glyph">◁</span>Sound</button>
-          <button class="toolbar-btn" id="toolbarTurbo" type="button" aria-pressed="false"><span class="glyph">⚡</span>Turbo</button>
-          <button class="toolbar-btn" id="toolbarAuto" type="button" aria-pressed="false"><span class="glyph">⟳</span>Auto</button>
-          <button class="toolbar-btn menu" id="menuButton" type="button" aria-label="Help and rules"><span class="glyph">☰</span></button>
+          <button class="toolbar-btn" type="button"><span class="glyph">◁</span>Sound</button>
+          <button class="toolbar-btn" type="button"><span class="glyph">⚡</span>Turbo</button>
+          <button class="toolbar-btn" type="button"><span class="glyph">⟳</span>Auto</button>
+          <button class="toolbar-btn menu" type="button" aria-label="Menu"><span class="glyph">☰</span></button>
         </div>
       </header>
 
@@ -659,35 +629,35 @@
           <h2 class="panel-header">Guardians</h2>
           <div class="guardians">
             <div class="guardian-item">
-              <div class="guardian-portrait" aria-hidden="true"><span>✧</span></div>
+              <div class="guardian-badge">8</div>
               <div class="guardian-copy"><strong>Aether</strong><small>The supreme one</small></div>
             </div>
             <div class="guardian-item">
-              <div class="guardian-portrait" aria-hidden="true"><span>☽</span></div>
+              <div class="guardian-badge">7</div>
               <div class="guardian-copy"><strong>Oblivion</strong><small>The end bringer</small></div>
             </div>
             <div class="guardian-item">
-              <div class="guardian-portrait" aria-hidden="true"><span>☀</span></div>
+              <div class="guardian-badge">6</div>
               <div class="guardian-copy"><strong>Solara</strong><small>Star empress</small></div>
             </div>
             <div class="guardian-item">
-              <div class="guardian-portrait" aria-hidden="true"><span>◇</span></div>
+              <div class="guardian-badge">5</div>
               <div class="guardian-copy"><strong>Nexus</strong><small>Realm weaver</small></div>
             </div>
             <div class="guardian-item">
-              <div class="guardian-portrait" aria-hidden="true"><span>◉</span></div>
+              <div class="guardian-badge">4</div>
               <div class="guardian-copy"><strong>Void</strong><small>Rift walker</small></div>
             </div>
             <div class="guardian-item">
-              <div class="guardian-portrait" aria-hidden="true"><span>≋</span></div>
+              <div class="guardian-badge">3</div>
               <div class="guardian-copy"><strong>Tidal</strong><small>Abyss keeper</small></div>
             </div>
             <div class="guardian-item">
-              <div class="guardian-portrait" aria-hidden="true"><span>♨</span></div>
+              <div class="guardian-badge">2</div>
               <div class="guardian-copy"><strong>Inferno</strong><small>Flame sovereign</small></div>
             </div>
             <div class="guardian-item">
-              <div class="guardian-portrait" aria-hidden="true"><span>❋</span></div>
+              <div class="guardian-badge">1</div>
               <div class="guardian-copy"><strong>Terra</strong><small>Earthbound fury</small></div>
             </div>
           </div>
@@ -700,209 +670,82 @@
 
           <div class="bottom-bar">
             <div class="bet-control" aria-label="Bet control">
-              <button class="stepper" id="betDown" type="button" aria-label="Decrease bet">−</button>
-              <div class="bet-amount" id="betAmount" aria-live="polite">10.00</div>
-              <button class="stepper" id="betUp" type="button" aria-label="Increase bet">+</button>
+              <div class="stepper">−</div>
+              <div class="bet-amount">100.00</div>
+              <div class="stepper">+</div>
             </div>
 
-            <button class="spin-btn" id="spin" type="button" aria-label="Spin"><span>✦</span></button>
+            <button class="spin-btn" type="button" aria-label="Spin"><span>✦</span></button>
 
-            <button class="micro-btn" id="autoToggle" type="button" aria-pressed="false">Auto</button>
-            <button class="micro-btn" id="turboToggle" type="button" aria-pressed="false">Turbo</button>
+            <button class="micro-btn" type="button">Auto</button>
+            <button class="micro-btn" type="button">Turbo</button>
           </div>
 
-          <div class="game-message" id="gameMessage" role="status" aria-live="polite">Welcome to the Vault. Virtual credits only.</div>
           <div class="footer-row">
-            <div class="balance"><span class="dot">◈</span> Balance <strong id="balanceValue">1,000.00</strong></div>
-            <div class="win"><span class="dot">✦</span> Win <strong id="winValue">0.00</strong></div>
+            <div class="balance"><span class="dot">◈</span> Balance 1,000.00</div>
+            <div class="win"><span class="dot">✦</span> Win 0.00</div>
           </div>
         </section>
 
         <aside class="panel right-panel" aria-label="Buy feature panel">
           <h2 class="panel-header">Buy Feature</h2>
           <div class="panel-feature">
-            <button class="feature-row feature-buy featureForgeBtn" id="featureForgeBtn" data-feature="normal" type="button" aria-label="Buy Normal Bonus for 2.25 times bet"><span class="feature-icon">✧</span><span class="feature-copy"><strong>Normal Bonus</strong><small>Buy for 2.25× bet</small></span><span class="feature-value">2×</span></button>
-            <button class="feature-row feature-buy" data-feature="higher" type="button" aria-label="Buy Hyper Bonus for 4.5 times bet"><span class="feature-icon">✦</span><span class="feature-copy"><strong>Hyper Bonus</strong><small>Buy for 4.5× bet</small></span><span class="feature-value">5×</span></button>
-            <button class="feature-row feature-buy" data-feature="mythic" type="button" aria-label="Buy Mythic Bonus for 8 times bet"><span class="feature-icon">✹</span><span class="feature-copy"><strong>Mythic Bonus</strong><small>Buy for 8× bet</small></span><span class="feature-value">8×</span></button>
+            <div class="feature-row">
+              <div class="feature-icon"></div>
+              <div class="feature-copy"><strong>Normal Bonus</strong><small>Max multiplier</small></div>
+              <div class="feature-value">2×</div>
+            </div>
+            <div class="feature-row">
+              <div class="feature-icon"></div>
+              <div class="feature-copy"><strong>Hyper Bonus</strong><small>Max multiplier</small></div>
+              <div class="feature-value">5×</div>
+            </div>
+            <div class="feature-row">
+              <div class="feature-icon"></div>
+              <div class="feature-copy"><strong>Mythic Bonus</strong><small>Max multiplier</small></div>
+              <div class="feature-value">8×</div>
+            </div>
 
             <div class="feature-note">
               Epic bonus cannot be bought.<br>
               It can only be triggered during normal play.
             </div>
 
-            <button class="feature-row feature-buy" data-feature="extreme" type="button" aria-label="Play Extreme Spin for 65 times bet" style="padding-top:18px;"><span class="feature-icon">⚡</span><span class="feature-copy"><strong>Extreme Spin</strong><small>Special prototype mode · 65× bet</small></span><span class="feature-value">65×</span></button>
+            <div class="feature-row" style="padding-top: 18px;">
+              <div class="feature-icon"></div>
+              <div class="feature-copy"><strong>Extreme Spin</strong><small>Higher chance / bigger rewards</small></div>
+              <div class="feature-value">65×</div>
+            </div>
           </div>
         </aside>
       </main>
-      <div class="prototype-disclaimer">PROTOTYPE DISCLAIMER · VIRTUAL CREDITS ONLY · NOT REAL-MONEY GAMBLING · RTP NOT CERTIFIED · MAX DISPLAY CAP 100,000×</div>
     </div>
 
     <script>
-      (() => {
-        'use strict';
-        const board = document.getElementById('board');
-        const spinButton = document.getElementById('spin');
-        const betAmountEl = document.getElementById('betAmount');
-        const balanceEl = document.getElementById('balanceValue');
-        const winEl = document.getElementById('winValue');
-        const messageEl = document.getElementById('gameMessage');
-        const autoButtons = [document.getElementById('autoToggle'), document.getElementById('toolbarAuto')];
-        const turboButtons = [document.getElementById('turboToggle'), document.getElementById('toolbarTurbo')];
-        const symbols = [
-          { key: 'moon', icon: '☾', pay: 0.20 },
-          { key: 'star', icon: '✦', pay: 0.25 },
-          { key: 'eye', icon: '◉', pay: 0.30 },
-          { key: 'crystal', icon: '◆', pay: 0.35 },
-          { key: 'crown', icon: '♛', pay: 0.45 },
-          { key: 'key', icon: '⚿', pay: 0.50 },
-          { key: 'wild', icon: 'W', pay: 0.60 },
-          { key: 'guardian', icon: '✧', pay: 0.75 }
-        ];
-        const bets = [1, 2, 5, 10, 20, 50, 100];
-        let betIndex = 3;
-        let balance = 1000;
-        let lastWin = 0;
-        let busy = false;
-        let auto = false;
-        let turbo = false;
-        let spinCount = 0;
-        let autoTimer = null;
-        let boardState = [];
+      const board = document.getElementById('board');
+      const symbols = [
+        { key: 'moon', icon: '☾' },
+        { key: 'star', icon: '✦' },
+        { key: 'eye', icon: '◉' },
+        { key: 'crystal', icon: '△' },
+        { key: 'crown', icon: '◈' },
+        { key: 'key', icon: '◌' },
+        { key: 'wild', icon: 'W' },
+        { key: 'guardian', icon: '◍' }
+      ];
 
-        const money = value => value.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-        const setMessage = message => { messageEl.textContent = message; };
-        const currentBet = () => bets[betIndex];
-        const updateHud = () => {
-          betAmountEl.textContent = money(currentBet());
-          balanceEl.textContent = money(balance);
-          winEl.textContent = money(lastWin);
-          document.getElementById('betDown').disabled = betIndex === 0 || busy;
-          document.getElementById('betUp').disabled = betIndex === bets.length - 1 || busy;
-          spinButton.disabled = busy || balance < currentBet();
-          document.querySelectorAll('[data-feature]').forEach(button => {
-            const cost = featureCost(button.dataset.feature);
-            button.disabled = busy || balance < cost;
-          });
-        };
-        const featureCost = feature => currentBet() * ({ normal: 2.25, higher: 4.5, mythic: 8, extreme: 65 }[feature] || 1);
-        const randomSymbol = () => symbols[Math.floor(Math.random() * symbols.length)];
-        function renderBoard(state) {
-          board.replaceChildren();
-          state.forEach((sym, index) => {
-            const tile = document.createElement('div');
-            tile.className = 'tile ' + sym.key;
-            tile.dataset.index = String(index);
-            const icon = document.createElement('div');
-            icon.className = 'icon';
-            icon.textContent = sym.icon;
-            tile.appendChild(icon);
-            board.appendChild(tile);
-          });
+      for (let row = 0; row < 6; row++) {
+        for (let col = 0; col < 8; col++) {
+          const tile = document.createElement('div');
+          const sym = symbols[(row * 8 + col) % symbols.length];
+          tile.className = 'tile ' + sym.key;
+          const icon = document.createElement('div');
+          icon.className = 'icon';
+          icon.textContent = sym.icon;
+          tile.appendChild(icon);
+          board.appendChild(tile);
         }
-        function createBoard() { return Array.from({ length: 48 }, randomSymbol); }
-        function findClusters(state) {
-          const seen = new Set();
-          const clusters = [];
-          for (let i = 0; i < state.length; i++) {
-            if (seen.has(i) || state[i].key === 'wild') continue;
-            const key = state[i].key;
-            const stack = [i], cells = [];
-            seen.add(i);
-            while (stack.length) {
-              const idx = stack.pop();
-              cells.push(idx);
-              const row = Math.floor(idx / 8), col = idx % 8;
-              const neighbors = [];
-              if (row > 0) neighbors.push(idx - 8);
-              if (row < 5) neighbors.push(idx + 8);
-              if (col > 0) neighbors.push(idx - 1);
-              if (col < 7) neighbors.push(idx + 1);
-              for (const n of neighbors) {
-                if (!seen.has(n) && state[n].key === key) { seen.add(n); stack.push(n); }
-              }
-            }
-            if (cells.length >= 5) clusters.push({ key, cells, symbol: state[i] });
-          }
-          return clusters;
-        }
-        const wait = ms => new Promise(resolve => setTimeout(resolve, ms));
-        async function runSpin(feature = 'standard') {
-          if (busy) return;
-          const cost = feature === 'standard' ? currentBet() : featureCost(feature);
-          if (balance < cost) { setMessage('Not enough virtual credits. Lower your bet to continue.'); auto = false; syncToggles(); updateHud(); return; }
-          busy = true;
-          lastWin = 0;
-          balance -= cost;
-          updateHud();
-          spinCount++;
-          setMessage(feature === 'standard' ? 'The Vault stirs…' : feature === 'extreme' ? 'EXTREME SPIN · Prototype mode' : feature.toUpperCase() + ' BONUS · Prototype mode');
-          let state = createBoard();
-          let totalWin = 0;
-          const cascadeLimit = feature === 'standard' ? 4 : 6;
-          const featureBoost = ({ standard: 1, normal: 1.4, higher: 1.8, mythic: 2.4, extreme: 3.2 }[feature] || 1);
-          for (let cascade = 0; cascade < cascadeLimit; cascade++) {
-            renderBoard(state);
-            if (!turbo) await wait(220);
-            const clusters = findClusters(state);
-            if (!clusters.length) break;
-            const removed = new Set();
-            let cascadeWin = 0;
-            for (const cluster of clusters) {
-              cluster.cells.forEach(i => removed.add(i));
-              cascadeWin += cluster.cells.length * cluster.symbol.pay * currentBet() * featureBoost * (1 + cascade * 0.5);
-            }
-            const tileNodes = [...board.children];
-            removed.forEach(i => tileNodes[i]?.classList.add('winning'));
-            if (!turbo) await wait(260);
-            totalWin += cascadeWin;
-            state = state.map((sym, i) => removed.has(i) ? randomSymbol() : sym);
-            if (totalWin >= currentBet() * 100000) { totalWin = currentBet() * 100000; break; }
-          }
-          balance += totalWin;
-          lastWin = totalWin;
-          boardState = state;
-          renderBoard(boardState);
-          busy = false;
-          const capped = totalWin >= currentBet() * 100000;
-          setMessage(totalWin > 0 ? (capped ? 'MAX WIN DISPLAY CAP REACHED · ' : 'CLUSTER WIN · ') + money(totalWin) + ' virtual credits' : 'No cluster this time. The Vault awaits your next spin.');
-          updateHud();
-          if (auto && balance >= currentBet()) {
-            autoTimer = setTimeout(() => runSpin('standard'), turbo ? 120 : 700);
-          } else if (auto) { auto = false; syncToggles(); setMessage('Auto Play stopped: virtual credit balance is too low.'); }
-        }
-        function syncToggles() {
-          autoButtons.forEach(button => { button.setAttribute('aria-pressed', String(auto)); button.textContent = button.id === 'toolbarAuto' ? (auto ? '⟳ Auto ON' : '⟳ Auto') : (auto ? 'Stop Auto' : 'Auto'); });
-          turboButtons.forEach(button => { button.setAttribute('aria-pressed', String(turbo)); if (button.id === 'turboToggle') button.textContent = turbo ? 'Turbo ON' : 'Turbo'; });
-        }
-        function toggleAuto() {
-          auto = !auto;
-          if (!auto && autoTimer) { clearTimeout(autoTimer); autoTimer = null; }
-          syncToggles();
-          setMessage(auto ? 'Auto Play enabled. Press Auto again to stop.' : 'Auto Play stopped.');
-          if (auto && !busy) runSpin('standard');
-        }
-        document.getElementById('betDown').addEventListener('click', () => { if (!busy && betIndex > 0) { betIndex--; updateHud(); setMessage('Bet set to ' + money(currentBet()) + ' virtual credits.'); } });
-        document.getElementById('betUp').addEventListener('click', () => { if (!busy && betIndex < bets.length - 1) { betIndex++; updateHud(); setMessage('Bet set to ' + money(currentBet()) + ' virtual credits.'); } });
-        spinButton.addEventListener('click', () => runSpin('standard'));
-        autoButtons.forEach(button => button.addEventListener('click', toggleAuto));
-        turboButtons.forEach(button => button.addEventListener('click', () => { turbo = !turbo; syncToggles(); setMessage(turbo ? 'Turbo mode enabled.' : 'Turbo mode disabled.'); }));
-        document.querySelectorAll('[data-feature]').forEach(button => button.addEventListener('click', () => { auto = false; if (autoTimer) clearTimeout(autoTimer); syncToggles(); runSpin(button.dataset.feature); }));
-        document.getElementById('soundToggle').addEventListener('click', event => {
-          const button = event.currentTarget;
-          const enabled = button.getAttribute('aria-pressed') !== 'true';
-          button.setAttribute('aria-pressed', String(enabled));
-          button.innerHTML = '<span class="glyph">' + (enabled ? '♫' : '◁') + '</span>' + (enabled ? 'Sound On' : 'Sound Off');
-          setMessage(enabled ? 'Sound toggle enabled; audio assets are not included in this prototype.' : 'Sound toggle disabled.');
-        });
-        document.getElementById('menuButton').addEventListener('click', () => {
-          setMessage('Prototype rules: 8×6 board · 5+ connected matching symbols · virtual credits only · RTP is not certified.');
-          window.alert('FORGOTTEN VAULT: AWAKENING\n\nPrototype rules\n• 8 columns × 6 rows\n• Clusters contain 5+ orthogonally connected matching symbols\n• All credits are virtual; no deposits or cash-outs\n• This visual demo is not the official math/RGS engine. RTP is not certified.');
-        });
-        boardState = createBoard();
-        renderBoard(boardState);
-        syncToggles();
-        updateHud();
-      })();
+      }
     </script>
   </body>
 </html>
