@@ -19,7 +19,7 @@ The repository is a visual prototype and local math publication candidate, not y
 - `scripts/validate-math-official.mjs` explicitly says it is a local structural validator, not the official Stake Engine SDK validator.
 - `scripts/test-prototype.mjs` expects element IDs and handlers such as `spin`, `betDown`, `autoToggle`, `async function runSpin`, and `findClusters`; those are not present in the currently inspected `forgotten-vault.html`. The test likely fails against the current source and needs to be run in a checkout before claiming a pass.
 - `STAKE_ENGINE_SUBMISSION.json` describes a custom spin endpoint and provably-fair scheme, but this does not prove those endpoints exist in Stake Engine RGS. Treat it as project metadata, not an authoritative API contract.
-- The repository's own README correctly states that official SDK validation, authoritative RGS integration, ACP upload, and approval are pending.
+- The repository's own README correctly states that official SDK math validation, complete authoritative outcome rendering, ACP upload, and approval remain pending. An initial official-client authentication/play bridge has now been added on the working branch; it has not been exercised against a live RGS session.
 
 ## Implementation order
 
