@@ -1,6 +1,11 @@
 <script>
   let loaded = false;
-  function onLoad() { loaded = true; }
+  const launchQuery = typeof window !== 'undefined' ? window.location.search : '';
+  const gameSrc = '/forgotten-vault.html' + launchQuery;
+
+  function onLoad() {
+    loaded = true;
+  }
 </script>
 
 <svelte:head>
@@ -11,7 +16,7 @@
 
 <main class="prototype-host" aria-label="Forgotten Vault prototype">
   {#if !loaded}<div class="loading">Opening Forgotten Vault…</div>{/if}
-  <iframe title="Forgotten Vault: Awakening" src="/forgotten-vault.html" on:load={onLoad}></iframe>
+  <iframe title="Forgotten Vault: Awakening" src={gameSrc} on:load={onLoad}></iframe>
 </main>
 
 <style>
