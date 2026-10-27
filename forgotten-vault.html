@@ -719,8 +719,11 @@
       </main>
     </div>
 
+    <div id="rgsStatus" role="status" aria-live="polite" style="position:fixed;left:50%;bottom:14px;transform:translateX(-50%);z-index:20;max-width:min(92vw,760px);padding:10px 16px;border:1px solid rgba(243,201,106,.7);border-radius:10px;background:rgba(7,9,20,.94);color:#f9efbf;font:600 12px Inter,system-ui,sans-serif;text-align:center;box-shadow:0 0 22px rgba(140,94,247,.25)">Prototype mode — launch through Stake Engine to authenticate.</div>
     <script>
       const board = document.getElementById('board');
+      const statusEl = document.getElementById('rgsStatus');
+      const spinButton = document.querySelector('.spin-btn');
       const symbols = [
         { key: 'moon', icon: '☾' },
         { key: 'star', icon: '✦' },
@@ -744,6 +747,81 @@
           board.appendChild(tile);
         }
       }
+
+      let rgsReady = false;
+      let busy = false;
+      let currentConfig = null;
+      let currentBalance = null;
+
+      function showStatus(message) {
+        statusEl.textContent = String(message || 'Stake Engine status unavailable.');
+      }
+
+      function send(type, payload = {}) {
+        window.parent.postMessage({ source: 'forgotten-vault-game', type, payload }, window.location.origin);
+      }
+
+      window.addEventListener('message', (event) => {
+        if (event.origin !== window.location.origin || event.source !== window.parent) return;
+        const message = event.data;
+        if (!message || message.source !== 'forgotten-vault-host') return;
+        const payload = message.payload || {};
+
+        if (message.type === 'RGS_STATUS') {
+          rgsReady = Boolean(payload.ready);
+          currentConfig = payload.config || null;
+          currentBalance = payload.balance || null;
+          showStatus(payload.message || (rgsReady ? 'Connected to Stake Engine.' : 'Stake Engine session is not ready.'));
+          if (payload.activeRound?.active) {
+            showStatus('An active Stake Engine round was restored. Do not place another bet until it is resolved.');
+            spinButton.disabled = true;
+          }
+        }
+        if (message.type === 'RGS_BUSY') {
+          busy = Boolean(payload.busy);
+          spinButton.disabled = busy || !rgsReady;
+          if (busy) showStatus('Requesting authoritative outcome from Stake Engine…');
+        }
+        if (message.type === 'RGS_RESULT') {
+          currentBalance = payload.balance || currentBalance;
+          const round = payload.round || {};
+          const payout = Number(round.payout ?? 0);
+          showStatus('Stake Engine outcome received. Payout multiplier: ' + String(round.payoutMultiplier ?? 0) + '×. Board-event rendering is still pending integration.');
+          const balanceNode = document.querySelector('.balance');
+          if (balanceNode && currentBalance) balanceNode.textContent = 'Balance ' + currentBalance.amount + ' ' + currentBalance.currency;
+          const winNode = document.querySelector('.win');
+          if (winNode) winNode.textContent = 'Win ' + payout;
+          // Deliberately do not generate a client-side board from random values.
+          // The server state is retained in the message for the next renderer stage.
+        }
+        if (message.type === 'RGS_ROUND_ENDED') {
+          currentBalance = payload.balance || currentBalance;
+          showStatus('Stake Engine round completed.');
+          if (currentBalance) {
+            const balanceNode = document.querySelector('.balance');
+            if (balanceNode) balanceNode.textContent = 'Balance ' + currentBalance.amount + ' ' + currentBalance.currency;
+          }
+          spinButton.disabled = !rgsReady;
+        }
+        if (message.type === 'RGS_ERROR') {
+          showStatus(payload.message || 'Stake Engine request failed.');
+          spinButton.disabled = !rgsReady;
+        }
+        if (message.type === 'RGS_HOST_READY') send('RGS_INIT');
+      });
+
+      spinButton.disabled = true;
+      spinButton.addEventListener('click', () => {
+        if (!rgsReady || busy) {
+          showStatus('Stake Engine is not ready. Use a valid Stake Engine launch URL.');
+          return;
+        }
+        // Use the operator-configured default bet level rather than a
+        // hard-coded display value. Amount remains in the SDK's API units.
+        send('RGS_PLAY', { amount: currentConfig?.defaultBetLevel, mode: 'standard' });
+      });
+
+      window.addEventListener('load', () => send('RGS_INIT'));
     </script>
   </body>
 </html>
