@@ -9,36 +9,41 @@ const manifest = JSON.parse(await fs.readFile(path.join(root, 'math/index.json')
 const checks = [];
 function check(name, fn) { fn(); checks.push(name); }
 
-check('HTML document has a doctype and closing tags', () => {
+check('HTML document is complete and includes its inline runtime', () => {
   assert.match(html, /^<!doctype html>/i);
   assert.match(html, /<\/html>\s*$/i);
+  assert.match(html, /<script[\s>]/i);
   assert.match(html, /<\/script>/i);
   assert.match(html, /<\/style>/i);
 });
-check('Core board dimensions are represented in source', () => {
-  assert.ok(html.includes('repeat(8'), 'missing 8-column grid');
-  assert.ok(html.includes('row < 6') || html.includes('6 rows') || html.includes('repeat(6'), 'missing 6-row board');
+check('Game board is configured as an 8-column by 6-row grid', () => {
+  assert.ok(/const C\s*=\s*8/.test(html) || html.includes('repeat(8'), 'missing 8-column board');
+  assert.ok(/const R\s*=\s*6/.test(html) || html.includes('repeat(6') || html.includes('8 × 6'), 'missing 6-row board');
 });
-check('Game exposes wired spin, bet, auto-play, turbo, and feature controls', () => {
-  for (const id of ['spin','betDown','betUp','autoToggle','turboToggle','featureForgeBtn','toolbarAuto','toolbarTurbo','soundToggle','menuButton']) {
+check('Current v110 controls exist and are wired', () => {
+  for (const id of ['spin','down','up','autoToggle','featureForgeBtn','turbo','sound','replayBtn','mobileSpinDock','mobileSpin','buyNormal','buyHigher','buyMythic','extremeSpin']) {
     assert.ok(html.includes('id="' + id + '"'), 'missing control ' + id);
   }
-  assert.ok(html.includes("addEventListener('click'"), 'click handlers are not present');
-  assert.ok(html.includes('async function runSpin('), 'spin logic is missing');
-  assert.ok(html.includes('function findClusters('), 'cluster detection is missing');
-  for (const feature of ['normal','higher','mythic','extreme']) assert.ok(html.includes('data-feature="' + feature + '"'), 'missing feature ' + feature);
+  assert.ok(html.includes("$('spin').onclick="), 'spin button handler is missing');
+  assert.ok(html.includes('async function spinCore('), 'spin logic is missing');
+  assert.ok(html.includes('function findClustersForBoard('), 'cluster detection is missing');
+  assert.ok(html.includes('function simulate('), 'diagnostic simulator is missing');
 });
-check('All eight Guardian portrait treatments exist', () => {
-  assert.equal((html.match(/class="guardian-portrait"/g) || []).length, 8);
-  for (const name of ['Aether','Oblivion','Solara','Nexus','Void','Tidal','Inferno','Terra']) assert.ok(html.includes(name), 'missing Guardian ' + name);
+check('Guardian tiers and feature modes are represented', () => {
+  for (const id of ['buyNormal','buyHigher','buyMythic','extremeSpin','multi10','multi50','multi200']) {
+    assert.ok(html.includes('id="' + id + '"'), 'missing feature control ' + id);
+  }
+  assert.ok(/tierForGuardians\(4\)/.test(html), 'Normal Guardian threshold path missing');
+  assert.ok(/tierForGuardians\(6\)/.test(html), 'Mythic Guardian threshold path missing');
+  assert.ok(/tierForGuardians\(8\)/.test(html), 'Epic Guardian threshold path missing');
 });
-check('Virtual-credit safety and limitations are visible', () => {
-  assert.ok(html.includes('PROTOTYPE DISCLAIMER'));
-  assert.ok(html.includes('VIRTUAL CREDITS ONLY'));
-  assert.ok(html.includes('RTP NOT CERTIFIED'));
+check('Prototype-only and unverified RTP disclosures remain visible', () => {
+  assert.match(html, /NOT STAKE ENGINE INTEGRATED/i);
+  assert.match(html, /VIRTUAL CREDITS/i);
+  assert.match(html, /RTP.{0,35}(?:not verified|not validated|not certified)/i);
   assert.match(html, /100[, ]?000|100000/);
 });
-check('RTP target and pending publication state are explicit', () => {
+check('Math manifest keeps RTP as a target and publication pending', () => {
   assert.equal(manifest.target_rtp, 0.98);
   assert.equal(manifest.status, 'PENDING_OFFICIAL_STAKE_SDK_VALIDATION');
 });
@@ -48,10 +53,9 @@ check('Required math modes are unique and complete', () => {
   assert.equal(new Set(names).size, names.length);
   for (const name of expected) assert.ok(names.includes(name), 'missing ' + name);
 });
-check('Game avoids false official-certified copy', () => {
-  assert.match(html, /PROTOTYPE DISCLAIMER/);
+check('No false claim of official certification remains in the playable entry', () => {
   assert.doesNotMatch(html, /STAKE ENGINE CERTIFIED|certified RTP 98\.00%/i);
 });
-console.log('Forgotten Vault local source smoke tests');
+console.log('Forgotten Vault v110 local source smoke tests');
 for (const name of checks) console.log('PASS ' + name);
-console.log(checks.length + ' checks passed. These source smoke tests do not replace browser, SDK, or RGS testing.');
+console.log(checks.length + ' checks passed. These source smoke tests do not replace browser, SDK, RGS, or RTP certification.');
