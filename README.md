@@ -12,6 +12,8 @@
 
 ## Current prototype
 
+- **Main playable entry:** `forgotten-vault.html` is now the v110 mobile-spin-fix build (promoted on 2026-10-29). This remains a standalone virtual-credit prototype, not an RGS-integrated release.
+
 - **Board:** 8 columns × 6 rows (48 tiles).
 - **Wins:** clusters of 5 or more matching symbols connected orthogonally.
 - **Cascades:** winning symbols are removed and replaced.
@@ -43,7 +45,7 @@ npm run validate:math
 npm run validate:math:official
 ```
 
-These commands are local checks, not official SDK validation or RTP certification. Run them from the repository root. Inspect every reported warning or failure before preparing a submission.
+These commands are local checks, not official SDK validation or RTP certification. Run them from the repository root. Inspect every reported warning or failure before preparing a submission. GitHub Actions also runs a frontend build, prototype regression checks, and local math validations on pushes and pull requests.
 
 ## Math and release readiness
 
