@@ -1,0 +1,31 @@
+name: Prototype build and local validation
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  prototype-build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Build web app
+        run: npm run build
+      - name: Run prototype regression checks
+        run: npm run test:prototype
+      - name: Validate math publication structure
+        run: npm run validate:math
+      - name: Validate local manifest paths and tables
+        run: npm run validate:math:official
+      - name: Run math audit
+        run: npm run audit:math
