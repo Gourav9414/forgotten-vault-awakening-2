@@ -1,0 +1,31 @@
+name: Frontend and RGS bridge checks
+
+on:
+  push:
+    branches:
+      - main
+      - work/stake-engine-readiness
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  frontend-rgs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install dependencies
+        run: npm install --no-package-lock
+      - name: Build frontend
+        run: npm run build
+      - name: Check RGS bridge source safeguards
+        run: npm run test:rgs
+      - name: Validate math package structure
+        run: npm run validate:math:official
+      - name: Audit math tables
+        run: npm run audit:math
